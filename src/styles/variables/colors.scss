@@ -1,0 +1,5 @@
+$app-color-green: #008a23;
+$app-color-green-light: #00cc33;
+$app-color-yellow: #ffff00;
+$app-yellow-green-radial-gradient: radial-gradient(circle, $app-color-yellow, $app-color-green-light);
+$app-yellow-green-radial-gradient-hover: radial-gradient(circle, darken($app-color-yellow, 2%), darken($app-color-green-light, 2%));

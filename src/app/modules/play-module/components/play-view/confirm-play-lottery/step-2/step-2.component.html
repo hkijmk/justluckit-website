@@ -1,0 +1,22 @@
+<div class="text-title highlighted">Success</div>
+
+<div class="margin-top-x4 text-info">
+    Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam. Sed metus diam, mollis vitae rhoncus vitae, tincidunt at
+    dolor. Suspendisse a vulputate massa. Nullam pulvinar et est eu imperdiet.
+</div>
+
+<div class="margin-top-x4 text-title-small">Coupon Code</div>
+
+<div class="margin-top-x3 text-title highlighted">0.0001 SOL</div>
+
+<div class="margin-top-x4 text-title-small">Your Numbers</div>
+
+<div class="margin-top-x2 connect-wallet-selected-numbers">
+    <lottery-number *ngFor="let selectedNumber of selectedNumbers" [selected]="true">
+        {{selectedNumber}}
+    </lottery-number>
+</div>
+
+<div class="margin-top-x4">
+    <app-button [variant]="'secondary'" (onClick)="onClose.emit()">Close Dialog</app-button>
+</div>

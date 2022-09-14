@@ -1,0 +1,12 @@
+<app-modal>
+    <div content class="confirm-play-lottery">
+        <confirm-play-lottery-step-1 *ngIf="!isConfirmed"
+                                     (onConfirm)="isConfirmed = true"
+                                     (onCancel)="close.emit()">
+        </confirm-play-lottery-step-1>
+
+        <confirm-play-lottery-step-2 *ngIf="isConfirmed"
+                                     (onClose)="close.emit()">
+        </confirm-play-lottery-step-2>
+    </div>
+</app-modal>

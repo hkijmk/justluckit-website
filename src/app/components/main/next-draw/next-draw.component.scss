@@ -1,0 +1,7 @@
+@use '../../../../styles/variables/layout' as *;
+
+.next-draw {
+    padding: 80px $spacing-x4;
+    margin: 0 auto;
+    max-width: 1280px;
+}

@@ -1,0 +1,14 @@
+<header class="header">
+    <div class="header-left" [routerLink]="''">JustLuckIt</div>
+
+    <div class="header-right">
+        <div class="header-navbar">
+            <div>About</div>
+            <div>LUCKIT</div>
+            <div>Support</div>
+            <div>Blog</div>
+        </div>
+
+        <app-button [routerLink]="'play'" [variant]="'secondary'" (onClick)="goToPlayScreen()">Play Now</app-button>
+    </div>
+</header>

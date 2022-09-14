@@ -1,0 +1,27 @@
+@use '../../../styles/variables/colors' as *;
+
+.header {
+    display: flex;
+    padding: 0 80px;
+    height: 100px;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: $app-color-green;
+
+    .header-left {
+        cursor: pointer;
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+}
+
+.header-navbar {
+    display: flex;
+    align-items: center;
+    gap: 20px
+}

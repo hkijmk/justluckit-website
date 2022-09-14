@@ -1,0 +1,29 @@
+<div class="play-card">
+    <div class="text-title highlighted">SEPTEMBER 27TH 2022</div>
+
+    <div class="play-card-number-selection-container">
+        <div class="play-card-number-selection-title">Choose 6 numbers</div>
+
+        <div class="margin-top-x4 play-card-number-selection">
+            <lottery-number *ngFor="let number of numbersList"
+                            [selected]="isNumberSelected(number)"
+                            (click)="onSelectNumber(number)">
+                {{number}}
+            </lottery-number>
+        </div>
+    </div>
+
+    <div class="play-card-selected-numbers">
+        <lottery-number *ngFor="let selectedNumber of selectedNumbers" [selected]="true">{{selectedNumber}}</lottery-number>
+    </div>
+
+    <div class="play-card-total-price">
+        <div class="play-card-total-price-title">Total Price</div>
+        <div class="play-card-total-price-value">{{totalPrice}} SOL</div>
+    </div>
+
+    <div class="margin-top-x4 play-card-actions">
+        <app-button [variant]="'secondary'" (click)="showConnectWalletModal.emit()">Connect Wallet</app-button>
+        <app-button [variant]="'primary'" [disabled]="!selectedWallet" (onClick)="showConfirmPlayLotteryModal.emit()">Play</app-button>
+    </div>
+</div>

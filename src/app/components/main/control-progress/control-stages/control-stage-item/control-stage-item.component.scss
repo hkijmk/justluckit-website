@@ -1,0 +1,26 @@
+@use '../../../../../../styles/variables/colors' as *;
+
+.control-stage-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: conic-gradient($app-color-green-light, $app-color-yellow);
+}
+
+.control-stage-item-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    background-color: white;
+    border-radius: 50%;
+    font-size: 40px;
+
+    &.completed {
+        background-color: transparent;
+    }
+}

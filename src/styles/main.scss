@@ -1,0 +1,8 @@
+@forward './variables/fonts';
+
+@forward './layout';
+@forward './text';
+
+* {
+    font-family: "Helvetica", sans-serif !important;
+}

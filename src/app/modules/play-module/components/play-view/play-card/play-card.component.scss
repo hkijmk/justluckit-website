@@ -1,0 +1,64 @@
+@use '../../../../../../styles/variables/colors' as *;
+@use '../../../../../../styles/variables/layout' as *;
+
+@use '../../../../../../styles/layout' as *;
+
+%separator {
+    margin-top: $spacing-x4;
+    padding-top: $spacing-x4;
+    border-top: 1px solid rgba(151, 151, 151, 0.24);
+}
+
+.play-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: $spacing-x4 $spacing-x3;
+    box-shadow: 0 30px 30 -15 rgba(0, 0, 0, 0.34);
+    width: 390px;
+}
+
+.play-card-number-selection-container {
+    @extend %separator;
+
+    .play-card-number-selection-title {
+        font-size: 25px;
+        line-height: 36px;
+        color: #e600c7;
+        text-align: center;
+    }
+
+    .play-card-number-selection {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.play-card-selected-numbers {
+    @extend %separator;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.play-card-total-price {
+    @extend %separator;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 25px;
+    line-height: 36px;
+    color: #333333;
+}
+
+.play-card-actions {
+    > app-button {
+        display: block;
+        width: 100%;
+
+        &:not(:first-child) {
+            @extend .margin-top-x4;
+        }
+    }
+}

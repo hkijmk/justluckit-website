@@ -1,0 +1,45 @@
+@use '../../../../styles/variables/colors' as *;
+@use '../../../../styles/variables/layout' as *;
+
+.last-draw-results-container {
+    background-color: #e8f2eb;
+
+    .last-draw-results {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: $spacing-x6 $spacing-x2;
+    }
+}
+
+.last-draw-results-table {
+    > table {
+        margin: 0 auto;
+        width: 100%;
+
+        tr {
+            th {
+                font-size: 20px;
+                font-weight: normal;
+                color: #747474;
+                height: 64px;
+                text-align: center;
+                padding: $spacing-x2;
+
+                &:nth-child(3) {
+                    max-width: 200px;
+                }
+            }
+
+            td {
+                text-align: center;
+                font-size: 24px;
+                color: #404040;
+
+                &:nth-child(3) {
+                    color: $app-color-green;
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

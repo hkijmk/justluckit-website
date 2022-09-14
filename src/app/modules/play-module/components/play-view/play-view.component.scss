@@ -1,0 +1,9 @@
+@use '../../../../../styles/variables/colors' as *;
+
+.play-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+    background: $app-yellow-green-radial-gradient;
+}

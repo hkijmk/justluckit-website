@@ -1,0 +1,47 @@
+@use '../../../../../styles/variables/colors' as *;
+
+.button {
+    min-height: 48px;
+    width: 100%;
+    padding: 12px 25px;
+    border-radius: 24px;
+    border: none;
+    font-size: 15px;
+    letter-spacing: 1.88px;
+    box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.34);
+    text-transform: uppercase;
+
+    &.button-primary {
+        background: $app-yellow-green-radial-gradient;
+    }
+
+    &.button-secondary {
+        background: $app-color-yellow;
+    }
+
+    &.button-default {
+        background-color: white;
+    }
+
+    &:enabled {
+        cursor: pointer;
+
+        &:hover {
+            &.button-primary {
+                background: $app-yellow-green-radial-gradient-hover;
+            }
+
+            &.button-secondary {
+                background: darken($app-color-yellow, 2%);
+            }
+
+            &.button-default {
+                background: darken(white, 2%);
+            }
+        }
+    }
+
+    .button-content {
+        min-width: 125px;
+    }
+}

@@ -1,0 +1,19 @@
+@use '../../../../../styles/variables/colors' as *;
+@use '../../../../../styles/variables/layout' as *;
+
+.remaining-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-x6;
+}
+
+.remaining-time-section {
+    text-align: center;
+
+    .remaining-time-number {
+        font-size: 60px;
+        color: $app-color-green;
+    }
+}
+

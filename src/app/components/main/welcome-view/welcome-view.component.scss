@@ -1,0 +1,54 @@
+@use '../../../../styles/variables/colors' as *;
+
+.welcome-view-container {
+    background: $app-yellow-green-radial-gradient;
+}
+
+.welcome-view {
+    margin: 0 auto;
+    padding: 80px;
+    max-width: 1600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    .welcome-view-left {
+        .welcome-view-title, .welcome-view-info {
+            color: white;
+        }
+
+        .welcome-view-title {
+            text-align: center;
+            font-size: 50px;
+            line-height: 60px;
+        }
+
+        .welcome-view-info {
+            margin-top: 24px;
+            font-size: 24px;
+            line-height: 40px;
+        }
+
+        .welcome-view-left-buttons {
+            display: flex;
+            align-items: center;
+            gap: 38px;
+            margin-top: 68px;
+
+            > app-button {
+                width: 100%;
+            }
+        }
+    }
+
+    .welcome-view-right {
+        margin-left: 80px;
+
+        > .welcome-view-image {
+            max-width: 768px;
+        }
+    }
+}
+
+

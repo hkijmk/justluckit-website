@@ -1,0 +1,15 @@
+@use '../../../../../styles/variables/colors' as *;
+@use '../../../../../styles/variables/layout' as *;
+
+.control-stages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .control-stage-separator {
+        width: 75px;
+        height: 1px;
+        margin: 0 $spacing-x1;
+        background-color: $app-color-green-light;
+    }
+}

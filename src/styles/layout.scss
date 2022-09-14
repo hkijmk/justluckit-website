@@ -1,0 +1,11 @@
+@use './variables/layout' as *;
+
+@for $i from 1 to 11 {
+    .margin-top-x#{$i} {
+        margin-top: $spacing-unit * $i;
+    }
+
+    padding-x#{$i} {
+        padding: $spacing-unit * $i;
+    }
+}

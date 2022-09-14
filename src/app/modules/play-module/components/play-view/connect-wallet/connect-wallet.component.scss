@@ -1,0 +1,20 @@
+@use '../../../../../../styles/variables/layout' as *;
+
+.connect-wallet {
+    width: 360px !important;
+}
+
+.connect-wallet-button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-x2;
+
+    > img {
+        max-height: 30px;
+
+        &:nth-child(2) {
+            max-height: 20px;
+        }
+    }
+}
