@@ -5,6 +5,9 @@ import { HdWalletAdapterModule } from '@heavy-duty/wallet-adapter';
 import { FrameworkModule } from './modules/framework-module/framework.module';
 import { AppRoutingModule } from './app-routing.module';
 
+import { BroadcastService } from './services/broadcast.service';
+import { WalletService } from './services/wallet.service';
+
 import { ControlStageItemComponent } from './components/main/control-progress/control-stages/control-stage-item/control-stage-item.component';
 import { ControlStagesComponent } from './components/main/control-progress/control-stages/control-stages.component';
 import { ControlProgressComponent } from './components/main/control-progress/control-progress.component';
@@ -33,7 +36,10 @@ import { AppComponent } from './app.component';
         FrameworkModule,
         HdWalletAdapterModule.forRoot({ autoConnect: true }),
     ],
-    providers: [],
+    providers: [
+        BroadcastService,
+        WalletService,
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

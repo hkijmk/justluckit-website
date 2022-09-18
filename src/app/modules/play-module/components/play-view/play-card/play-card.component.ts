@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 
+import { WalletService } from '../../../../../services/wallet.service';
 import { PlayService } from '../../../services/play.service';
-import { WalletService } from '../../../services/wallet.service';
-import { WALLET_TYPE } from '../../../enums';
 
 @Component({
     selector: 'play-card',
@@ -23,8 +23,8 @@ export class PlayCardComponent {
         return this._playService.totalPrice;
     }
 
-    get selectedWallet(): WALLET_TYPE | undefined {
-        return this._walletService.selectedWallet;
+    get isWalletConnected$(): Observable<boolean> {
+        return this._walletService.isWalletConnected$;
     }
 
     constructor(private _playService: PlayService,
@@ -39,4 +39,5 @@ export class PlayCardComponent {
     onSelectNumber(selectedNumber: number): void {
         this._playService.toggleSelectedNumber(selectedNumber);
     }
+
 }

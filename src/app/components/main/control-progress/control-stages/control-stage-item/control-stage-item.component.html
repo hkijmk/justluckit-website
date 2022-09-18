@@ -1,3 +1,4 @@
 <div class="control-stage-item">
-    <div class="control-stage-item-number" [class.completed]="isCompleted">{{stageNumber}}</div>
+    <div *ngIf="!isCompleted" class="control-stage-item-number">{{ stageNumber }}</div>
+    <img *ngIf="isCompleted" src="../../../../../../assets/icons/justluckit-check.svg" alt="JustLuckIt Check Icon">
 </div>

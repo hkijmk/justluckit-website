@@ -5,11 +5,19 @@
             <div class="text-title-big highlighted">52.1362 SOL</div>
         </div>
 
-        <div>
+        <div *ngIf="winningNumbers">
             <div class="margin-top-x4 text-title-small">Winning Numbers</div>
+
+            <div class="margin-top-x2 last-draw-results-winning-numbers">
+                <div *ngFor="let winningNumber of winningNumbers">
+                    <lottery-number [selected]="true">
+                        {{ winningNumber }}
+                    </lottery-number>
+                </div>
+            </div>
         </div>
 
-        <div class="margin-top-x4 last-draw-results-table">
+        <div *ngIf="numberOfWinners && winningAmounts" class="margin-top-x4 last-draw-results-table">
             <table>
                 <tr>
                     <th>Guessed Numbers</th>
@@ -19,26 +27,38 @@
 
                 <tr>
                     <td>6</td>
-                    <td>0</td>
-                    <td>No Winner</td>
+                    <td>{{ numberOfWinners.sixMatchersCount }}</td>
+                    <td>
+                        <span *ngIf="numberOfWinners.sixMatchersCount > 0">{{ winningAmounts.sixMatchersAmount.toNumber() }}</span>
+                        <span *ngIf="numberOfWinners.sixMatchersCount === 0">No Winners</span>
+                    </td>
                 </tr>
 
                 <tr>
-                    <td>6</td>
-                    <td>0</td>
-                    <td>No Winner</td>
+                    <td>5</td>
+                    <td>{{ numberOfWinners.fiveMatchersCount }}</td>
+                    <td>
+                        <span *ngIf="numberOfWinners.fiveMatchersCount.toNumber() > 0">{{ winningAmounts.fiveMatchersAmount.toNumber() }}</span>
+                        <span *ngIf="numberOfWinners.fiveMatchersCount.toNumber() === 0">No Winners</span>
+                    </td>
                 </tr>
 
                 <tr>
-                    <td>6</td>
-                    <td>0</td>
-                    <td>No Winner</td>
+                    <td>4</td>
+                    <td>{{ numberOfWinners.fourMatchersCount }}</td>
+                    <td>
+                        <span *ngIf="numberOfWinners.fourMatchersCount.toNumber() > 0">{{ winningAmounts.fourMatchersAmount.toNumber() }}</span>
+                        <span *ngIf="numberOfWinners.fourMatchersCount.toNumber() === 0">No Winners</span>
+                    </td>
                 </tr>
 
                 <tr>
-                    <td>6</td>
-                    <td>0</td>
-                    <td>No Winner</td>
+                    <td>3</td>
+                    <td>{{ numberOfWinners.threeMatchersCount }}</td>
+                    <td>
+                        <span *ngIf="numberOfWinners.threeMatchersCount.toNumber() > 0">{{ winningAmounts.threeMatchersAmount.toNumber() }}</span>
+                        <span *ngIf="numberOfWinners.threeMatchersCount.toNumber() === 0">No Winners</span>
+                    </td>
                 </tr>
             </table>
         </div>

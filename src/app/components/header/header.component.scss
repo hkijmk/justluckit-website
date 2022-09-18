@@ -1,4 +1,6 @@
 @use '../../../styles/variables/colors' as *;
+@use '../../../styles/variables/layout' as *;
+@use '../../../styles/variables/layout' as *;
 
 .header {
     display: flex;
@@ -7,21 +9,25 @@
     justify-content: space-between;
     align-items: center;
     color: white;
-    background-color: $app-color-green;
+    background-color: $app-color-green-light;
 
     .header-left {
         cursor: pointer;
+
+        > img {
+            max-width: 180px;
+        }
     }
 
     .header-right {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: $spacing-x8;
     }
 }
 
 .header-navbar {
     display: flex;
     align-items: center;
-    gap: 20px
+    gap: $spacing-x8;
 }

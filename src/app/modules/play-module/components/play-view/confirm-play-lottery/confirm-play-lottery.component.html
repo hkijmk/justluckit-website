@@ -1,7 +1,7 @@
 <app-modal>
     <div content class="confirm-play-lottery">
         <confirm-play-lottery-step-1 *ngIf="!isConfirmed"
-                                     (onConfirm)="isConfirmed = true"
+                                     (confirmed)="isConfirmed = true"
                                      (onCancel)="close.emit()">
         </confirm-play-lottery-step-1>
 

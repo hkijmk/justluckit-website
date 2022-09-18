@@ -1,20 +1,30 @@
 <div class="text-title">Confirm Your Coupon</div>
 
-<div class="margin-top-x4 text-title-small">Total Price</div>
+<div class="margin-top-x4">
+    <div class="text-title-small">Total Price</div>
+    <div class="margin-top-x1 text-title highlighted">0.0001 SOL</div>
+</div>
 
-<div class="margin-top-x1 text-title highlighted">0.0001 SOL</div>
+<div class="margin-top-x4">
+    <div class="text-title-small">Deposit</div>
+    <div class="margin-top-x1 text-title highlighted">0.0001 SOL</div>
+</div>
 
-<div class="margin-top-x4 text-title-small">Your Numbers</div>
+<div class="margin-top-x4">
+    <div class="margin-top-x4 text-title-small">Your Numbers</div>
 
-<div class="margin-top-x1">
-    <lottery-number *ngFor="let selectedNumber of selectedNumbers" [selected]="true">
-        {{selectedNumber}}
-    </lottery-number>
+    <div class="margin-top-x2 confirm-play-lottery-numbers">
+        <div *ngFor="let selectedNumber of selectedNumbers">
+            <lottery-number [selected]="true">
+                {{ selectedNumber }}
+            </lottery-number>
+        </div>
+    </div>
 </div>
 
 <div class="margin-top-x4">
     <div>
-        <app-button [variant]="'primary'" (onClick)="onConfirm.emit()">Confirm</app-button>
+        <app-button [variant]="'primary'" (onClick)="onConfirm()">Confirm</app-button>
     </div>
 
     <div class="margin-top-x2">

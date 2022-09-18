@@ -1,7 +1,13 @@
 <div class="play-view">
-    <play-card (showConnectWalletModal)="isConnectingWallet = true"
-               (showConfirmPlayLotteryModal)="isConfirmingPlay = true">
-    </play-card>
+    <img class="play-view-logo"
+         src="../../../../../assets/logos/butterfly-6-49/butterfly-6-49-temporary-logo.svg"
+         alt="butterfly-lottery">
+
+    <div class="margin-top-x6">
+        <play-card (showConnectWalletModal)="isConnectingWallet = true"
+                   (showConfirmPlayLotteryModal)="isConfirmingPlay = true">
+        </play-card>
+    </div>
 </div>
 
 <connect-wallet *ngIf="isConnectingWallet" (close)="isConnectingWallet = false"></connect-wallet>

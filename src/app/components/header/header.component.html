@@ -1,14 +1,13 @@
 <header class="header">
-    <div class="header-left" [routerLink]="''">JustLuckIt</div>
+    <div class="header-left" [routerLink]="''">
+        <img src="../../../assets/logos/justluckit/justluckit-logo-dark-2.svg" alt="JustLuckIt Logo">
+    </div>
 
     <div class="header-right">
-        <div class="header-navbar">
-            <div>About</div>
-            <div>LUCKIT</div>
-            <div>Support</div>
-            <div>Blog</div>
-        </div>
-
-        <app-button [routerLink]="'play'" [variant]="'secondary'" (onClick)="goToPlayScreen()">Play Now</app-button>
+        <a>About</a>
+        <a>LUCKIT</a>
+        <a>Support</a>
+        <a>Blog</a>
+        <app-button [variant]="'secondary'" [routerLink]="'play'">Play Now</app-button>
     </div>
 </header>

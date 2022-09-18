@@ -11,8 +11,9 @@
     }
 
     &.highlighted-gradient {
-        background: linear-gradient($app-color-green, $app-color-green-light);
+        background: linear-gradient(0.25turn,  $app-color-green, $app-color-green-light);
         -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 }
 

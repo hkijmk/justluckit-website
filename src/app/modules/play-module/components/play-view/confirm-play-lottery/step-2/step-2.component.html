@@ -11,10 +11,12 @@
 
 <div class="margin-top-x4 text-title-small">Your Numbers</div>
 
-<div class="margin-top-x2 connect-wallet-selected-numbers">
-    <lottery-number *ngFor="let selectedNumber of selectedNumbers" [selected]="true">
-        {{selectedNumber}}
-    </lottery-number>
+<div class="margin-top-x2 confirm-play-lottery-numbers">
+    <div *ngFor="let selectedNumber of selectedNumbers">
+        <lottery-number [selected]="true">
+            {{ selectedNumber }}
+        </lottery-number>
+    </div>
 </div>
 
 <div class="margin-top-x4">

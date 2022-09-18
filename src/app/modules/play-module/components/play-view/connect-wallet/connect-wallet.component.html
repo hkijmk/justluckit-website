@@ -1,38 +1,28 @@
 <app-modal>
     <div content class="connect-wallet">
-        <div class="text-title-small">Select Your Wallet</div>
+        <div *ngIf="selectedWallet" class="text-title-small">Selected Wallet: {{ selectedWallet.adapter.name }}</div>
+        <div *ngIf="!selectedWallet" class="text-title-small">Select Your Wallet</div>
 
-        <div class="margin-top-x4">
-            <div>
-                <app-button (onClick)="onSelectWallet(WALLET_TYPE.phantom)">
+        <div *ngIf="wallets !== undefined" class="margin-top-x4">
+            <div *ngFor="let wallet of wallets; let i = index"
+                 [class.margin-top-x2]="i !== 0">
+                <app-button [ngSwitch]="wallet.adapter.name" (onClick)="onSelectWallet(wallet)">
                     <div class="connect-wallet-button-content">
-                        <img src="../../../../../../assets/svgs/phantom-logo.svg" alt="Phantom Logo">
-                        <img src="../../../../../../assets/svgs/phantom-text.svg" alt="Phantom Text">
-                    </div>
-                </app-button>
-            </div>
+                        <img *ngSwitchCase="'Phantom'"
+                             src="../../../../../../assets/logos/3rd-party/phantom-logo.svg"
+                             alt="phantom-wallet">
 
-            <div class="margin-top-x2">
-                <app-button (onClick)="onSelectWallet(WALLET_TYPE.solflare)">
-                    <div class="connect-wallet-button-content">
-                        <img src="../../../../../../assets/svgs/solflare-logo.svg" alt="Solflare Logo">
-                        <img src="../../../../../../assets/svgs/solflare-text.svg" alt="Solflare Text">
-                    </div>
-                </app-button>
-            </div>
+                        <img *ngSwitchCase="'Solflare'"
+                             src="../../../../../../assets/logos/3rd-party/solflare-logo.svg"
+                             alt="solflare-wallet">
 
-            <div class="margin-top-x2">
-                <app-button (onClick)="onSelectWallet(WALLET_TYPE.slope)">
-                    <div class="connect-wallet-button-content">
-                        <img src="../../../../../../assets/svgs/slope-logo.svg" alt="Slope Logo">
-                    </div>
-                </app-button>
-            </div>
+                        <img *ngSwitchCase="'Ledger'"
+                             src="../../../../../../assets/logos/3rd-party/ledger-logo.svg"
+                             alt="ledger-wallet">
 
-            <div class="margin-top-x2">
-                <app-button (onClick)="onSelectWallet(WALLET_TYPE.ledger)">
-                    <div class="connect-wallet-button-content">
-                        <img src="../../../../../../assets/svgs/ledger-logo.svg" alt="Ledger Logo">
+                        <img *ngSwitchCase="'Slope'"
+                             src="../../../../../../assets/logos/3rd-party/slope-logo.svg"
+                             alt="slope-wallet">
                     </div>
                 </app-button>
             </div>

@@ -6,15 +6,11 @@
 
 .connect-wallet-button-content {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: $spacing-x2;
+    align-items: center;
 
     > img {
-        max-height: 30px;
-
-        &:nth-child(2) {
-            max-height: 20px;
-        }
+        max-height: 36px;
     }
 }
+
