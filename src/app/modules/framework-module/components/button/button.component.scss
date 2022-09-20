@@ -1,18 +1,19 @@
 @use '../../../../../styles/variables/colors' as *;
+@use '../../../../../styles/variables/layout' as *;
 
 $border-radius: 24px;
 
 .button {
     position: relative;
+    display: flex;
+    align-items: center;
     height: 48px;
     width: 100%;
     padding: 0 25px;
     border-radius: $border-radius;
+    gap: $spacing-x2;
     border: none;
-    font-size: 15px;
-    letter-spacing: 1.88px;
     box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.34);
-    text-transform: uppercase;
 
     &.button-primary {
         background: $app-yellow-green-radial-gradient;
@@ -44,34 +45,18 @@ $border-radius: 24px;
         }
     }
 
+    .button-loading-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $border-radius;
+    }
+
     .button-content {
+        flex: 1;
         min-width: 125px;
-    }
-}
-
-.button-loading-indicator {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.51);
-    backdrop-filter: blur(1px);
-    border-radius: $border-radius;
-
-    > svg {
-        width: 32px;
-        height: 32px;
-
-        path:not(:first-child) {
-            fill: red;
-        }
-    }
-
-    > img {
-        max-height: 36px;
+        font-size: 15px;
+        letter-spacing: 1.88px;
+        text-transform: uppercase;
     }
 }

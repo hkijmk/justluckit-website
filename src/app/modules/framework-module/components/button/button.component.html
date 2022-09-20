@@ -1,13 +1,12 @@
 <button class="button"
         [ngClass]="'button-' + variant"
-        [disabled]="disabled"
+        [disabled]="disabled || isLoading"
         (click)="onClick.emit($event)">
-    <div class="button-content">
-        <ng-content></ng-content>
+    <div *ngIf="isLoading" class="button-loading-indicator">
+        <app-icon [icon]="ICON_SVGS.spinner" [color]="'black'" [shouldSpin]="true" [size]="28"></app-icon>
     </div>
 
-    <div *ngIf="isLoading" class="button-loading-indicator">
-        <app-icon [svg]="ICON_SVGS.spinner" [color]="'red'"></app-icon>
-        <!--        <img src="../../../../../assets/icons/justluckit-spinner.svg">-->
+    <div class="button-content">
+        <ng-content></ng-content>
     </div>
 </button>
