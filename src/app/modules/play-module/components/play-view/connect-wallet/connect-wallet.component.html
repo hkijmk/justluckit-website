@@ -6,7 +6,9 @@
         <div *ngIf="wallets !== undefined" class="margin-top-x4">
             <div *ngFor="let wallet of wallets; let i = index"
                  [class.margin-top-x2]="i !== 0">
-                <app-button [ngSwitch]="wallet.adapter.name" (onClick)="onSelectWallet(wallet)">
+                <app-button [ngSwitch]="wallet.adapter.name"
+                            [variant]="isWalletConnected && selectedWallet !== null && selectedWallet.adapter.name === wallet.adapter.name ? 'primary' : 'default'"
+                            (onClick)="onSelectWallet(wallet)">
                     <div class="connect-wallet-button-content">
                         <img *ngSwitchCase="'Phantom'"
                              src="../../../../../../assets/logos/3rd-party/phantom-logo.svg"
@@ -26,6 +28,10 @@
                     </div>
                 </app-button>
             </div>
+        </div>
+
+        <div class="margin-top-x6">
+            <app-button [variant]="'secondary'" (onClick)="close.emit()">Close Dialog</app-button>
         </div>
     </div>
 </app-modal>

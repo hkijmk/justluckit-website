@@ -12,8 +12,9 @@ import { WalletService } from '../../../../../services/wallet.service';
 export class ConnectWalletComponent implements OnInit, OnDestroy {
     @Output() close = new EventEmitter<void>();
 
-    private _isWalletConnected$?: Subscription;
     private _wallets: Wallet[] | undefined;
+    private _isWalletConnected$?: Subscription;
+    private _isWalletConnected: boolean = false;
 
     get wallets(): Wallet[] | undefined {
         return this._wallets;
@@ -27,12 +28,16 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
         return this._walletService.selectedWallet;
     }
 
+    get isWalletConnected(): boolean {
+        return this._isWalletConnected;
+    }
+
     constructor(private _walletService: WalletService) {
     }
 
     ngOnInit(): void {
-        this._getWallets();
         this._setIsWalletConnected$();
+        this._getWallets();
     }
 
     ngOnDestroy(): void {
@@ -49,17 +54,16 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
         })
     }
 
-
     private _setIsWalletConnected$(): void {
-        this._isWalletConnected$ = this._walletService.isWalletConnected$.subscribe((isConnected: boolean) => {
-            if (isConnected) {
-                this.close.emit();
-            }
-        })
+        this._clearIsWalletConnected$();
+
+        this._isWalletConnected$ = this._walletService.isWalletConnected$.subscribe((isConnected => {
+            this._isWalletConnected = isConnected;
+        }));
     }
 
     private _clearIsWalletConnected$(): void {
-        if (this._isWalletConnected$) {
+        if (this._isWalletConnected$ !== undefined) {
             this._isWalletConnected$.unsubscribe();
         }
     }
