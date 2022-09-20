@@ -9,3 +9,9 @@
         padding: $spacing-unit * $i;
     }
 }
+
+.separator-v {
+    margin-top: $spacing-x4;
+    padding-top: $spacing-x4;
+    border-top: 1px solid rgba(151, 151, 151, 0.24);
+}
