@@ -4,9 +4,10 @@ import { deserialize } from 'borsh';
 import { addDays } from 'date-fns';
 import { firstValueFrom } from 'rxjs';
 
+import { BlockChainService } from '../../../services/block-chain.service';
+
 import { BLOCK_CHAIN_KEYS } from '../../../constants';
 import { DateOfDrawModel } from '../../../models';
-import { WalletService } from '../../../services/wallet.service';
 
 @Component({
     selector: 'next-draw',
@@ -20,7 +21,7 @@ export class NextDrawComponent implements OnInit {
         return this._drawDate;
     }
 
-    constructor(private _walletService: WalletService) {
+    constructor(private _blockChainService: BlockChainService) {
     }
 
     ngOnInit(): void {
@@ -28,7 +29,7 @@ export class NextDrawComponent implements OnInit {
     }
 
     private async _getDateOfDraw(): Promise<void> {
-        const connection: Connection | null = await firstValueFrom(this._walletService.connection$);
+        const connection: Connection | null = await firstValueFrom(this._blockChainService.connection$);
         if (connection === null) {
             return;
         }

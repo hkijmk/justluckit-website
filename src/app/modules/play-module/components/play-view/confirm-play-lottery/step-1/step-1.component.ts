@@ -3,11 +3,12 @@ import { Connection, Keypair, PublicKey, SystemProgram, Transaction, Transaction
 import { deserialize, serialize } from 'borsh';
 import { firstValueFrom } from 'rxjs';
 
-import { WalletService } from '../../../../../../services/wallet.service';
+import { BlockChainService } from '../../../../../../services/block-chain.service';
 import { PlayService } from '../../../../services/play.service';
 
 import { BLOCK_CHAIN_KEYS } from '../../../../../../constants';
-import { LottoGameModel, MinerTermsModel, RecordModel, SubControllerModel, SubCounterModel, TermOneModel } from '../../../../models';
+import { RecordModel } from '../../../../../../models';
+import { LottoGameModel, MinerTermsModel, SubControllerModel, SubCounterModel, TermOneModel } from '../../../../models';
 
 @Component({
     selector: 'confirm-play-lottery-step-1',
@@ -23,16 +24,16 @@ export class ConfirmPlayLotteryStep1Component {
     }
 
     constructor(private _playService: PlayService,
-                private _walletService: WalletService) {
+                private _blockChainService: BlockChainService) {
     }
 
     async onConfirm(): Promise<void> {
-        const connection: Connection | null = await firstValueFrom(this._walletService.connection$);
+        const connection: Connection | null = await firstValueFrom(this._blockChainService.connection$);
         if (connection === null) {
             return;
         }
 
-        const publicKey: PublicKey | null = await firstValueFrom(this._walletService.publicKey$);
+        const publicKey: PublicKey | null = await firstValueFrom(this._blockChainService.publicKey$);
         if (publicKey === null) {
             return;
         }
@@ -87,7 +88,7 @@ export class ConfirmPlayLotteryStep1Component {
             midCountNumber,
             controllerNumber,
             controllerNumberOfSeries,
-            record.week,
+            record.weekNumber,
         );
     }
 
@@ -102,7 +103,7 @@ export class ConfirmPlayLotteryStep1Component {
         midCountNumber: number,
         controllerNumber: number,
         controllerNumberOfSeries: number,
-        week: number,
+        weekNumber: number,
     ) {
         try {
             let numberOfSeries: number;
@@ -130,7 +131,7 @@ export class ConfirmPlayLotteryStep1Component {
             }
 
             const sp1 = 'w';
-            const s1 = week.toString();
+            const s1 = weekNumber.toString();
             const sp2 = "m";
             const s2 = mainCountNumber.toString();
             const sp3 = "md";
@@ -156,15 +157,15 @@ export class ConfirmPlayLotteryStep1Component {
             let hostFeesAsString = String(termOne.new_hostfee);
             let minerFeesAsString = String(minerData.new_minersfee);
 
-            if (week <= minerData.apply_after) {
+            if (weekNumber <= minerData.apply_after) {
                 minerFeesAsString = String(minerData.old_minersfee);
             }
 
-            if (week <= termOne.apply_after_t) {
+            if (weekNumber <= termOne.apply_after_t) {
                 demandAsString = String(termOne.old_demand);
             }
 
-            if (week <= termOne.apply_after_h) {
+            if (weekNumber <= termOne.apply_after_h) {
                 hostFeesAsString = String(termOne.old_hostfee);
             }
 
@@ -267,7 +268,7 @@ export class ConfirmPlayLotteryStep1Component {
             transaction.lastValidBlockHeight = hash.lastValidBlockHeight;
 
             transaction.sign(temp1, temp2);
-            const signedTrans = await firstValueFrom(this._walletService.signTransaction(transaction));
+            const signedTrans = await firstValueFrom(this._blockChainService.signTransaction(transaction));
             const signature = await connection.sendRawTransaction(signedTrans.serialize());
             const result = await connection.confirmTransaction(
                 { signature, blockhash: hash.blockhash, lastValidBlockHeight: hash.lastValidBlockHeight },

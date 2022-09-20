@@ -6,7 +6,7 @@ import { Connection, PublicKey, Transaction } from '@solana/web3.js';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class WalletService {
+export class BlockChainService {
     private _selectedWallet: Wallet | null = null;
 
     get isWalletConnected$(): Observable<boolean> {

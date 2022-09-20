@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { Wallet } from '@heavy-duty/wallet-adapter';
 import { Observable, Subscription } from 'rxjs';
 
-import { WalletService } from '../../../../../services/wallet.service';
+import { BlockChainService } from '../../../../../services/block-chain.service';
 
 @Component({
     selector: 'connect-wallet',
@@ -21,18 +21,18 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
     }
 
     get wallets$(): Observable<Wallet[] | undefined> {
-        return this._walletService.wallets$;
+        return this._blockChainService.wallets$;
     }
 
     get selectedWallet(): Wallet | null {
-        return this._walletService.selectedWallet;
+        return this._blockChainService.selectedWallet;
     }
 
     get isWalletConnected(): boolean {
         return this._isWalletConnected;
     }
 
-    constructor(private _walletService: WalletService) {
+    constructor(private _blockChainService: BlockChainService) {
     }
 
     ngOnInit(): void {
@@ -45,11 +45,11 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
     }
 
     onSelectWallet(wallet: Wallet) {
-        this._walletService.selectWallet(wallet.adapter.name);
+        this._blockChainService.selectWallet(wallet.adapter.name);
     }
 
     private _getWallets(): void {
-        this._walletService.wallets$.subscribe((wallets) => {
+        this._blockChainService.wallets$.subscribe((wallets) => {
             this._wallets = wallets;
         })
     }
@@ -57,7 +57,7 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
     private _setIsWalletConnected$(): void {
         this._clearIsWalletConnected$();
 
-        this._isWalletConnected$ = this._walletService.isWalletConnected$.subscribe((isConnected => {
+        this._isWalletConnected$ = this._blockChainService.isWalletConnected$.subscribe((isConnected => {
             this._isWalletConnected = isConnected;
         }));
     }

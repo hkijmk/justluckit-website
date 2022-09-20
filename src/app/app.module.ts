@@ -6,7 +6,7 @@ import { FrameworkModule } from './modules/framework-module/framework.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { BroadcastService } from './services/broadcast.service';
-import { WalletService } from './services/wallet.service';
+import { BlockChainService } from './services/block-chain.service';
 
 import { ControlStageItemComponent } from './components/main/control-progress/control-stages/control-stage-item/control-stage-item.component';
 import { ControlStagesComponent } from './components/main/control-progress/control-stages/control-stages.component';
@@ -38,7 +38,7 @@ import { AppComponent } from './app.component';
     ],
     providers: [
         BroadcastService,
-        WalletService,
+        BlockChainService,
     ],
     bootstrap: [AppComponent]
 })

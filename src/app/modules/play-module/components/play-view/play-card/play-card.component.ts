@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { WalletService } from '../../../../../services/wallet.service';
+import { BlockChainService } from '../../../../../services/block-chain.service';
 import { PlayService } from '../../../services/play.service';
 
 @Component({
@@ -24,11 +24,11 @@ export class PlayCardComponent {
     }
 
     get isWalletConnected$(): Observable<boolean> {
-        return this._walletService.isWalletConnected$;
+        return this._blockChainService.isWalletConnected$;
     }
 
     constructor(private _playService: PlayService,
-                private _walletService: WalletService) {
+                private _blockChainService: BlockChainService) {
         this.numbersList = Array.from(Array(49)).map((_, i) => i + 1);
     }
 
