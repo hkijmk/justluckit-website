@@ -52,7 +52,7 @@ export class BlockChainService {
     }
 
     private _initStoreAndAdapters(): void {
-        this._connectionStore.setEndpoint('http://api.testnet.solana.com');
+        this._connectionStore.setEndpoint('https://api.testnet.solana.com');
         this._walletStore.setAdapters([
             new PhantomWalletAdapter(),
             new SolflareWalletAdapter(),
