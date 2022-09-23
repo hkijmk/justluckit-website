@@ -1,5 +1,10 @@
+$app-color-bg-light: #f2f2e8;
 $app-color-green: #008a23;
 $app-color-green-light: #00cc33;
 $app-color-yellow: #ffff00;
+
 $app-yellow-green-radial-gradient: radial-gradient(circle, $app-color-yellow, $app-color-green-light);
 $app-yellow-green-radial-gradient-hover: radial-gradient(circle, darken(rgba($app-color-yellow, 0.4), 2%), darken(rgba($app-color-green-light, 0.4), 2%));
+
+$app-text-color-standard: #747474;
+$app-text-color-light: rgba(0, 0, 0, 0.21);

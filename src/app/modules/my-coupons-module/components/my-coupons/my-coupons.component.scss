@@ -1,0 +1,10 @@
+@use '../../../../../styles/variables/colors' as *;
+@use '../../../../../styles/layout' as *;
+
+.my-coupons {
+    background-color: $app-color-bg-light;
+
+    .my-coupons-search {
+        max-width: 1280px;
+    }
+}

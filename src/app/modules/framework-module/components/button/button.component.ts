@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
+import { ICON_SVGS } from '../../../../constants';
 import { BUTTON_VARIANT } from '../../enums';
-import { ICON_SVGS } from '../../constants';
 
 @Component({
     selector: 'app-button',

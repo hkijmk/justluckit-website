@@ -2,11 +2,11 @@
         [ngClass]="'button-' + variant"
         [disabled]="disabled || isLoading"
         (click)="onClick.emit($event)">
-    <div *ngIf="isLoading" class="button-loading-indicator">
-        <app-icon [icon]="ICON_SVGS.spinner" [color]="'black'" [shouldSpin]="true" [size]="28"></app-icon>
+    <div class="button-content" [class.transparent-content]="isLoading">
+        <ng-content></ng-content>
     </div>
 
-    <div class="button-content">
-        <ng-content></ng-content>
+    <div *ngIf="isLoading" class="flex-center button-loading-indicator">
+        <app-loading-indicator-icon [size]="28"></app-loading-indicator-icon>
     </div>
 </button>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { deserialize } from 'borsh';
-import { addDays } from 'date-fns';
 import { firstValueFrom } from 'rxjs';
 
 import { BlockChainService } from '../../../services/block-chain.service';
@@ -17,6 +16,7 @@ import { DateOfDrawModel, DirectorModel, RecordModel } from '../../../models';
 export class ControlProgressComponent implements OnInit {
     private _director?: DirectorModel;
     private _drawDate?: Date;
+    private _canDrawLottery: boolean = false;
 
     get director(): DirectorModel | undefined {
         return this._director;
@@ -24,6 +24,10 @@ export class ControlProgressComponent implements OnInit {
 
     get drawDate(): Date | undefined {
         return this._drawDate;
+    }
+
+    get canDrawLottery(): boolean {
+        return this._canDrawLottery;
     }
 
     constructor(private _blockChainService: BlockChainService) {
@@ -42,7 +46,6 @@ export class ControlProgressComponent implements OnInit {
         this._getControlStages(connection);
         this._getDateOfDraw(connection);
     }
-
 
     private async _getControlStages(connection: Connection): Promise<void> {
         const recordBuffer = await connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
@@ -64,9 +67,7 @@ export class ControlProgressComponent implements OnInit {
         const dateOfDraw = deserialize(DateOfDrawModel.getSchema(), DateOfDrawModel, dateOfDrawBuffer!.data);
 
         const currentTime = new Date().getTime();
-        if (dateOfDraw.getDate().getTime() < currentTime) {
-            this._drawDate = addDays(new Date(), 2);
-        } else {
+        if (dateOfDraw.getDate().getTime() > currentTime) {
             this._drawDate = new Date(dateOfDraw.getDate().getTime());
         }
     }

@@ -10,8 +10,24 @@
     }
 }
 
+.container {
+    padding: $spacing-x8 $spacing-x4;
+    margin: 0 auto;
+    max-width: 1280px;
+}
+
+.transparent-content {
+    opacity: 0;
+}
+
 .separator-v {
     margin-top: $spacing-x4;
     padding-top: $spacing-x4;
     border-top: 1px solid rgba(151, 151, 151, 0.24);
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

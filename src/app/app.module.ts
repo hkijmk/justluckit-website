@@ -11,6 +11,7 @@ import { BlockChainService } from './services/block-chain.service';
 import { ControlStageItemComponent } from './components/main/control-progress/control-stages/control-stage-item/control-stage-item.component';
 import { ControlStagesComponent } from './components/main/control-progress/control-stages/control-stages.component';
 import { ControlProgressComponent } from './components/main/control-progress/control-progress.component';
+import { DrawNowComponent } from './components/main/control-progress/draw-now/draw-now.component';
 import { LastDrawResultsComponent } from './components/main/last-draw-results/last-draw-results.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
@@ -23,12 +24,13 @@ import { AppComponent } from './app.component';
         AppComponent,
         MainComponent,
         HeaderComponent,
-        WelcomeViewComponent,
         ControlProgressComponent,
         ControlStagesComponent,
         ControlStageItemComponent,
+        DrawNowComponent,
         LastDrawResultsComponent,
         NextDrawComponent,
+        WelcomeViewComponent,
     ],
     imports: [
         AppRoutingModule,

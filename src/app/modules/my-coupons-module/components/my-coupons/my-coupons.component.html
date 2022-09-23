@@ -1,0 +1,15 @@
+<div class="my-coupons">
+    <div class="container">
+        <div class="text-title">Check Your Coupon</div>
+
+        <div class="margin-top-x4 my-coupons-search">
+            <app-search-input [placeholder]="'Enter your coupon code and then press enter'"
+                              (onSearch)="searchCouponByCode($event)">
+            </app-search-input>
+        </div>
+
+        <div *ngIf="isLoading" class="margin-top-x6 flex-center">
+            <app-loading-indicator-icon></app-loading-indicator-icon>
+        </div>
+    </div>
+</div>

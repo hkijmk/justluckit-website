@@ -9,6 +9,10 @@ const routes: Routes = [
         path: 'play',
         loadChildren: () => import('./modules/play-module/play.module').then(m => m.PlayModule),
     },
+    {
+        path: 'my-coupons',
+        loadChildren: () => import('./modules/my-coupons-module/my-coupons.module').then(m => m.MyCouponsModule),
+    },
 ];
 
 @NgModule({

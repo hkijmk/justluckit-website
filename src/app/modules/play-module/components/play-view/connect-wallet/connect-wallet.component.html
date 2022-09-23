@@ -9,7 +9,7 @@
                 <app-button [ngSwitch]="wallet.adapter.name"
                             [variant]="isWalletConnected && selectedWallet !== null && selectedWallet.adapter.name === wallet.adapter.name ? 'primary' : 'default'"
                             (onClick)="onSelectWallet(wallet)">
-                    <div class="connect-wallet-button-content">
+                    <div class="flex-center connect-wallet-button-content">
                         <img *ngSwitchCase="'Phantom'"
                              src="../../../../../../assets/logos/3rd-party/phantom-logo.svg"
                              alt="phantom-wallet">

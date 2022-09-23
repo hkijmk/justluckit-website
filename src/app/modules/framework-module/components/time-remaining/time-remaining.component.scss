@@ -2,9 +2,6 @@
 @use '../../../../../styles/variables/layout' as *;
 
 .remaining-time {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: $spacing-x2;
 }
 
