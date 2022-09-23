@@ -1,4 +1,4 @@
-<div *ngIf="drawDate && canDrawLottery" class="container">
+<div *ngIf="drawDate && !canDrawLottery" class="container">
     <div class="text-title highlighted-gradient">Control Progress</div>
 
     <div class="margin-top-x4 text-info">
@@ -26,4 +26,4 @@
     <div class="margin-top-x4 text-info-small">*Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam.</div>
 </div>
 
-<draw-now *ngIf="!canDrawLottery"></draw-now>
+<draw-now *ngIf="canDrawLottery"></draw-now>

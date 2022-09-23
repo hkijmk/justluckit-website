@@ -8,4 +8,7 @@ import { Component } from '@angular/core';
 export class DrawNowComponent {
     constructor() {
     }
+
+    draw(): void {
+    }
 }
