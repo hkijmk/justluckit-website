@@ -9,6 +9,7 @@ import { PlayService } from '../../../../services/play.service';
 import { BLOCK_CHAIN_KEYS } from '../../../../../../constants';
 import { RecordModel } from '../../../../../../models';
 import { LottoGameModel, MinerTermsModel, SubControllerModel, SubCounterModel, TermOneModel } from '../../../../models';
+import { encode } from '@faustbrian/node-base58';
 
 @Component({
     selector: 'confirm-play-lottery-step-1',
@@ -168,10 +169,10 @@ export class ConfirmPlayLotteryStep1Component {
             game.bump = programAddress[1];
             game.wins = bumpGameWins ? subCountNew[1] : 0;
 
-            const lottoGameEncoded = serialize(LottoGameModel.toSchema(), game);
-            let lottoGameBuffer = Uint8Array.of(10, ...lottoGameEncoded);
-            let account2ProgramId = SystemProgram.programId;
+            const lottoGameEncoded = serialize(LottoGameModel.getSchema(), game);
 
+            let account2ProgramId = SystemProgram.programId;
+            let lottoGameBuffer: Uint8Array;
             let keys = [
                 { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.record },
                 { isSigner: false, isWritable: true, pubkey: publicKey },
@@ -185,13 +186,14 @@ export class ConfirmPlayLotteryStep1Component {
                 { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.term },
                 { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.minerTerms },
                 { isSigner: false, isWritable: true, pubkey: SystemProgram.programId },
-            ]
+            ];
 
             if (counter !== undefined && counter < 10) {
                 account2ProgramId = BLOCK_CHAIN_KEYS.programId;
                 lottoGameBuffer = Uint8Array.of(0, ...lottoGameEncoded);
                 keys.splice(5, 0, { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.host });
             } else {
+                lottoGameBuffer = Uint8Array.of(10, ...lottoGameEncoded);
                 keys.splice(6, 0, { isSigner: false, isWritable: true, pubkey: subCountNew[0] });
             }
 
@@ -213,7 +215,8 @@ export class ConfirmPlayLotteryStep1Component {
                 total,
             );
 
-            this.confirmed.emit('d0514423-c845-41c8-b57b-ac3132e67677');
+            const couponCode = encode(seed);
+            this.confirmed.emit(couponCode);
         } catch (e) {
             alert(e);
         }

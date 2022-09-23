@@ -41,7 +41,7 @@ export class LottoGameModel implements ILottoGameModel {
         this.winno = obj?.winno ?? "wwwwmmmmssssrrrraaaaa";
     }
 
-    static toSchema(): BlockChainSchemaType<typeof LottoGameModel> {
+    static getSchema(): BlockChainSchemaType<typeof LottoGameModel> {
         return new Map([
             [
                 LottoGameModel,
@@ -70,6 +70,10 @@ export class LottoGameModel implements ILottoGameModel {
                 },
             ],
         ]);
+    }
+
+    getNumbers(): number[] {
+        return [this.number1, this.number2, this.number3, this.number4, this.number5, this.number6];
     }
 }
 

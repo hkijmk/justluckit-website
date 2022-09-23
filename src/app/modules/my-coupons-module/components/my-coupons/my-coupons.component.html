@@ -1,8 +1,8 @@
-<div class="my-coupons">
-    <div class="container">
+<div class="my-coupons-container">
+    <div class="container my-coupons">
         <div class="text-title">Check Your Coupon</div>
 
-        <div class="margin-top-x4 my-coupons-search">
+        <div class="margin-top-x4">
             <app-search-input [placeholder]="'Enter your coupon code and then press enter'"
                               (onSearch)="searchCouponByCode($event)">
             </app-search-input>
@@ -10,6 +10,16 @@
 
         <div *ngIf="isLoading" class="margin-top-x6 flex-center">
             <app-loading-indicator-icon></app-loading-indicator-icon>
+        </div>
+
+        <div *ngIf="searchedCoupon" class="margin-top-x6">
+            <coupon-item [coupon]="searchedCoupon"></coupon-item>
+        </div>
+
+        <div *ngIf="allCoupons && !searchedCoupon" class="margin-top-x6 my-coupons-list">
+            <div *ngFor="let coupon of allCoupons">
+                <coupon-item [coupon]="coupon"></coupon-item>
+            </div>
         </div>
     </div>
 </div>

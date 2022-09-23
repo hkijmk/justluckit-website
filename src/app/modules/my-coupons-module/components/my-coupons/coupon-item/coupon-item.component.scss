@@ -1,0 +1,12 @@
+@use '../../../../../../styles/variables/layout' as *;
+
+.coupon-item-container {
+    padding: $spacing-x2 $spacing-x4;
+    background-color: white;
+    box-shadow: 0 30px 30px -15px rgba(0, 0, 0, 0.21);
+
+    .coupon-item {
+        margin: 0 auto;
+        max-width: 420px;
+    }
+}
