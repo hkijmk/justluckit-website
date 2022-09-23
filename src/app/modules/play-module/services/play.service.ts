@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class PlayService {
     private _selectedNumbersMap: Set<number> = new Set<number>();
-    private _totalPrice: number = 0.001;
+    private _totalPrice: number = 0.0705;
 
     get selectedNumbers(): number[] {
         return Array.from(this._selectedNumbersMap).sort((number1, number2) => number1 - number2);

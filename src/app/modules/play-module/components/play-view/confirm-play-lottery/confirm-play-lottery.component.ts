@@ -8,7 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class ConfirmPlayLotteryComponent {
     @Output() close = new EventEmitter<void>();
 
-    isConfirmed: boolean = false;
+    confirmationCode?: string;
 
     constructor() {
     }

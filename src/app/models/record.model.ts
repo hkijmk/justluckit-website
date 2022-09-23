@@ -3,16 +3,16 @@ import { BlockChainSchemaType } from '../types';
 export class RecordModel implements IRecordModel {
     isInit: number;
     weekNumber: number;
-    mainCountNumber: number;
-    midCountNumber: number;
-    subCountNumber: number;
+    mainCount: number;
+    midCount: number;
+    subCount: number;
 
     constructor(obj: IRecordModel) {
         this.isInit = obj.isInit;
         this.weekNumber = obj.weekNumber;
-        this.mainCountNumber = obj.mainCountNumber;
-        this.midCountNumber = obj.midCountNumber;
-        this.subCountNumber = obj.subCountNumber;
+        this.mainCount = obj.mainCount;
+        this.midCount = obj.midCount;
+        this.subCount = obj.subCount;
     }
 
     static getSchema(): BlockChainSchemaType<typeof RecordModel> {
@@ -24,9 +24,9 @@ export class RecordModel implements IRecordModel {
                     fields: [
                         ["isInit", "u8"],
                         ["weekNumber", "u16"],
-                        ["mainCountNumber", "u8"],
-                        ["midCountNumber", "u8"],
-                        ["subCountNumber", "u8"],
+                        ["mainCount", "u8"],
+                        ["midCount", "u8"],
+                        ["subCount", "u8"],
                     ],
                 },
             ],
@@ -37,7 +37,7 @@ export class RecordModel implements IRecordModel {
 export interface IRecordModel {
     isInit: number;
     weekNumber: number;
-    mainCountNumber: number;
-    midCountNumber: number;
-    subCountNumber: number;
+    mainCount: number;
+    midCount: number;
+    subCount: number;
 }

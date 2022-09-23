@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { PlayService } from '../../../../services/play.service';
 
@@ -8,6 +8,8 @@ import { PlayService } from '../../../../services/play.service';
     styleUrls: ['./step-2.component.scss', '../confirm-play-lottery.component.scss']
 })
 export class ConfirmPlayLotteryStep2Component {
+    @Input() confirmationCode!: string;
+
     @Output() onClose = new EventEmitter();
 
     get selectedNumbers(): number[] {

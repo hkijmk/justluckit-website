@@ -5,20 +5,19 @@
     dolor. Suspendisse a vulputate massa. Nullam pulvinar et est eu imperdiet.
 </div>
 
-<div class="margin-top-x4 text-title-small">Coupon Code</div>
+<div class="margin-top-x4">
+    <div class="text-title-small">Coupon Code</div>
+    <div class="margin-top-x3 text-title highlighted">{{ confirmationCode }}</div>
+</div>
 
-<div class="margin-top-x3 text-title highlighted">0.0001 SOL</div>
+<div class="margin-top-x4">
+    <div class="text-title-small">Your Numbers</div>
 
-<div class="margin-top-x4 text-title-small">Your Numbers</div>
-
-<div class="margin-top-x2 confirm-play-lottery-numbers">
-    <div *ngFor="let selectedNumber of selectedNumbers">
-        <lottery-number [selected]="true">
-            {{ selectedNumber }}
-        </lottery-number>
+    <div class="margin-top-x2">
+        <lottery-numbers [numbers]="selectedNumbers" [columnCountMd]="6" [columnCountSm]="3"></lottery-numbers>
     </div>
 </div>
 
 <div class="margin-top-x4">
-    <app-button [variant]="'secondary'" (onClick)="onClose.emit()">Close Dialog</app-button>
+    <app-button [variant]="'secondary'" (onClick)="finalize()">Close Dialog</app-button>
 </div>

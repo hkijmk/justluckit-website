@@ -1,0 +1,33 @@
+@use '../../../../../styles/variables/layout' as *;
+
+.lottery-numbers {
+    width: 100%;
+    display: grid;
+    grid-gap: $spacing-x1;
+
+    @media (min-width: $max-width-sm + 1) {
+        @for $i from 1 to 7 {
+            &.count-md-#{$i} {
+                grid-template-columns: repeat($i, 1fr);
+            }
+        }
+    }
+
+    @media (max-width: $max-width-sm) {
+        @for $i from 1 to 7 {
+            &.count-sm-#{$i} {
+                grid-template-columns: repeat($i, 1fr);
+            }
+        }
+    }
+
+    .lottery-numbers-height-placeholder {
+        opacity: 0;
+    }
+
+    > div {
+        display: inline-block;
+        justify-self: center;
+        align-self: center;
+    }
+}

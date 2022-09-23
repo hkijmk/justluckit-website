@@ -1,14 +1,20 @@
+import * as BN from 'bn.js';
+
 import { BlockChainSchemaType } from '../types';
 
 export class LastWeekLumpModel implements ILastWeekLumpModel {
     isInit: number;
-    amount: number;
+    amountBN: BN;
     weekNumber: number;
 
-    constructor(obj?: ILastWeekLumpModel) {
-        this.isInit = obj?.isInit ?? 0;
-        this.amount = obj?.amount ?? 0;
-        this.weekNumber = obj?.weekNumber ?? 0;
+    get amount(): number {
+        return this.amountBN.toNumber();
+    }
+
+    constructor(obj: ILastWeekLumpModel) {
+        this.isInit = obj.isInit;
+        this.amountBN = obj.amountBN;
+        this.weekNumber = obj.weekNumber;
     }
 
     static getSchema(): BlockChainSchemaType<typeof LastWeekLumpModel> {
@@ -19,7 +25,7 @@ export class LastWeekLumpModel implements ILastWeekLumpModel {
                     kind: "struct",
                     fields: [
                         ["isInit", "u8"],
-                        ["amount", "u64"],
+                        ["amountBN", "u64"],
                         ["weekNumber", "u16"],
                     ],
                 },
@@ -30,6 +36,6 @@ export class LastWeekLumpModel implements ILastWeekLumpModel {
 
 export interface ILastWeekLumpModel {
     isInit: number;
-    amount: number;
+    amountBN: BN;
     weekNumber: number;
 }

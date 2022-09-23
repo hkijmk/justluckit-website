@@ -1,11 +1,12 @@
 <app-modal>
     <div content class="confirm-play-lottery">
-        <confirm-play-lottery-step-1 *ngIf="!isConfirmed"
-                                     (confirmed)="isConfirmed = true"
+        <confirm-play-lottery-step-1 *ngIf="confirmationCode === undefined"
+                                     (confirmed)="confirmationCode = $event"
                                      (onCancel)="close.emit()">
         </confirm-play-lottery-step-1>
 
-        <confirm-play-lottery-step-2 *ngIf="isConfirmed"
+        <confirm-play-lottery-step-2 *ngIf="confirmationCode !== undefined"
+                                     [confirmationCode]="confirmationCode"
                                      (onClose)="close.emit()">
         </confirm-play-lottery-step-2>
     </div>

@@ -6,18 +6,18 @@
         dolor. Suspendisse a vulputate massa. Nullam pulvinar et est eu imperdiet.
     </div>
 
-    <div *ngIf="drawDate" class="margin-top-x6">
+    <div *ngIf="nextDrawDate" class="margin-top-x6">
         <div class=" text-title-small">Date of Draw</div>
-        <div class="margin-top-x2 text-title highlighted">{{ drawDate | date:'longDate' }}</div>
+        <div class="margin-top-x2 text-title highlighted">{{ nextDrawDate | date:'longDate' }}</div>
     </div>
 
-    <div class="margin-top-x6">
-        <div class="text-title-small">Time Remaining</div>
+    <!--    <div class="margin-top-x6">-->
+    <!--        <div class="text-title-small">Time Remaining</div>-->
 
-        <div class="margin-top-x4">
-            <time-remaining [date]="drawDate"></time-remaining>
-        </div>
-    </div>
+    <!--        <div class="margin-top-x4">-->
+    <!--            <time-remaining [date]="nextDrawDate"></time-remaining>-->
+    <!--        </div>-->
+    <!--    </div>-->
 
     <div class="margin-top-x4 text-info-small">
         *Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam. Sed metus diam, mollis vitae rhoncus vitae.

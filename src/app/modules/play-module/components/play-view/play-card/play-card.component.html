@@ -14,10 +14,8 @@
         </div>
     </div>
 
-    <div class="separator-v play-card-selected-numbers">
-        <div *ngFor="let selectedNumber of selectedNumbers">
-            <lottery-number [selected]="true">{{selectedNumber}}</lottery-number>
-        </div>
+    <div class="separator-v">
+        <lottery-numbers [numbers]="selectedNumbers" [columnCountMd]="6" [columnCountSm]="3"></lottery-numbers>
     </div>
 
     <div class="separator-v play-card-total-price">

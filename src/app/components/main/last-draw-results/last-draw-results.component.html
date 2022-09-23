@@ -2,7 +2,12 @@
     <div class="last-draw-results">
         <div>
             <div class="text-title-small">Total Reward</div>
-            <div class="text-title-big highlighted">52.1362 SOL</div>
+            <div class="text-title-big highlighted">{{ lastWeekReward }} SOL</div>
+        </div>
+
+        <div *ngIf="lastWeekLump" class="margin-top-x4">
+            <div class="text-title-small">Carry Over</div>
+            <div class="text-title-big highlighted">{{ lastWeekLump.amount }} SOL</div>
         </div>
 
         <div *ngIf="winningNumbers">

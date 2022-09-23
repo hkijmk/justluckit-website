@@ -31,6 +31,21 @@ export class LastDrawResultsComponent implements OnInit {
         return this._winningAmounts;
     }
 
+    get lastWeekLump(): LastWeekLumpModel | undefined {
+        return this._lastWeekLump;
+    }
+
+    get lastWeekReward(): number {
+        if (this._winningAmounts === undefined || this._numberOfWinners === undefined) {
+            return 0;
+        }
+
+        return this._winningAmounts!.threeMatchersAmount.toNumber() * this._numberOfWinners!.threeMatchersCount.toNumber() +
+            this._winningAmounts!.fourMatchersAmount.toNumber() * this._numberOfWinners!.fourMatchersCount.toNumber() +
+            this._winningAmounts!.fiveMatchersAmount.toNumber() * this._numberOfWinners!.fiveMatchersCount.toNumber() +
+            this._winningAmounts!.sixMatchersAmount.toNumber() * this._numberOfWinners!.sixMatchersCount;
+    }
+
     constructor(private _blockChainService: BlockChainService) {
     }
 
@@ -46,12 +61,17 @@ export class LastDrawResultsComponent implements OnInit {
 
         const recordBuffer = await connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
         const record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
-        const weekNumber = record.weekNumber;
+        const weekNumber = record.weekNumber - 1;
 
         await this._setLastWeekLump(connection, weekNumber);
         await this._setWinningAmounts(connection, weekNumber);
         await this._setNumberOfWinners(connection, weekNumber);
         await this._setWinningNumbers(connection, weekNumber);
+
+        console.log('winningNumbers: ', this._winningNumbers);
+        console.log('numberOfWinners: ', this._numberOfWinners);
+        console.log('winningAmounts: ', this._winningAmounts);
+        console.log('lastWeekLump: ', this._lastWeekLump);
     }
 
     private async _setLastWeekLump(connection: Connection, weekNumber: number): Promise<void> {

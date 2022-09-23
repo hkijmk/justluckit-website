@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Connection } from '@solana/web3.js';
 import { deserialize } from 'borsh';
-import { addDays } from 'date-fns';
+import { addSeconds } from 'date-fns';
 import { firstValueFrom } from 'rxjs';
 
 import { BlockChainService } from '../../../services/block-chain.service';
 
 import { BLOCK_CHAIN_KEYS } from '../../../constants';
-import { DateOfDrawModel } from '../../../models';
+import { DateOfDrawModel, HowOftenModel } from '../../../models';
 
 @Component({
     selector: 'next-draw',
@@ -15,20 +15,20 @@ import { DateOfDrawModel } from '../../../models';
     styleUrls: ['./next-draw.component.scss']
 })
 export class NextDrawComponent implements OnInit {
-    private _drawDate?: Date;
+    private _nextDrawDate?: Date;
 
-    get drawDate(): Date | undefined {
-        return this._drawDate;
+    get nextDrawDate(): Date | undefined {
+        return this._nextDrawDate;
     }
 
     constructor(private _blockChainService: BlockChainService) {
     }
 
     ngOnInit(): void {
-        this._getDateOfDraw();
+        this._getNextDrawDate();
     }
 
-    private async _getDateOfDraw(): Promise<void> {
+    private async _getNextDrawDate(): Promise<void> {
         const connection: Connection | null = await firstValueFrom(this._blockChainService.connection$);
         if (connection === null) {
             return;
@@ -37,11 +37,9 @@ export class NextDrawComponent implements OnInit {
         const dateOfDrawBuffer = await connection.getAccountInfo(BLOCK_CHAIN_KEYS.dateOfDraw);
         const dateOfDraw = deserialize(DateOfDrawModel.getSchema(), DateOfDrawModel, dateOfDrawBuffer!.data);
 
-        const currentTime = new Date().getTime();
-        if (dateOfDraw.getDate().getTime() < currentTime) {
-            this._drawDate = addDays(new Date(), 2);
-        } else {
-            this._drawDate = new Date(dateOfDraw.getDate().getTime());
-        }
+        const howOftenBuffer = await connection.getAccountInfo(BLOCK_CHAIN_KEYS.howOften);
+        const howOften = deserialize(HowOftenModel.getSchema(), HowOftenModel, howOftenBuffer!.data);
+
+        this._nextDrawDate = addSeconds(dateOfDraw.getDate(), howOften.howOften);
     }
 }
