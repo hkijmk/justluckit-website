@@ -134,10 +134,10 @@ export class DrawNowComponent {
                 { isSigner: false, isWritable: false, pubkey: controllerAddress[0] },
                 { isSigner: false, isWritable: false, pubkey: mainCountAddress[0] },
                 { isSigner: false, isWritable: true, pubkey: walletPublicKey },
-                { isSigner: false, isWritable: false, pubkey: playerAccount },
+                { isSigner: false, isWritable: true, pubkey: playerAccount },
                 { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.lottoFund },
                 { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.lottery },
-                { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.record },
+                { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.record },
                 { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.rentTerms },
             ],
             data: Buffer.from([210])
@@ -154,7 +154,7 @@ export class DrawNowComponent {
             keys: [
                 { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.record },
                 { isSigner: false, isWritable: true, pubkey: walletPublicKey },
-                { isSigner: false, isWritable: false, pubkey: playerAccount },
+                { isSigner: false, isWritable: true, pubkey: playerAccount },
                 { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.lottoFund },
                 { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.lottery },
                 { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.rentTerms },
@@ -177,6 +177,7 @@ export class DrawNowComponent {
             let signedTrans = await firstValueFrom(this._blockChainService.signTransaction(transaction));
             let signature = await this._connection!.sendRawTransaction(signedTrans.serialize());
             await this._connection!.confirmTransaction({ signature, blockhash: hash.blockhash, lastValidBlockHeight: hash.lastValidBlockHeight });
+            alert('Congratulations, you won!');
         } catch (error) {
             alert(error);
         }

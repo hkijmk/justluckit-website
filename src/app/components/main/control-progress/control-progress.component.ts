@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { encode } from '@faustbrian/node-base58';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { deserialize } from 'borsh';
 import { firstValueFrom } from 'rxjs';
@@ -7,7 +8,6 @@ import { BlockChainService } from '../../../services/block-chain.service';
 
 import { BLOCK_CHAIN_KEYS } from '../../../constants';
 import { DateOfDrawModel, DirectorModel, LotteryModel, LottoGameModel, RecordModel } from '../../../models';
-import { encode } from '@faustbrian/node-base58';
 
 @Component({
     selector: 'control-progress',
