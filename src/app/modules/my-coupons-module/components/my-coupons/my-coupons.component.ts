@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { decode, encode } from '@faustbrian/node-base58';
 import { Connection, PublicKey } from '@solana/web3.js';
+import { deserialize } from 'borsh';
 import { firstValueFrom } from 'rxjs';
 
 import { BlockChainService } from '../../../../services/block-chain.service';
+
 import { BLOCK_CHAIN_KEYS } from '../../../../constants';
-import { LottoGameModel } from '../../../play-module/models';
-import { deserialize } from 'borsh';
+import { LottoGameModel } from '../../../../models';
 
 @Component({
     selector: 'my-coupons',

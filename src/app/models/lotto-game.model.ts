@@ -1,4 +1,4 @@
-import { BlockChainSchemaType } from '../../../types';
+import { BlockChainSchemaType } from '../types';
 
 export class LottoGameModel implements ILottoGameModel {
     week: number;

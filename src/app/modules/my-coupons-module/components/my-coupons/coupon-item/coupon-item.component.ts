@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { LottoGameModel } from '../../../../play-module/models';
+import { LottoGameModel } from '../../../../../models';
 
 @Component({
     selector: 'coupon-item',

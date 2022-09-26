@@ -1,4 +1,3 @@
-export * from './lotto-game.model';
 export * from './miner-terms.model';
 export * from './sub-controller.model';
 export * from './sub-counter.model';

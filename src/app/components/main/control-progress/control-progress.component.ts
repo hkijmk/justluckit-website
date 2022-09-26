@@ -6,7 +6,8 @@ import { firstValueFrom } from 'rxjs';
 import { BlockChainService } from '../../../services/block-chain.service';
 
 import { BLOCK_CHAIN_KEYS } from '../../../constants';
-import { DateOfDrawModel, DirectorModel, RecordModel } from '../../../models';
+import { DateOfDrawModel, DirectorModel, LotteryModel, LottoGameModel, RecordModel } from '../../../models';
+import { encode } from '@faustbrian/node-base58';
 
 @Component({
     selector: 'control-progress',
@@ -17,6 +18,7 @@ export class ControlProgressComponent implements OnInit {
     private _director?: DirectorModel;
     private _drawDate?: Date;
     private _canDrawLottery: boolean = false;
+    private _connection?: Connection;
 
     get director(): DirectorModel | undefined {
         return this._director;
@@ -38,17 +40,14 @@ export class ControlProgressComponent implements OnInit {
     }
 
     private async _init(): Promise<void> {
-        const connection: Connection | null = await firstValueFrom(this._blockChainService.connection$);
-        if (connection === null) {
-            return;
-        }
+        this._connection = (await firstValueFrom(this._blockChainService.connection$))!;
 
-        this._getControlStages(connection);
-        this._getDateOfDraw(connection);
+        this._getControlStages();
+        this._getDateOfDraw();
     }
 
-    private async _getControlStages(connection: Connection): Promise<void> {
-        const recordBuffer = await connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
+    private async _getControlStages(): Promise<void> {
+        const recordBuffer = await this._connection!.getAccountInfo(BLOCK_CHAIN_KEYS.record);
         const record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
 
         const directorAddress = await PublicKey.findProgramAddress([
@@ -58,17 +57,53 @@ export class ControlProgressComponent implements OnInit {
             BLOCK_CHAIN_KEYS.programId,
         );
 
-        const directorBuffer = await connection.getAccountInfo(directorAddress[0]);
+        const directorBuffer = await this._connection!.getAccountInfo(directorAddress[0]);
         this._director = deserialize(DirectorModel.getSchema(), DirectorModel, directorBuffer!.data);
     }
 
-    private async _getDateOfDraw(connection: Connection): Promise<void> {
-        const dateOfDrawBuffer = await connection.getAccountInfo(BLOCK_CHAIN_KEYS.dateOfDraw);
+    private async _getDateOfDraw(): Promise<void> {
+        const dateOfDrawBuffer = await this._connection!.getAccountInfo(BLOCK_CHAIN_KEYS.dateOfDraw);
         const dateOfDraw = deserialize(DateOfDrawModel.getSchema(), DateOfDrawModel, dateOfDrawBuffer!.data);
 
+        const lotteryBuffer = await this._connection!.getAccountInfo(BLOCK_CHAIN_KEYS.lottery);
+        const lottery = deserialize(LotteryModel.getSchema(), LotteryModel, lotteryBuffer!.data);
+
         const currentTime = new Date().getTime();
-        if (dateOfDraw.getDate().getTime() > currentTime) {
+        if (lottery.call > 0 || dateOfDraw.getDate().getTime() <= currentTime) {
+            await this._setCanDrawLottery();
+        } else {
             this._drawDate = new Date(dateOfDraw.getDate().getTime());
         }
+    }
+
+    private async _setCanDrawLottery(): Promise<void> {
+        const walletPublicKey = (await firstValueFrom(this._blockChainService.publicKey$))!;
+        const walletPublicKeyBytes = encode(walletPublicKey.toString());
+
+        const accounts = await this._connection!.getProgramAccounts(
+            BLOCK_CHAIN_KEYS.programId,
+            {
+                filters: [
+                    {
+                        dataSize: 93, // number of bytes
+                    },
+                    {
+                        memcmp: {
+                            offset: 12, // number of bytes
+                            bytes: walletPublicKeyBytes,
+                        },
+                    },
+                ],
+            }
+        );
+
+        const isPlayerAlreadyPlayed = accounts[0] !== null;
+        if (!isPlayerAlreadyPlayed) {
+            this._canDrawLottery = false;
+            return;
+        }
+
+        const lottoGame = deserialize(LottoGameModel.getSchema(), LottoGameModel, accounts[0].account.data);
+        this._canDrawLottery = lottoGame.alreadyparticipated === 0;
     }
 }

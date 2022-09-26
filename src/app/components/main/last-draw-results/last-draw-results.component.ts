@@ -67,11 +67,6 @@ export class LastDrawResultsComponent implements OnInit {
         await this._setWinningAmounts(connection, weekNumber);
         await this._setNumberOfWinners(connection, weekNumber);
         await this._setWinningNumbers(connection, weekNumber);
-
-        console.log('winningNumbers: ', this._winningNumbers);
-        console.log('numberOfWinners: ', this._numberOfWinners);
-        console.log('winningAmounts: ', this._winningAmounts);
-        console.log('lastWeekLump: ', this._lastWeekLump);
     }
 
     private async _setLastWeekLump(connection: Connection, weekNumber: number): Promise<void> {
