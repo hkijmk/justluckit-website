@@ -15,7 +15,12 @@ import { DateOfDrawModel, HowOftenModel } from '../../../models';
     styleUrls: ['./next-draw.component.scss']
 })
 export class NextDrawComponent implements OnInit {
+    private _isLoading: boolean = false;
     private _nextDrawDate?: Date;
+
+    get isLoading(): boolean {
+        return this._isLoading;
+    }
 
     get nextDrawDate(): Date | undefined {
         return this._nextDrawDate;
@@ -29,8 +34,11 @@ export class NextDrawComponent implements OnInit {
     }
 
     private async _getNextDrawDate(): Promise<void> {
+        this._isLoading = true;
+
         const connection: Connection | null = await firstValueFrom(this._blockChainService.connection$);
         if (connection === null) {
+            this._isLoading = false;
             return;
         }
 
@@ -41,5 +49,7 @@ export class NextDrawComponent implements OnInit {
         const howOften = deserialize(HowOftenModel.getSchema(), HowOftenModel, howOftenBuffer!.data);
 
         this._nextDrawDate = addSeconds(dateOfDraw.getDate(), howOften.howOften);
+
+        this._isLoading = false;
     }
 }

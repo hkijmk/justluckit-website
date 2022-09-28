@@ -1,22 +1,22 @@
 @use './variables/colors' as *;
 
 html {
-  font-size: 100%;
+    font-size: 100%;
 }
 
 html,
 body {
-  font-family: "DM Sans", sans-serif;
-  font-weight: 400;
-  line-height: 1.5rem;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 400;
+    line-height: 1.5rem;
 }
 
 body {
-  font-size: 1rem;
+    font-size: 1rem;
 }
 
 p:not(:first-child) {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 h1,
@@ -25,57 +25,12 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Lexend", sans-serif;
-  font-weight: 600;
-}
-
-.font-size-0 {
-  font-size: 0.8rem;
-  line-height: 1.25rem;
-}
-
-.font-size-1 {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
-.font-size-2 {
-  font-size: 1.25rem;
-  line-height: 2rem;
-}
-
-.font-size-3 {
-  font-size: 1.563rem;
-  line-height: 2.5rem;
-}
-
-.font-size-4 {
-  font-size: 1.953rem;
-  line-height: 3rem;
-}
-
-.font-size-5 {
-  font-size: 2.441rem;
-  line-height: 3.75rem;
-}
-
-.font-size-6 {
-  font-size: 3.052rem;
-  line-height: 4.75rem;
-}
-
-.font-size-7 {
-  font-size: 3.815rem;
-  line-height: 5.75rem;
-}
-
-.font-size-8 {
-  font-size: 4.768rem;
-  line-height: 7.25rem;
+    font-family: "Lexend", sans-serif;
+    font-weight: 600;
 }
 
 .text-shadow {
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
 }
 
 // .font-secondary {
@@ -94,7 +49,7 @@ h6 {
     }
 
     &.highlighted-gradient {
-        background: linear-gradient(0.25turn,  $app-color-green, $app-color-green-light);
+        background: linear-gradient(0.25turn, $app-color-green, $app-color-green-light);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }

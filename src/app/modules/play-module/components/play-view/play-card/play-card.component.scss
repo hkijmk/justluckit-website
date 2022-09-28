@@ -6,7 +6,7 @@
 .play-card {
     background-color: white;
     border-radius: 8px;
-    padding: $spacing-x4 $spacing-x3;
+    padding: $spacing-x8 $spacing-x6;
     box-shadow: 0 30px 30 -15 rgba(0, 0, 0, 0.34);
     width: 390px;
 }
@@ -47,7 +47,7 @@
         width: 100%;
 
         &:not(:first-child) {
-            @extend .margin-top-x4;
+            @extend .margin-top-x8;
         }
     }
 }

@@ -62,8 +62,11 @@ export class MyCouponsComponent implements OnInit {
     }
 
     private async _getAllMyCoupons(): Promise<void> {
+        this._isLoading = true;
+
         const connection: Connection | null = await firstValueFrom(this._blockChainService.connection$);
         if (connection === null) {
+            this._isLoading = false;
             return;
         }
 
@@ -86,5 +89,7 @@ export class MyCouponsComponent implements OnInit {
         );
 
         this._allCoupons = accounts.map(accountItem => deserialize(LottoGameModel.getSchema(), LottoGameModel, accountItem.account!.data));
+
+        this._isLoading = false;
     }
 }

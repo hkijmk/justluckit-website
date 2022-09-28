@@ -11,7 +11,7 @@
 }
 
 .container {
-    padding: $spacing-x8 $spacing-x4;
+    padding: $spacing-x16 $spacing-x8;
     margin: 0 auto;
     max-width: 1280px;
 }
@@ -21,8 +21,8 @@
 }
 
 .separator-v {
-    margin-top: $spacing-x4;
-    padding-top: $spacing-x4;
+    margin-top: $spacing-x8;
+    padding-top: $spacing-x8;
     border-top: 1px solid rgba(151, 151, 151, 0.24);
 }
 

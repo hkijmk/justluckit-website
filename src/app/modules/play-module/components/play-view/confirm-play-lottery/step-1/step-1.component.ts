@@ -116,7 +116,7 @@ export class ConfirmPlayLotteryStep1Component {
     ) {
         try {
             let numberOfSeries: number;
-            let counter: number | undefined;
+            let subCount: number | undefined;
             let bumpGameWins: boolean = false;
 
             if (controllerNumberOfSeries === 0) {
@@ -126,21 +126,21 @@ export class ConfirmPlayLotteryStep1Component {
                 const subCounterAccountInfo = await connection.getAccountInfo(subCountKey);
                 const subCounterData = deserialize(SubCounterModel.toSchema(), SubCounterModel, subCounterAccountInfo!.data);
                 numberOfSeries = subCounterData.serialno;
-                counter = subCounterData.counter;
+                subCount = subCounterData.counter;
 
-                if (counter >= 10) {
+                if (subCount >= 10) {
                     bumpGameWins = true;
                 }
             }
 
-            const seed = await ConfirmPlayLotteryStep1Component._getSeed(
+            const seed = ConfirmPlayLotteryStep1Component._getSeed(
                 weekNumber,
                 controllerNumberOfSeries,
                 numberOfSeries,
                 mainCount,
                 midCount,
                 controllerNumber,
-                counter,
+                subCount,
             );
 
             const programAddress = await PublicKey.findProgramAddress([Buffer.from("L"), Buffer.from(seed)], BLOCK_CHAIN_KEYS.programId);
@@ -188,7 +188,7 @@ export class ConfirmPlayLotteryStep1Component {
                 { isSigner: false, isWritable: true, pubkey: SystemProgram.programId },
             ];
 
-            if (counter !== undefined && counter < 10) {
+            if (subCount !== undefined && subCount < 10) {
                 account2ProgramId = BLOCK_CHAIN_KEYS.programId;
                 lottoGameBuffer = Uint8Array.of(0, ...lottoGameEncoded);
                 keys.splice(5, 0, { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.host });
@@ -224,7 +224,7 @@ export class ConfirmPlayLotteryStep1Component {
         this._isPlaying = false;
     }
 
-    private static async _getSeed(
+    private static _getSeed(
         weekNumber: number,
         controllerNumberOfSeries: number,
         numberOfSeries: number,
@@ -232,7 +232,7 @@ export class ConfirmPlayLotteryStep1Component {
         midCount: number,
         controllerNumber: number,
         counter?: number,
-    ): Promise<string> {
+    ): string {
         let s5: string;
         let s6: string;
 

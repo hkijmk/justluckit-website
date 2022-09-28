@@ -1,17 +1,17 @@
 @use '../../../../../styles/variables/colors' as *;
 @use '../../../../../styles/variables/layout' as *;
 
-.input-container {
+.search-input-container {
     position: relative;
     display: flex;
     align-items: center;
     height: 60px;
     box-shadow: 0 30px 30px -15px rgba(0, 0, 0, 0.21);
     background-color: white;
-    padding: 0 $spacing-x2;
+    padding: 0 $spacing-x4;
 
     > input {
-        margin-inline-start: $spacing-x2;
+        margin-inline-start: $spacing-x4;
         flex-grow: 1;
         min-width: 1px;
         padding: 0;

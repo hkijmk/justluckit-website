@@ -1,6 +1,5 @@
 @use '../../../../../styles/variables/colors' as *;
 @use '../../../../../styles/variables/layout' as *;
-@use '../../../../../styles/layout' as *;
 
 .my-coupons-container {
     background-color: $app-color-bg-light;
@@ -12,6 +11,6 @@
 
 .my-coupons-list {
     > *:not(:first-child) {
-        margin-top: $spacing-x4;
+        margin-top: $spacing-x8;
     }
 }

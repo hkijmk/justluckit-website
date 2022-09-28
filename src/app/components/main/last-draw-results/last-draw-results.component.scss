@@ -19,9 +19,8 @@
                 font-size: 20px;
                 font-weight: normal;
                 color: #747474;
-                height: 64px;
                 text-align: center;
-                padding: $spacing-x2;
+                padding: $spacing-x4;
 
                 &:nth-child(3) {
                     max-width: 200px;
@@ -32,6 +31,7 @@
                 text-align: center;
                 font-size: 24px;
                 color: #404040;
+                padding: $spacing-x2;
 
                 &:nth-child(3) {
                     color: $app-color-green;
@@ -45,7 +45,7 @@
 .last-draw-results-winning-numbers {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: $spacing-x1;
+    grid-gap: $spacing-x2;
 
     > div {
         display: inline-block;

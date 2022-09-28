@@ -1,3 +1,5 @@
+import { encode } from '@faustbrian/node-base58';
+
 import { BlockChainSchemaType } from '../types';
 
 export class LottoGameModel implements ILottoGameModel {
@@ -74,6 +76,24 @@ export class LottoGameModel implements ILottoGameModel {
 
     getNumbers(): number[] {
         return [this.number1, this.number2, this.number3, this.number4, this.number5, this.number6];
+    }
+
+    getSeed(): string {
+        const sp1 = 'w';
+        const s1 = this.week.toString();
+        const sp2 = "m";
+        const s2 = this.mc.toString();
+        const sp3 = "md";
+        const s3 = this.midcno.toString();
+        const sp4 = "sc";
+        const s4 = this.gameno.toString();
+        const sp5 = "sr";
+        const s5 = this.serialno.toString();
+        const sp6 = "x";
+        const s6 = this.scno.toString();
+
+        const seed = sp1 + s1 + sp2 + s2 + sp3 + s3 + sp4 + s4 + sp5 + s5 + sp6 + s6;
+        return encode(seed);
     }
 }
 

@@ -1,7 +1,21 @@
 @use '../../../../../../styles/variables/layout' as *;
 
+@use '../../../../../../styles/layout' as *;
+
 .connect-wallet {
     width: 360px;
+}
+
+.connect-wallet-list {
+    > div {
+        &:not(:first-child) {
+            @extend .margin-top-x4;
+        }
+
+        > app-button > button.button {
+            padding: 0 !important;
+        }
+    }
 }
 
 .connect-wallet-button-content {

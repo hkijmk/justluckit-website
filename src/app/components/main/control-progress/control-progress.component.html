@@ -1,29 +1,35 @@
-<div *ngIf="drawDate && !canDrawLottery" class="container">
+<div class="container">
     <div class="text-title highlighted-gradient">Control Progress</div>
 
-    <div class="margin-top-x4 text-info">
+    <div class="margin-top-x8 text-info">
         Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam. Sed metus diam, mollis vitae rhoncus vitae, tincidunt at
         dolor. Suspendisse a vulputate massa. Nullam pulvinar et est eu imperdiet.
     </div>
 
-    <div *ngIf="drawDate" class="margin-top-x6">
-        <div class=" text-title-small">Date of Draw</div>
-        <div class="margin-top-x2 text-title highlighted">{{ drawDate | date:'longDate' }}</div>
+    <div *ngIf="isLoading" class="flex-center margin-top-x12">
+        <app-loading-indicator-icon></app-loading-indicator-icon>
     </div>
 
-    <div class="margin-top-x6 text-title-small">Current Control Stage</div>
+    <ng-container *ngIf="!isLoading && drawDate && !canDrawLottery">
+        <div *ngIf="drawDate" class="margin-top-x12">
+            <div class=" text-title-small">Date of Draw</div>
+            <div class="margin-top-x4 text-title highlighted">{{ drawDate | date:'longDate' }}</div>
+        </div>
 
-    <div class="margin-top-x4">
-        <control-stages [currentStageNumber]="director?.currentStage"></control-stages>
-    </div>
+        <div class="margin-top-x12 text-title-small">Current Control Stage</div>
 
-    <div class="margin-top-x10 text-title-small">Estimated Time Remaining</div>
+        <div class="margin-top-x8">
+            <control-stages [currentStageNumber]="director?.currentStage"></control-stages>
+        </div>
 
-    <div class="margin-top-x4">
-        <time-remaining [date]="drawDate"></time-remaining>
-    </div>
+        <div class="margin-top-x20 text-title-small">Estimated Time Remaining</div>
 
-    <div class="margin-top-x4 text-info-small">*Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam.</div>
+        <div class="margin-top-x8">
+            <time-remaining [date]="drawDate"></time-remaining>
+        </div>
+
+        <div class="margin-top-x8 text-info-small">*Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam.</div>
+    </ng-container>
 </div>
 
 <draw-now *ngIf="canDrawLottery"></draw-now>

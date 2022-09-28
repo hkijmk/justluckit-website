@@ -3,9 +3,8 @@
         <div *ngIf="selectedWallet" class="text-title-small">Selected Wallet: {{ selectedWallet.adapter.name }}</div>
         <div *ngIf="!selectedWallet" class="text-title-small">Select Your Wallet</div>
 
-        <div *ngIf="wallets !== undefined" class="margin-top-x4">
-            <div *ngFor="let wallet of wallets; let i = index"
-                 [class.margin-top-x2]="i !== 0">
+        <div *ngIf="wallets !== undefined" class="margin-top-x8 connect-wallet-list">
+            <div *ngFor="let wallet of wallets; let i = index">
                 <app-button [ngSwitch]="wallet.adapter.name"
                             [variant]="isWalletConnected && selectedWallet !== null && selectedWallet.adapter.name === wallet.adapter.name ? 'primary' : 'default'"
                             (onClick)="onSelectWallet(wallet)">

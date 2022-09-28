@@ -1,29 +1,29 @@
 <div class="text-title">Confirm Your Coupon</div>
 
-<div class="margin-top-x4">
+<div class="margin-top-x8">
     <div class="text-title-small">Total Price</div>
     <div class="margin-top-x1 text-title highlighted">0.0705 SOL</div>
 </div>
 
-<div class="margin-top-x4">
+<div class="margin-top-x8">
     <div class="text-title-small">Deposit</div>
     <div class="margin-top-x1 text-title highlighted">0.0705 SOL</div>
 </div>
 
-<div class="margin-top-x4">
-    <div class="margin-top-x4 text-title-small">Your Numbers</div>
+<div class="margin-top-x8">
+    <div class="margin-top-x8 text-title-small">Your Numbers</div>
 
-    <div class="margin-top-x2">
+    <div class="margin-top-x4">
         <lottery-numbers [numbers]="selectedNumbers" [columnCountMd]="6" [columnCountSm]="3"></lottery-numbers>
     </div>
 </div>
 
-<div class="margin-top-x4">
+<div class="margin-top-x8">
     <div>
         <app-button [variant]="'primary'" [isLoading]="isPlaying" (onClick)="onConfirm()">Confirm</app-button>
     </div>
 
-    <div class="margin-top-x2">
+    <div class="margin-top-x6">
         <app-button [variant]="'secondary'" (onClick)="onCancel.emit()">Cancel</app-button>
     </div>
 </div>

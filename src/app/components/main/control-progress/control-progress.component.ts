@@ -19,6 +19,7 @@ export class ControlProgressComponent implements OnInit {
     private _drawDate?: Date;
     private _canDrawLottery: boolean = false;
     private _connection?: Connection;
+    private _isLoading: boolean = false;
 
     get director(): DirectorModel | undefined {
         return this._director;
@@ -32,6 +33,10 @@ export class ControlProgressComponent implements OnInit {
         return this._canDrawLottery;
     }
 
+    get isLoading(): boolean {
+        return this._isLoading;
+    }
+
     constructor(private _blockChainService: BlockChainService) {
     }
 
@@ -40,10 +45,13 @@ export class ControlProgressComponent implements OnInit {
     }
 
     private async _init(): Promise<void> {
-        this._connection = (await firstValueFrom(this._blockChainService.connection$))!;
+        this._isLoading = true;
 
-        this._getControlStages();
-        this._getDateOfDraw();
+        this._connection = (await firstValueFrom(this._blockChainService.connection$))!;
+        await this._getControlStages();
+        await this._getDateOfDraw();
+
+        this._isLoading = false;
     }
 
     private async _getControlStages(): Promise<void> {

@@ -4,7 +4,7 @@
     <div class="separator-v play-card-number-selection-container">
         <div class="play-card-number-selection-title">Choose 6 numbers</div>
 
-        <div class="margin-top-x4 play-card-number-selection">
+        <div class="margin-top-x8 play-card-number-selection">
             <div *ngFor="let number of numbersList">
                 <lottery-number [selected]="isNumberSelected(number)"
                                 (click)="onSelectNumber(number)">
@@ -23,7 +23,7 @@
         <div class="play-card-total-price-value">{{ totalPrice }} SOL</div>
     </div>
 
-    <div class="margin-top-x4 play-card-actions">
+    <div class="margin-top-x8 play-card-actions">
         <app-button [variant]="'secondary'" (click)="showConnectWalletModal.emit()">
             <span *ngIf="!(isWalletConnected$ | async)">Connect Wallet</span>
             <span *ngIf="isWalletConnected$ | async">Connected</span>

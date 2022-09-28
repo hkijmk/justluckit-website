@@ -18,6 +18,11 @@ export class LastDrawResultsComponent implements OnInit {
     private _numberOfWinners?: NumberOfWinners;
     private _winningAmounts?: WinningAmountsModel;
     private _lastWeekLump?: LastWeekLumpModel;
+    private _isLoading: boolean = false;
+
+    get isLoading(): boolean {
+        return this._isLoading;
+    }
 
     get winningNumbers(): number[] | undefined {
         return this._winningNumbers;
@@ -54,8 +59,11 @@ export class LastDrawResultsComponent implements OnInit {
     }
 
     private async _getLastDrawResults(): Promise<void> {
+        this._isLoading = true;
+
         const connection: Connection | null = await firstValueFrom(this._blockChainService.connection$);
         if (connection === null) {
+            this._isLoading = false;
             return;
         }
 
@@ -67,6 +75,8 @@ export class LastDrawResultsComponent implements OnInit {
         await this._setWinningAmounts(connection, weekNumber);
         await this._setNumberOfWinners(connection, weekNumber);
         await this._setWinningNumbers(connection, weekNumber);
+
+        this._isLoading = false;
     }
 
     private async _setLastWeekLump(connection: Connection, weekNumber: number): Promise<void> {
