@@ -67,8 +67,8 @@ export class MyCouponsComponent implements OnInit {
             return;
         }
 
-        const publicKey = await firstValueFrom(this._blockChainService.publicKey$);
-        const base = encode(publicKey!.toString());
+        const walletPublicKey = await firstValueFrom(this._blockChainService.publicKey$);
+        const base = encode(walletPublicKey!.toString());
 
         const accounts = await connection.getProgramAccounts(
             BLOCK_CHAIN_KEYS.programId,
