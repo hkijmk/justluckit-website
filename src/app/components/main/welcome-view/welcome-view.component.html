@@ -1,17 +1,25 @@
-<div class="welcome-view-container">
+<section class="welcome-view-container">
     <div class="container welcome-view">
         <div class="welcome-view-left">
-            <div class="welcome-view-title">Praesent Porta</div>
+            <h2 class="font-size-6 text-shadow welcome-view-title">Praesent Porta</h2>
 
-            <div class="welcome-view-info">
-                Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam. Sed metus diam, mollis vitae rhoncus vitae,
-                tincidunt at dolor. Suspendisse a vulputate massa. Nullam pulvinar et est eu imperdiet. Aenean suscipit scelerisque purus, id
-                fringilla eros porttitor sed. Nulla est magna, pulvinar a tempus ac, bibendum a nulla. Nullam ac aliquam neque, vel mollis sapien. Sed
-                quis elementum mi.
+            <div class="text-shadow welcome-view-info">
+                <p>
+                  Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam. Sed metus diam, mollis vitae rhoncus vitae,
+                  tincidunt at dolor. Suspendisse a vulputate massa. Nullam pulvinar et est eu imperdiet. Aenean suscipit scelerisque purus, id
+                  fringilla eros porttitor sed. Nulla est magna, pulvinar a tempus ac, bibendum a nulla. Nullam ac aliquam neque, vel mollis sapien. Sed
+                  quis elementum mi.
+                </p>
+                <p>
+                  Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam. Sed metus diam, mollis vitae rhoncus vitae,
+                  tincidunt at dolor. Suspendisse a vulputate massa. Nullam pulvinar et est eu imperdiet. Aenean suscipit scelerisque purus, id
+                  fringilla eros porttitor sed. Nulla est magna, pulvinar a tempus ac, bibendum a nulla. Nullam ac aliquam neque, vel mollis sapien. Sed
+                  quis elementum mi.
+                </p>
             </div>
 
-            <div class="welcome-view-left-buttons">
-                <app-button [variant]="'secondary'" [routerLink]="'play'">Play Now</app-button>
+            <div class="margin-top-x17 welcome-view-left-buttons">
+                <app-button [variant]="'secondary'" [routerLink]="'play'" [isLoading]="true">Play Now</app-button>
                 <app-button>How It Works</app-button>
             </div>
         </div>
@@ -20,4 +28,4 @@
             <img class="welcome-view-image" src="../../../../assets/images/justluckit-play-card-3d.png" alt="Just Luck It">
         </div>
     </div>
-</div>
+</section>

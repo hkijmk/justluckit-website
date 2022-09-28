@@ -11,15 +11,10 @@
     align-items: center;
 
     .welcome-view-left {
-        .welcome-view-title, .welcome-view-info {
-            color: white;
-        }
+      .welcome-view-title, .welcome-view-info {
+        color: white;
+      }
 
-        .welcome-view-title {
-            text-align: center;
-            font-size: 50px;
-            line-height: 60px;
-        }
 
         .welcome-view-info {
             margin-top: 24px;
@@ -31,7 +26,6 @@
             display: flex;
             align-items: center;
             gap: 38px;
-            margin-top: 68px;
 
             > app-button {
                 width: 100%;

@@ -1,6 +1,6 @@
 @use './variables/layout' as *;
 
-@for $i from 1 to 11 {
+@for $i from 1 to 21 {
     .margin-top-x#{$i} {
         margin-top: $spacing-unit * $i;
     }

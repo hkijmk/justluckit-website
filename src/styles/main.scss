@@ -1,8 +1,8 @@
-@forward './variables/fonts';
+@forward "./variables/fonts";
 
-@forward './layout';
-@forward './text';
+@forward "./reset";
 
-* {
-    font-family: "Lexend Regular", sans-serif;
-}
+@forward "./layout";
+@forward "./text";
+
+
