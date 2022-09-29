@@ -10,6 +10,7 @@ import { ICON_SVGS, KEYBOARD_KEYS } from '../../../../constants';
 export class SearchInputComponent {
     @Input() placeholder?: string;
 
+    @Output() onChange = new EventEmitter<string>();
     @Output() onSearch = new EventEmitter<string>();
 
     searchText: string = '';
@@ -19,8 +20,14 @@ export class SearchInputComponent {
     constructor() {
     }
 
+    clearSearchText(): void {
+        this.searchText = '';
+        this.onChange.emit(this.searchText);
+    }
+
     onSearchTextChange(event: Event): void {
         this.searchText = (event.target as HTMLInputElement).value;
+        this.onChange.emit(this.searchText)
     }
 
     onKeyDown(event: KeyboardEvent): void {

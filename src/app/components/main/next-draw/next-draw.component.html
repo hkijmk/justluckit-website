@@ -1,9 +1,11 @@
 <div class="container">
-    <div class="text-title highlighted">Next Draw</div>
+    <h2 class="text-title highlighted">Next Draw</h2>
 
     <div class="margin-top-x8 text-info">
-        Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam. Sed metus diam, mollis vitae rhoncus vitae, tincidunt at
-        dolor. Suspendisse a vulputate massa. Nullam pulvinar et est eu imperdiet.
+        <p>
+            Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam. Sed metus diam, mollis vitae rhoncus vitae, tincidunt at
+            dolor. Suspendisse a vulputate massa. Nullam pulvinar et est eu imperdiet.
+        </p>
     </div>
 
     <div *ngIf="isLoading" class="flex-center margin-top-x12">
@@ -12,12 +14,12 @@
 
     <ng-container *ngIf="!isLoading && nextDrawDate">
         <div class="margin-top-x12">
-            <div class=" text-title-small">Date of Draw</div>
+            <h3 class="text-title-small">Date of Draw</h3>
             <div class="margin-top-x4 text-title highlighted">{{ nextDrawDate | date:'longDate' }}</div>
         </div>
 
         <div class="margin-top-x12">
-            <div class="text-title-small">Time Remaining</div>
+            <h3 class="text-title-small">Time Remaining</h3>
 
             <div class="margin-top-x8">
                 <time-remaining [date]="nextDrawDate"></time-remaining>
@@ -25,7 +27,7 @@
         </div>
 
         <div class="margin-top-x8 text-info-small">
-            *Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam. Sed metus diam, mollis vitae rhoncus vitae.
+            <p>*Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam. Sed metus diam, mollis vitae rhoncus vitae.</p>
         </div>
     </ng-container>
 </div>

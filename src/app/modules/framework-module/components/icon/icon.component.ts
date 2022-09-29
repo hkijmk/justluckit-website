@@ -9,7 +9,8 @@ export class IconComponent implements AfterViewInit {
     @Input() icon!: string;
     @Input() color?: string;
     @Input() size?: number;
-    @Input() shouldSpin?: boolean;
+    @Input() shouldSpin: boolean = false;
+    @Input() clickable: boolean = false;
 
     constructor(private _elementRef: ElementRef) {
     }
@@ -19,7 +20,7 @@ export class IconComponent implements AfterViewInit {
     }
 
     private _setStyles(): void {
-        const svgElement: SVGElement = this._elementRef.nativeElement.firstChild.firstChild;
+        const svgElement: SVGElement = this._elementRef.nativeElement.firstElementChild.firstElementChild;
 
         if (this.size !== undefined) {
             svgElement.setAttribute('width', this.size.toString());

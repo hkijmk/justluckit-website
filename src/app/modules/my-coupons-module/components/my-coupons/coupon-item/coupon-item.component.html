@@ -1,12 +1,12 @@
 <div class="coupon-item-container">
     <div class="coupon-item">
         <div>
-            <div class="text-title-small">Coupon Code</div>
+            <h3 class="text-title-small">Coupon Code</h3>
             <div class="margin-top-x3 text-title highlighted">{{ coupon.getSeed() }}</div>
         </div>
 
         <div class="margin-top-x8">
-            <div class="text-title-small">Your Numbers</div>
+            <h3 class="text-title-small">Your Numbers</h3>
 
             <div class="margin-top-x4">
                 <lottery-numbers [numbers]="coupon.getNumbers()" [columnCountMd]="6" [columnCountSm]="3"></lottery-numbers>

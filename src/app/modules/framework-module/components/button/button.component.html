@@ -2,7 +2,7 @@
         [ngClass]="'button-' + variant"
         [disabled]="disabled || isLoading"
         (click)="onClick.emit($event)">
-    <div class="button-content" [class.transparent-content]="isLoading">
+    <div class="flex-center button-content" [class.transparent-content]="isLoading">
         <ng-content></ng-content>
     </div>
 

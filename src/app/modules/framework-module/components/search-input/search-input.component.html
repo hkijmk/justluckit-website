@@ -1,4 +1,5 @@
 <div class="search-input-container">
     <app-icon [icon]="ICON_SVGS.search"></app-icon>
-    <input [placeholder]="placeholder" (input)="onSearchTextChange($event)" (keydown)="onKeyDown($event)"/>
+    <input [placeholder]="placeholder" [value]="searchText" (input)="onSearchTextChange($event)" (keydown)="onKeyDown($event)"/>
+    <app-icon *ngIf="searchText !== ''" [icon]="ICON_SVGS.timesCircle" [size]="20" [clickable]="true" (click)="clearSearchText()"></app-icon>
 </div>
