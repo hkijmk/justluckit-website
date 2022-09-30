@@ -1,5 +1,5 @@
 <div class="container">
-    <h2 class="text-title highlighted-gradient">Control Progress</h2>
+    <h2 class="text-title font-size-5 highlighted-gradient">Control Progress</h2>
 
     <div class="margin-top-x8 text-info">
         <p>
@@ -13,9 +13,9 @@
     </div>
 
     <ng-container *ngIf="!isLoading && drawDate && !canDrawLottery">
-        <div *ngIf="drawDate" class="margin-top-x12">
+        <div *ngIf="drawDate" class="margin-top-x14">
             <h3 class="text-title-small">Date of Draw</h3>
-            <div class="margin-top-x4 text-title highlighted">{{ drawDate | date:'longDate' }}</div>
+            <div class="margin-top-x6 text-title highlighted">{{ drawDate | date:'longDate' }}</div>
         </div>
 
         <div class="margin-top-x12">
@@ -26,10 +26,10 @@
             </div>
         </div>
 
-        <div class="margin-top-x20">
+        <div class="margin-top-x19">
             <h3 class="text-title-small">Estimated Time Remaining</h3>
 
-            <div class="margin-top-x8">
+            <div class="margin-top-x6">
                 <time-remaining [date]="drawDate"></time-remaining>
             </div>
         </div>

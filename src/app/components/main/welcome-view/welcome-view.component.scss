@@ -1,11 +1,16 @@
 @use '../../../../styles/variables/colors' as *;
+@use '../../../../styles/variables/layout' as *;
 
 .welcome-view-container {
     background: $app-yellow-green-radial-gradient;
 }
 
+.welcome-view-left, .welcome-view-right {
+  width: 100%;
+  padding: 0 $spacing-x4;
+}
+
 .welcome-view {
-    max-width: 1600px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,21 +29,27 @@
         .welcome-view-left-buttons {
             display: flex;
             align-items: center;
-            gap: 38px;
+            gap: $spacing-x12;
 
             > app-button {
-                width: 100%;
+
+                &.full {
+                  width: 100%;
+                }
             }
         }
     }
 
     .welcome-view-right {
-        margin-left: 80px;
 
         > .welcome-view-image {
-            max-width: 768px;
+            max-width: 100%;
         }
     }
 }
 
-
+@media (min-width: $max-width-md){
+  .welcome-view-left, .welcome-view-right {
+    width: 50%;
+  }
+}

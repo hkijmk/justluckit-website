@@ -1,4 +1,6 @@
 @use './variables/colors' as *;
+@use './variables/typography' as *;
+@use './fonts' as *;
 
 html {
     font-size: 100%;
@@ -6,6 +8,7 @@ html {
 
 html,
 body {
+    color: $app-text-color-body;
     font-family: "DM Sans", sans-serif;
     font-weight: 400;
     line-height: 1.5rem;
@@ -24,7 +27,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.heading {
     font-family: "Lexend", sans-serif;
     font-weight: 600;
 }
@@ -40,17 +44,20 @@ h6 {
 
 .text-title {
     color: #545454;
-    font-size: 25px;
-    line-height: 36px;
+    // font-size: 25px;
+    // line-height: 36px;
     text-align: center;
 
     &.highlighted {
+        @extend .font-size-6;
+        @extend .heading;
         color: $app-color-green;
+        font-weight: 600;
     }
 
     &.highlighted-gradient {
         background: linear-gradient(0.25turn, $app-color-green, $app-color-green-light);
-        -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 }
@@ -62,18 +69,15 @@ h6 {
 }
 
 .text-title-small {
+    @extend .font-size-1;
     color: #747474;
-    font-size: 16px;
-    letter-spacing: 2px;
-    line-height: 36px;
+    letter-spacing: $letter-spacing-default;
     text-transform: uppercase;
     text-align: center;
 }
 
 .text-info {
-    color: #404040;
-    font-size: 20px;
-    line-height: 32px;
+    @extend .font-size-2;
     text-align: center;
 }
 

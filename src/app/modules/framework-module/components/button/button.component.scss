@@ -1,5 +1,6 @@
 @use '../../../../../styles/variables/colors' as *;
 @use '../../../../../styles/variables/layout' as *;
+@use '../../../../../styles/variables/typography' as *;
 
 .button {
     position: relative;
@@ -10,7 +11,7 @@
     font-size: 0.9375rem;
     font-weight: 700;
     line-height: 1.5em;
-    letter-spacing: 0.125em;
+    letter-spacing: $letter-spacing-default;
     text-transform: uppercase;
     width: 100%;
     padding: 0.8em 2em;

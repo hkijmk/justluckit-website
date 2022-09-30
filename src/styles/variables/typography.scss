@@ -33,3 +33,11 @@
     src: url('../../assets/fonts/Lexend/Lexend-SemiBold.ttf');
     font-weight: 600;
 }
+
+@font-face {
+    font-family: 'Lexend';
+    src: url('../../assets/fonts/Lexend/Lexend-Bold.ttf');
+    font-weight: 700;
+}
+
+$letter-spacing-default: 0.125em;

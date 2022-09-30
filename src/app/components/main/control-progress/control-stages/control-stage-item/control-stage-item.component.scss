@@ -1,18 +1,27 @@
 @use '../../../../../../styles/variables/colors' as *;
+@use '../../../../../../styles/variables/layout' as *;
+@use '../../../../../../styles/fonts' as *;
 
 .control-stage-item {
-    width: 100px;
-    height: 100px;
+    width: $vr-base * 25;
+    height: $vr-base * 25;
     border-radius: 50%;
     background: conic-gradient($app-color-green-light, $app-color-yellow);
+    box-shadow: 0 30px 30px -15px rgba(0, 0, 0, 0.21);
+
+    &.disabled {
+      filter: saturate(0);
+      opacity: 0.62;
+    }
 }
 
 .control-stage-item-number {
-    width: 76px;
-    height: 76px;
+    @extend .font-size-5;
+    font-weight: 600;
+    width: $vr-base * 19;
+    height: $vr-base * 19;
     background-color: white;
     border-radius: 50%;
-    font-size: 40px;
 
     &.completed {
         background-color: transparent;

@@ -4,6 +4,11 @@
 .control-stage-separator {
     width: 75px;
     height: 1px;
-    margin: 0 $spacing-x1;
+    margin: 0 $spacing-x2;
     background-color: $app-color-green-light;
+
+    &.disabled {
+      filter: saturate(0);
+      opacity: 0.62;
+    }
 }

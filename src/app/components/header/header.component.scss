@@ -1,36 +1,47 @@
 @use '../../../styles/variables/colors' as *;
 @use '../../../styles/variables/layout' as *;
+@use '../../../styles/fonts' as *;
 
 .header {
-    display: flex;
-    padding: 0 80px;
-    height: 100px;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
     background-color: $app-color-green-light;
 
-    .header-left {
-        cursor: pointer;
-
-        > img {
-            max-width: 180px;
-        }
-    }
-
-    .header-right {
+    .container{
         display: flex;
+        padding: 0 $spacing-x4;
+        height: $vr-base * 25;
+        justify-content: space-between;
         align-items: center;
-        gap: $spacing-x12;
+        color: white;
+    }
+}
 
-        > a {
-            color: white;
-            text-decoration: none;
-            cursor: pointer;
 
-            &:hover {
-                color: rgb(220, 220, 220);
-            }
+.header-left {
+    cursor: pointer;
+
+    > img {
+        max-height: $vr-base * 11;
+    }
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-x16;
+
+    > a {
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+        @extend .font-size-1;
+        font-family: "Lexend";
+        font-weight: 700;
+        display: inline-flex;
+        min-height: $vr-base * 11;
+        align-items: center;
+
+        &:hover {
+            color: rgb(220, 220, 220);
         }
     }
 }
