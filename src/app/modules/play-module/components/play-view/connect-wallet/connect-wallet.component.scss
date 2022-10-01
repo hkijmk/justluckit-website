@@ -4,8 +4,10 @@
 @use '../../../../../../styles/layout' as *;
 
 .connect-wallet {
+    width: calc(100vw - #{$spacing-x16});
+
     @include mxns.md {
-        width: 360px;
+        width: 22.5rem;
     }
 }
 
