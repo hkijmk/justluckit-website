@@ -4,25 +4,29 @@
 
 @use '../../../styles/fonts' as *;
 
+$header-height: $vertical-rhythm * 18;
+$header-height-md: $vertical-rhythm * 25;
+
 .header-container {
+    position: relative;
     background-color: $app-color-green-light;
 }
 
 .header {
     display: flex;
-    flex-direction: column;
-    padding: 0 $spacing-x4;
-    height: $vertical-rhythm * 25;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-x4;
+    height: $header-height;
     color: white;
 
     @include mxns.md {
-        flex-direction: row;
+        height: $header-height-md;
+        padding: 0 $spacing-x4;
     }
 }
 
-.header-left {
+.header__logo {
     cursor: pointer;
 
     > img {
@@ -30,15 +34,53 @@
     }
 }
 
-.header-right {
+.header__nav {
     display: flex;
+    align-items: center;
+    background-color: $app-color-green-light;
+    height: 100%;
+
+    @include mxns.md {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.header__nav__icon {
+    @include mxns.md {
+        display: none;
+    }
+}
+
+.header__nav-links {
+    position: absolute;
+    top: $header-height;
+    right: 0;
+    display: flex;
+    max-height: 0;
+    overflow: hidden;
     flex-direction: column;
     align-items: center;
     gap: $spacing-x2;
+    opacity: 0.5;
+    background-color: $app-color-green-light;
+    width: 100%;
+    z-index: $app-header-z-index;
+    transition: max-height 0.15s ease-out, opacity 0.3s ease-out;
+
+    &.header__nav-links--visible-on-mobile {
+        max-height: 12rem;
+        opacity: 1;
+    }
 
     @include mxns.md {
+        position: static;
         flex-direction: row;
+        top: auto;
+        opacity: 1;
         gap: $spacing-x16;
+        background-color: transparent;
+        max-height: none;
     }
 
     > a {
@@ -52,15 +94,32 @@
         display: inline-flex;
         min-height: $vertical-rhythm * 11;
         align-items: center;
+        justify-content: center;
+        border-top: 1px solid #d8d8d8;
+        text-align: center;
+        width: 100%;
+        white-space: nowrap;
 
         &:hover {
             color: rgb(220, 220, 220);
         }
+
+        @include mxns.md {
+            width: auto;
+            text-align: inherit;
+            border-top: none;
+        }
     }
 }
 
-.header-navbar {
-    display: flex;
-    align-items: center;
-    gap: $spacing-x8;
+.header__nav-links__play-now-button {
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+    width: 100%;
+    padding: $spacing-x4;
+
+    @include mxns.md {
+        border: none;
+        padding: 0;
+    }
 }

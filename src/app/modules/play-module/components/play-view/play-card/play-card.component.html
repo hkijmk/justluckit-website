@@ -4,12 +4,14 @@
     <div class="separator-v play-card-number-selection-container">
         <div class="play-card-number-selection-title">Choose 6 numbers</div>
 
-        <div class="margin-top-x8 play-card-number-selection">
-            <div *ngFor="let number of numbersList">
-                <lottery-number [selected]="isNumberSelected(number)"
-                                (click)="onSelectNumber(number)">
-                    {{ number }}
-                </lottery-number>
+        <div class="flex-center margin-top-x8">
+            <div class="play-card-number-selection">
+                <div *ngFor="let number of numbersList">
+                    <lottery-number [selected]="isNumberSelected(number)"
+                                    (click)="onSelectNumber(number)">
+                        {{ number }}
+                    </lottery-number>
+                </div>
             </div>
         </div>
     </div>

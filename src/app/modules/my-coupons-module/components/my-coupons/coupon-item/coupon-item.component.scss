@@ -1,4 +1,6 @@
+@use '../../../../../../styles/abstracts/variables/colors' as *;
 @use '../../../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../../../styles/abstracts/placeholders/typography' as *;
 
 .coupon-item-container {
     padding: $spacing-x6 $spacing-x8;
@@ -9,4 +11,13 @@
         margin: 0 auto;
         max-width: 420px;
     }
+}
+
+.coupon-item__coupon-code {
+    @extend %font-size-2;
+    @extend %font-size-md-3;
+
+    color: $app-color-green;
+    text-align: center;
+    font-weight: 600;
 }

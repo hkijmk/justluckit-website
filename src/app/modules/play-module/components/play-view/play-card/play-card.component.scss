@@ -1,10 +1,15 @@
 @use '../../../../../../styles/abstracts/variables/colors' as *;
 @use '../../../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../../../styles/abstracts/mixins' as mxns;
 
 @use '../../../../../../styles/layout' as *;
 
 .play-card {
-    width: 390px;
+    width: 22rem;
+
+    @include mxns.md {
+        width: 26rem;
+    }
 }
 
 .play-card-number-selection-container {
@@ -17,8 +22,12 @@
 
     .play-card-number-selection {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: repeat(6, 1fr);
         grid-gap: $spacing-x1;
+
+        @include mxns.md {
+            grid-gap: $spacing-x4;
+        }
 
         > div {
             display: inline-block;

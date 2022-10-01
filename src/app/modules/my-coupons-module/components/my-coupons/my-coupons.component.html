@@ -5,6 +5,7 @@
 
             <div class="margin-top-x8">
                 <app-search-input [placeholder]="'Enter your coupon code and then press enter'"
+                                  (onChange)="searchText = $event"
                                   (onSearch)="searchCouponByCode($event)">
                 </app-search-input>
             </div>

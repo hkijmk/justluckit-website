@@ -18,14 +18,11 @@ export class MyCouponsComponent implements OnInit {
     private _isLoading: boolean = false;
     private _allCoupons?: LottoGameModel[];
     private _searchedCoupon?: LottoGameModel;
-    private _searchText: string = ''
+
+    searchText: string = ''
 
     get isLoading(): boolean {
         return this._isLoading;
-    }
-
-    get searchText(): string {
-        return this._searchText;
     }
 
     get allCoupons(): LottoGameModel[] | undefined {
@@ -44,8 +41,13 @@ export class MyCouponsComponent implements OnInit {
     }
 
     async searchCouponByCode(couponCode: string): Promise<void> {
+        this.searchText = couponCode;
+
+        if (!couponCode) {
+            return;
+        }
+
         this._isLoading = true;
-        this._searchText = couponCode;
 
         const connection: Connection | null = await firstValueFrom(this._blockChainService.connection$);
         if (connection === null) {
