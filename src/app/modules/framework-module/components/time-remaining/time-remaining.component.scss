@@ -1,7 +1,7 @@
 @use '../../../../../styles/variables/colors' as *;
 @use '../../../../../styles/variables/layout' as *;
 @use '../../../../../styles/fonts' as *;
-@use '../../../../../styles/text' as *;
+@use '../../../../../styles/typography' as *;
 
 .remaining-time {
     gap: $spacing-x8;
@@ -15,6 +15,7 @@
     .remaining-time-number {
         @extend .font-size-8;
         @extend .heading;
+
         color: $app-color-green;
     }
 }

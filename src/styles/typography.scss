@@ -37,39 +37,35 @@ h6,
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
 }
 
-// .font-secondary {
-//   font-family: "Lexend", sans-serif;
-//   font-weight: 600;
-// }
-
 .text-title {
     color: #545454;
-    // font-size: 25px;
-    // line-height: 36px;
     text-align: center;
 
     &.highlighted {
         @extend .font-size-6;
         @extend .heading;
+
         color: $app-color-green;
         font-weight: 600;
     }
 
     &.highlighted-gradient {
         background: linear-gradient(0.25turn, $app-color-green, $app-color-green-light);
-        background-clip: text;
+        -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 }
 
 .text-title-big {
     @extend .text-title;
+
     font-size: 50px;
     line-height: 76px;
 }
 
 .text-title-small {
     @extend .font-size-1;
+
     color: #747474;
     letter-spacing: $letter-spacing-default;
     text-transform: uppercase;
@@ -78,6 +74,7 @@ h6,
 
 .text-info {
     @extend .font-size-2;
+
     text-align: center;
 }
 

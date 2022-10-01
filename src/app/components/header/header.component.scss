@@ -2,19 +2,18 @@
 @use '../../../styles/variables/layout' as *;
 @use '../../../styles/fonts' as *;
 
-.header {
+.header-container {
     background-color: $app-color-green-light;
-
-    .container{
-        display: flex;
-        padding: 0 $spacing-x4;
-        height: $vr-base * 25;
-        justify-content: space-between;
-        align-items: center;
-        color: white;
-    }
 }
 
+.header {
+    display: flex;
+    padding: 0 $spacing-x4;
+    height: $vr-base * 25;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
 
 .header-left {
     cursor: pointer;
@@ -30,11 +29,12 @@
     gap: $spacing-x16;
 
     > a {
+        @extend .font-size-1;
+
         color: white;
         text-decoration: none;
         cursor: pointer;
-        @extend .font-size-1;
-        font-family: "Lexend";
+        font-family: 'Lexend', sans-serif;
         font-weight: 700;
         display: inline-flex;
         min-height: $vr-base * 11;
