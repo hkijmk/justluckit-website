@@ -13,15 +13,15 @@
     </div>
 
     <ng-container *ngIf="!isLoading && nextDrawDate">
-        <div class="margin-top-x12">
+        <div class="margin-top-x14">
             <h3 class="text-title-small">Date of Draw</h3>
             <div class="margin-top-x4 text-title highlighted">{{ nextDrawDate | date:'longDate' }}</div>
         </div>
 
-        <div class="margin-top-x12">
+        <div class="margin-top-x19">
             <h3 class="text-title-small">Time Remaining</h3>
 
-            <div class="margin-top-x8">
+            <div class="margin-top-x6">
                 <time-remaining [date]="nextDrawDate"></time-remaining>
             </div>
         </div>

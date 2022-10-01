@@ -7,27 +7,23 @@
         <ng-container *ngIf="!isLoading">
             <div>
                 <h3 class="text-title-small">Total Reward</h3>
-                <div class="text-title-big highlighted">{{ lastWeekReward }} SOL</div>
+                <div class="margin-top-x6 text-title highlighted">{{ lastWeekReward }} SOL</div>
             </div>
 
-            <div *ngIf="lastWeekLump" class="margin-top-x8">
+            <div *ngIf="lastWeekLump" class="margin-top-x12">
                 <h3 class="text-title-small">Carry Over</h3>
-                <div class="text-title-big highlighted">{{ lastWeekLump.amount }} SOL</div>
+                <div class="margin-top-x6 text-title highlighted">{{ lastWeekLump.amount }} SOL</div>
             </div>
 
-            <div *ngIf="winningNumbers" class="margin-top-x8">
+            <div *ngIf="winningNumbers" class="margin-top-x12">
                 <h3 class="text-title-small">Winning Numbers</h3>
 
-                <div class="margin-top-x4 last-draw-results-winning-numbers">
-                    <div *ngFor="let winningNumber of winningNumbers">
-                        <lottery-number [selected]="true">
-                            {{ winningNumber }}
-                        </lottery-number>
-                    </div>
+                <div class="margin-top-x8 last-draw-results-winning-numbers">
+                    <lottery-numbers [numbers]="winningNumbers" [columnCountMd]="6" [columnCountSm]="3"></lottery-numbers>
                 </div>
             </div>
 
-            <div *ngIf="numberOfWinners && winningAmounts" class="margin-top-x8 last-draw-results-table">
+            <div *ngIf="numberOfWinners && winningAmounts" class="margin-top-x12 last-draw-results-table">
                 <table>
                     <tr>
                         <th>Guessed Numbers</th>

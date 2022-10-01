@@ -40,15 +40,3 @@
         }
     }
 }
-
-.last-draw-results-winning-numbers {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: $spacing-x2;
-
-    > div {
-        display: inline-block;
-        justify-self: center;
-        align-self: center;
-    }
-}
