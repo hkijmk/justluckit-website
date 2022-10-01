@@ -1,5 +1,8 @@
 @use './abstracts/variables/colors' as *;
 @use './abstracts/variables/typography' as *;
+@use './abstracts/mixins' as mxns;
+@use './abstracts/placeholders/typography' as *;
+
 @use './fonts' as *;
 
 html {
@@ -27,10 +30,8 @@ h2,
 h3,
 h4,
 h5,
-h6,
-.heading {
-    font-family: "Lexend", sans-serif;
-    font-weight: 600;
+h6 {
+    @extend %heading;
 }
 
 .text-shadow {
@@ -42,8 +43,9 @@ h6,
     text-align: center;
 
     &.highlighted {
-        @extend .font-size-6;
-        @extend .heading;
+        @extend %font-size-4;
+        @extend %font-size-md-6;
+        @extend %heading;
 
         color: $app-color-green;
         font-weight: 600;
@@ -64,8 +66,15 @@ h6,
 }
 
 .text-title-small {
-    @extend .font-size-1;
+    @extend %font-size-1;
+}
 
+.text-title-xsmall {
+    @extend %font-size-0;
+    @extend %font-size-md-1;
+}
+
+.text-title-small, .text-title-xsmall {
     color: #747474;
     letter-spacing: $letter-spacing-default;
     text-transform: uppercase;

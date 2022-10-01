@@ -1,22 +1,52 @@
 @use '../../../../styles/abstracts/variables/colors' as *;
 @use '../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../styles/abstracts/mixins' as mxns;
+@use '../../../../styles/abstracts/placeholders/typography' as *;
 
 .last-draw-results-container {
     background-color: #e8f2eb;
+}
 
-    .last-draw-results {
-        max-width: 640px;
-    }
+.last-draw-results {
+    max-width: 640px;
+}
+
+.last-draw-results-logo {
+    height: 82px;
 }
 
 .last-draw-results-table {
+    @extend %font-size-2;
+
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+
     > table {
         margin: 0 auto;
         width: 100%;
 
+        thead {
+            display: none;
+
+            @include mxns.md {
+                display: table-header-group;
+            }
+        }
+
         tr {
+            display: flex;
+            flex-wrap: wrap;
+            border-top: 1px solid #d8d8d8;
+            padding: $spacing-x8 0;
+            gap: $spacing-x4 $spacing-x8;
+
+            @include mxns.md {
+                display: table-row;
+                border-top: none;
+            }
+
             th {
-                font-size: 20px;
+                @extend %font-size-1;
                 font-weight: normal;
                 color: #747474;
                 text-align: center;
@@ -28,13 +58,32 @@
             }
 
             td {
-                text-align: center;
-                font-size: 24px;
-                padding: $spacing-x2;
+                @extend %font-size-2;
 
-                &:nth-child(3) {
+                flex: 1 1 calc(50% - #{$spacing-x4});
+                text-align: center;
+
+                @include mxns.md {
+                    padding: $spacing-x2;
+                }
+
+                &:last-child {
+                    flex: 1 1 100%;
+                    text-align: center;
                     color: $app-color-green;
-                    text-align: right;
+                }
+
+                &:before {
+                    @extend %font-size-1;
+
+                    display: block;
+                    color: #747474;
+                    content: attr(data-heading);
+
+                    @include mxns.md {
+                        content: unset;
+                        display: none;
+                    }
                 }
             }
         }

@@ -1,10 +1,16 @@
+@use '../../../../../../styles/abstracts/placeholders/typography' as *;
 @use '../../../../../../styles/abstracts/variables/colors' as *;
 @use '../../../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../../../styles/abstracts/functions' as fns;
+@use '../../../../../../styles/abstracts/mixins' as mxns;
+
 @use '../../../../../../styles/fonts' as *;
 
+$md-scale: 2.5;
+
 .control-stage-item {
-    width: $vr-base * 25;
-    height: $vr-base * 25;
+    width: fns.vertical-rhythm(10);
+    height: fns.vertical-rhythm(10);
     border-radius: 50%;
     background: conic-gradient($app-color-green-light, $app-color-yellow);
     box-shadow: 0 30px 30px -15px rgba(0, 0, 0, 0.21);
@@ -13,18 +19,37 @@
         filter: saturate(0);
         opacity: 0.62;
     }
+
+    > img {
+        width: fns.vertical-rhythm(4.8);
+    }
+
+    @include mxns.md {
+        width: fns.vertical-rhythm(10 * $md-scale);
+        height: fns.vertical-rhythm(10 * $md-scale);
+
+        > img {
+            width: fns.vertical-rhythm(4.8 * $md-scale);
+        }
+    }
 }
 
 .control-stage-item-number {
-    @extend .font-size-5;
+    @extend %font-size-2;
+    @extend %font-size-md-5;
 
     font-weight: 600;
-    width: $vr-base * 19;
-    height: $vr-base * 19;
+    width: fns.vertical-rhythm(7.6);
+    height: fns.vertical-rhythm(7.6);
     background-color: white;
     border-radius: 50%;
 
     &.completed {
         background-color: transparent;
+    }
+
+    @include mxns.md {
+        width: fns.vertical-rhythm(7.6 * $md-scale);
+        height: fns.vertical-rhythm(7.6 * $md-scale);
     }
 }

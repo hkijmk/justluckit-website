@@ -1,5 +1,7 @@
+@use '../../../../../styles/abstracts/placeholders/typography' as *;
 @use '../../../../../styles/abstracts/variables/colors' as *;
 @use '../../../../../styles/abstracts/variables/layout' as *;
+
 @use '../../../../../styles/fonts' as *;
 @use '../../../../../styles/typography' as *;
 
@@ -11,12 +13,16 @@
     flex: 1;
     text-align: center;
     max-width: 120px;
-
-    .remaining-time-number {
-        @extend .font-size-8;
-        @extend .heading;
-
-        color: $app-color-green;
-    }
 }
 
+.remaining-time-number {
+    @extend %font-size-4;
+    @extend %font-size-md-8;
+    @extend %heading;
+
+    color: $app-color-green;
+}
+
+.remaining-time--text {
+    @extend %heading;
+}

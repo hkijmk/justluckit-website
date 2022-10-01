@@ -1,0 +1,7 @@
+/* Vertical Rhythm function that returns calc(var(--vertical-rhythm) * n)
+* @param n:integer Multiplier for vertical rhythm
+* @return calc(var(--vertical-rhythm)):rem
+*/
+@function vertical-rhythm($n: 1) {
+    @return calc(var(--vertical-rhythm) * #{$n});
+}

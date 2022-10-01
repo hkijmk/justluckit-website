@@ -2,18 +2,13 @@
 @use '../../../../../styles/abstracts/mixins/grid' as mxns;
 
 .lottery-numbers {
-    width: 100%;
     display: grid;
-    grid-gap: $spacing-x1;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-gap: $spacing-x4;
+    grid-template-columns: repeat(3, min-content);
+    grid-template-rows: repeat(2, min-content);
 
     @include mxns.md {
-        grid-template-columns: repeat(6, 1fr);
-    }
-
-    .lottery-numbers-height-placeholder {
-        opacity: 0;
+        grid-template-columns: repeat(6, min-content);
     }
 
     > div {
@@ -21,4 +16,8 @@
         justify-self: center;
         align-self: center;
     }
+}
+
+.lottery-numbers-height-placeholder {
+    opacity: 0;
 }

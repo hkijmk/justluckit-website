@@ -2,11 +2,11 @@
 
 @for $i from 1 to 22 {
     .margin-top-x#{$i} {
-        margin-top: $spacing-unit * $i;
+        margin-top: $vertical-rhythm * $i;
     }
 
     padding-x#{$i} {
-        padding: $spacing-unit * $i;
+        padding: $vertical-rhythm * $i;
     }
 }
 
@@ -14,6 +14,20 @@
     padding: $spacing-x16 $spacing-x4;
     margin: 0 auto;
     max-width: 1170px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    padding: $spacing-x8 $spacing-x6;
+
+    &.card--on-light-bg {
+        box-shadow: 0 30px 30 -15 rgba(0, 0, 0, 0.21);
+    }
+
+    &.card--on-dark-bg {
+        box-shadow: 0 30px 30 -15 rgba(0, 0, 0, 0.34);
+    }
 }
 
 .row {

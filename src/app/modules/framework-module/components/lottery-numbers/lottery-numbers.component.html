@@ -1,10 +1,12 @@
-<div class="lottery-numbers"
-     [ngClass]="'count-md-' + columnCountMd + ' count-sm-' + columnCountSm">
-    <div *ngIf="numbers.length === 0" class="lottery-numbers-height-placeholder">
-        <lottery-number></lottery-number>
-    </div>
+<div class="flex-center">
+    <div class="lottery-numbers"
+         [ngClass]="'count-md-' + columnCountMd + ' count-sm-' + columnCountSm">
+        <div *ngIf="numbers.length === 0" class="lottery-numbers-height-placeholder">
+            <lottery-number></lottery-number>
+        </div>
 
-    <div *ngFor="let lotteryNumber of numbers">
-        <lottery-number [selected]="true">{{ lotteryNumber }}</lottery-number>
+        <div *ngFor="let lotteryNumber of numbers">
+            <lottery-number [selected]="true">{{ lotteryNumber }}</lottery-number>
+        </div>
     </div>
 </div>

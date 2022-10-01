@@ -1,25 +1,19 @@
-$vr-base: 0.25rem;
+@use '../functions' as fns;
 
-$spacing-unit: $vr-base;
+$vertical-rhythm: 0.25rem;
 
-$spacing-x1: $spacing-unit * 1;
-$spacing-x2: $spacing-unit * 2;
-$spacing-x4: $spacing-unit * 4;
-$spacing-x6: $spacing-unit * 6;
-$spacing-x8: $spacing-unit * 8;
-$spacing-x12: $spacing-unit * 12;
-$spacing-x16: $spacing-unit * 16;
+$spacing-x1: $vertical-rhythm * 1;
+$spacing-x2: $vertical-rhythm * 2;
+$spacing-x4: $vertical-rhythm * 4;
+$spacing-x6: $vertical-rhythm * 6;
+$spacing-x8: $vertical-rhythm * 8;
+$spacing-x12: $vertical-rhythm * 12;
+$spacing-x16: $vertical-rhythm * 16;
 
 $grid-breakpoints: (
-  xs: 0,
-  // 0
-  sm: 576px,
-  // 576px
-  md: 768px,
-  // 768px
-  lg: 992px,
-  // 992px
-  xl: 1200px,
-  // 1200px
-  // xxl: 87.5rem // 1400px,
-) !default;
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+);
