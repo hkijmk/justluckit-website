@@ -93,11 +93,11 @@ export class ControlProgressComponent implements OnInit {
             {
                 filters: [
                     {
-                        dataSize: 93, // number of bytes
+                        dataSize: 93,
                     },
                     {
                         memcmp: {
-                            offset: 12, // number of bytes
+                            offset: 12,
                             bytes: walletPublicKeyBytes,
                         },
                     },
