@@ -10,6 +10,16 @@ $spacing-x8: $spacing-unit * 8;
 $spacing-x12: $spacing-unit * 12;
 $spacing-x16: $spacing-unit * 16;
 
-$max-width-sm: 576px;
-$max-width-md: 768px;
-$max-width-lg: 992px;
+$grid-breakpoints: (
+  xs: 0,
+  // 0
+  sm: 576px,
+  // 576px
+  md: 768px,
+  // 768px
+  lg: 992px,
+  // 992px
+  xl: 1200px,
+  // 1200px
+  // xxl: 87.5rem // 1400px,
+) !default;

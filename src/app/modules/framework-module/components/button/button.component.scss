@@ -1,6 +1,6 @@
-@use '../../../../../styles/variables/colors' as *;
-@use '../../../../../styles/variables/layout' as *;
-@use '../../../../../styles/variables/typography' as *;
+@use '../../../../../styles/abstracts/variables/colors' as *;
+@use '../../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../../styles/abstracts/variables/typography' as *;
 
 .button {
     position: relative;

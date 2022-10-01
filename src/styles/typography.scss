@@ -1,5 +1,5 @@
-@use './variables/colors' as *;
-@use './variables/typography' as *;
+@use './abstracts/variables/colors' as *;
+@use './abstracts/variables/typography' as *;
 @use './fonts' as *;
 
 html {
