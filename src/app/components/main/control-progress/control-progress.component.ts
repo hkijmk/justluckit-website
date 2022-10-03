@@ -77,7 +77,7 @@ export class ControlProgressComponent implements OnInit {
         const lottery = deserialize(LotteryModel.getSchema(), LotteryModel, lotteryBuffer!.data);
 
         const currentTime = new Date().getTime();
-        if (lottery.call > 0 || dateOfDraw.getDate().getTime() <= currentTime) {
+        if (lottery.call <= lottery.shouldCall || dateOfDraw.getDate().getTime() <= currentTime) {
             await this._setCanDrawLottery();
         } else {
             this._drawDate = new Date(dateOfDraw.getDate().getTime());
