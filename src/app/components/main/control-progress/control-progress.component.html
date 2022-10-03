@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div *ngIf="drawDate" class="margin-top-x12">
+        <div class="margin-top-x12">
             <h3 class="text-title-small">Date of Draw</h3>
             <div class="margin-top-x6 text-title highlighted">{{ drawDate | date:'longDate' }}</div>
         </div>
@@ -40,6 +40,9 @@
             </p>
         </div>
     </ng-container>
+
+    <div class="margin-top-x14">
+    <draw-now *ngIf="canDrawLottery"></draw-now>
+    </div>
 </div>
 
-<draw-now *ngIf="canDrawLottery"></draw-now>

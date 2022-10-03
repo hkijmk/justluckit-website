@@ -53,9 +53,11 @@
             justify-content: unset;
         }
 
-        >app-button {
-            &.full {
-                width: 100%;
+        > app-button {
+            width: 100%;
+
+            @include mxns.md {
+                width: auto;
             }
         }
     }
@@ -68,7 +70,7 @@
         order: 2;
     }
 
-    >.welcome-view-image {
+    > .welcome-view-image {
         max-width: 100%;
     }
 }
