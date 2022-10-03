@@ -86,11 +86,11 @@ export class LottoGameModel implements ILottoGameModel {
         const sp3 = "md";
         const s3 = this.midcno.toString();
         const sp4 = "sc";
-        const s4 = this.gameno.toString();
+        const s4 = this.scno.toString();
         const sp5 = "sr";
         const s5 = this.serialno.toString();
         const sp6 = "x";
-        const s6 = this.scno.toString();
+        const s6 = this.gameno.toString();
 
         const seed = sp1 + s1 + sp2 + s2 + sp3 + s3 + sp4 + s4 + sp5 + s5 + sp6 + s6;
         return encode(seed);
