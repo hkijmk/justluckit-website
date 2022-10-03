@@ -1,28 +1,28 @@
 import { BlockChainSchemaType } from '../../../types';
 
 export class SubCounterModel implements ISubCounterModel {
-    numberofthreewinners: number;
-    numberoffourwinners: number;
-    numberoffivewinners: number;
-    numberofsixwinners: number;
+    threeWinnersCount: number;
+    fourWinnersCount: number;
+    fiveWinnersCount: number;
+    sixWinnersCount: number;
     counter: number;
-    serialno: number;
-    belongtoctrller: number;
-    belongtomcno: number;
-    belongtomidno: number;
-    icollecteddata: number;
+    numberOfSeries: number;
+    belongsToController: number;
+    belongsToMainCountNumber: number;
+    belongsToMidCountNumber: number;
+    isCollectedData: number;
 
-    constructor(obj?: ISubCounterModel) {
-        this.numberofthreewinners = obj?.numberofthreewinners ?? 0;
-        this.numberoffourwinners = obj?.numberoffourwinners ?? 0;
-        this.numberoffivewinners = obj?.numberoffivewinners ?? 0;
-        this.numberofsixwinners = obj?.numberofsixwinners ?? 0;
-        this.counter = obj?.counter ?? 0;
-        this.serialno = obj?.serialno ?? 0;
-        this.belongtoctrller = obj?.belongtoctrller ?? 0;
-        this.belongtomcno = obj?.belongtomcno ?? 0;
-        this.belongtomidno = obj?.belongtomidno ?? 0;
-        this.icollecteddata = obj?.icollecteddata ?? 0;
+    constructor(obj: ISubCounterModel) {
+        this.threeWinnersCount = obj.threeWinnersCount;
+        this.fourWinnersCount = obj.fourWinnersCount;
+        this.fiveWinnersCount = obj.fiveWinnersCount;
+        this.sixWinnersCount = obj.sixWinnersCount;
+        this.counter = obj.counter;
+        this.numberOfSeries = obj.numberOfSeries;
+        this.belongsToController = obj.belongsToController;
+        this.belongsToMainCountNumber = obj.belongsToMainCountNumber;
+        this.belongsToMidCountNumber = obj.belongsToMidCountNumber;
+        this.isCollectedData = obj.isCollectedData;
     }
 
     static toSchema(): BlockChainSchemaType<typeof SubCounterModel> {
@@ -32,16 +32,16 @@ export class SubCounterModel implements ISubCounterModel {
                 {
                     kind: "struct",
                     fields: [
-                        ["numberofthreewinners", "u64"],
-                        ["numberoffourwinners", "u64"],
-                        ["numberoffivewinners", "u64"],
-                        ["numberofsixwinners", "u16"],
+                        ["threeWinnersCount", "u64"],
+                        ["fourWinnersCount", "u64"],
+                        ["fiveWinnersCount", "u64"],
+                        ["sixWinnersCount", "u16"],
                         ["counter", "u16"],
-                        ["serialno", "u8"],
-                        ["belongtoctrller", "u8"],
-                        ["belongtomcno", "u8"],
-                        ["belongtomidno", "u8"],
-                        ["icollecteddata", "u8"],
+                        ["numberOfSeries", "u8"],
+                        ["belongsToController", "u8"],
+                        ["belongsToMainCountNumber", "u8"],
+                        ["belongsToMidCountNumber", "u8"],
+                        ["isCollectedData", "u8"],
                     ],
                 },
             ],
@@ -50,14 +50,14 @@ export class SubCounterModel implements ISubCounterModel {
 }
 
 export interface ISubCounterModel {
-    numberofthreewinners: number;
-    numberoffourwinners: number;
-    numberoffivewinners: number;
-    numberofsixwinners: number;
+    threeWinnersCount: number;
+    fourWinnersCount: number;
+    fiveWinnersCount: number;
+    sixWinnersCount: number;
     counter: number;
-    serialno: number;
-    belongtoctrller: number;
-    belongtomcno: number;
-    belongtomidno: number;
-    icollecteddata: number;
+    numberOfSeries: number;
+    belongsToController: number;
+    belongsToMainCountNumber: number;
+    belongsToMidCountNumber: number;
+    isCollectedData: number;
 }

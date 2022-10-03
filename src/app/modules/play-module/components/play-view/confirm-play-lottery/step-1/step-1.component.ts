@@ -75,7 +75,7 @@ export class ConfirmPlayLotteryStep1Component {
         const controllerBuffer = await connection.getAccountInfo(controllerAddress[0]);
         const controllerData = deserialize(SubControllerModel.getSchema(), SubControllerModel, controllerBuffer!.data);
 
-        const controllerNumberOfSeries = controllerData.number_of_series;
+        const controllerNumberOfSeries = controllerData.numberOfSeries;
         const programAddress = await PublicKey.findProgramAddress([
                 Buffer.from("sc"), Buffer.from([record.mainCount]),
                 Buffer.from("m"), Buffer.from([midCountNumber]),
@@ -123,10 +123,10 @@ export class ConfirmPlayLotteryStep1Component {
                 numberOfSeries = 1;
                 bumpGameWins = true;
             } else {
-                const subCounterAccountInfo = await connection.getAccountInfo(subCountKey);
-                const subCounterData = deserialize(SubCounterModel.toSchema(), SubCounterModel, subCounterAccountInfo!.data);
-                numberOfSeries = subCounterData.serialno;
-                subCount = subCounterData.counter;
+                const subCounterBuffer = await connection.getAccountInfo(subCountKey);
+                const subCounter = deserialize(SubCounterModel.toSchema(), SubCounterModel, subCounterBuffer!.data);
+                numberOfSeries = subCounter.numberOfSeries;
+                subCount = subCounter.counter;
 
                 if (subCount >= 10) {
                     bumpGameWins = true;

@@ -12,6 +12,8 @@
     .modal {
         background-color: #f2f2f2;
         padding: $spacing-x8 $spacing-x4;
+        max-height: calc(100% - #{$spacing-x8});
+        overflow-y: auto;
 
         @include mxns.md {
             max-width: calc(100vw - #{$spacing-x8});
