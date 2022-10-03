@@ -116,7 +116,7 @@ export class ConfirmPlayLotteryStep1Component {
     ) {
         try {
             let numberOfSeries: number;
-            let subCount: number | undefined;
+            let counter: number | undefined;
             let bumpGameWins: boolean = false;
 
             if (controllerNumberOfSeries === 0) {
@@ -126,10 +126,11 @@ export class ConfirmPlayLotteryStep1Component {
                 const subCounterBuffer = await connection.getAccountInfo(subCountKey);
                 const subCounter = deserialize(SubCounterModel.toSchema(), SubCounterModel, subCounterBuffer!.data);
                 numberOfSeries = subCounter.numberOfSeries;
-                subCount = subCounter.counter;
+                counter = subCounter.counter;
 
-                if (subCount >= 10) {
+                if (counter >= 10) {
                     bumpGameWins = true;
+                    numberOfSeries++;
                 }
             }
 
@@ -140,7 +141,7 @@ export class ConfirmPlayLotteryStep1Component {
                 mainCount,
                 midCount,
                 controllerNumber,
-                subCount,
+                counter,
             );
 
             const programAddress = await PublicKey.findProgramAddress([Buffer.from("L"), Buffer.from(seed)], BLOCK_CHAIN_KEYS.programId);
@@ -188,7 +189,7 @@ export class ConfirmPlayLotteryStep1Component {
                 { isSigner: false, isWritable: true, pubkey: SystemProgram.programId },
             ];
 
-            if (subCount !== undefined && subCount < 10) {
+            if (counter !== undefined && counter < 10) {
                 account2ProgramId = BLOCK_CHAIN_KEYS.programId;
                 lottoGameBuffer = Uint8Array.of(0, ...lottoGameEncoded);
                 keys.splice(5, 0, { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.host });
@@ -233,18 +234,14 @@ export class ConfirmPlayLotteryStep1Component {
         controllerNumber: number,
         counter?: number,
     ): string {
-        let s5: string;
         let s6: string;
 
         if (controllerNumberOfSeries === 0) {
-            s5 = (1).toString();
             s6 = (1).toString();
         } else {
             if (counter! < 10) {
-                s5 = (numberOfSeries).toString();
                 s6 = (counter! + 1).toString();
             } else {
-                s5 = (numberOfSeries + 1).toString();
                 s6 = (1).toString();
             }
         }
@@ -258,6 +255,7 @@ export class ConfirmPlayLotteryStep1Component {
         const sp4 = "sc";
         const s4 = controllerNumber.toString();
         const sp5 = "sr";
+        const s5 = numberOfSeries.toString();
         const sp6 = "x";
 
         return sp1 + s1 + sp2 + s2 + sp3 + s3 + sp4 + s4 + sp5 + s5 + sp6 + s6;

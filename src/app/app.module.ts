@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HdWalletAdapterModule } from '@heavy-duty/wallet-adapter';
 
 import { FrameworkModule } from './modules/framework-module/framework.module';
@@ -35,6 +36,7 @@ import { AppComponent } from './app.component';
     imports: [
         AppRoutingModule,
         BrowserModule,
+        BrowserAnimationsModule,
         FrameworkModule,
         HdWalletAdapterModule.forRoot({ autoConnect: true }),
     ],
