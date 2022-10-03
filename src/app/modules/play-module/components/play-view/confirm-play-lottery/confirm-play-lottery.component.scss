@@ -1,5 +1,10 @@
 @use '../../../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../../../styles/abstracts/mixins' as mxns;
 
 .confirm-play-lottery {
-    width: 360px;
+    width: calc(100vw - #{$spacing-x16});
+
+    @include mxns.md {
+        width: 22.5rem;
+    }
 }

@@ -45,10 +45,12 @@ export class LastDrawResultsComponent implements OnInit {
             return 0;
         }
 
-        return this._winningAmounts!.threeMatchersAmount.toNumber() * this._numberOfWinners!.threeMatchersCount.toNumber() +
+        const totalWinningAmount = this._winningAmounts!.threeMatchersAmount.toNumber() * this._numberOfWinners!.threeMatchersCount.toNumber() +
             this._winningAmounts!.fourMatchersAmount.toNumber() * this._numberOfWinners!.fourMatchersCount.toNumber() +
             this._winningAmounts!.fiveMatchersAmount.toNumber() * this._numberOfWinners!.fiveMatchersCount.toNumber() +
-            this._winningAmounts!.sixMatchersAmount.toNumber() * this._numberOfWinners!.sixMatchersCount;
+            this._winningAmounts!.sixMatchersAmount.toNumber() * this._numberOfWinners!.sixMatchersCount
+
+        return totalWinningAmount / 1000000000;
     }
 
     constructor(private _blockChainService: BlockChainService) {

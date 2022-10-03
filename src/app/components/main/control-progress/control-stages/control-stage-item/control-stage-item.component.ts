@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./control-stage-item.component.scss']
 })
 export class ControlStageItemComponent {
-    @Input() isCompleted!: boolean;
+    @Input() currentStageNumber!: number;
     @Input() stageNumber!: number;
 
     constructor() {

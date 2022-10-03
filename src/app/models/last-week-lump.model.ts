@@ -8,7 +8,7 @@ export class LastWeekLumpModel implements ILastWeekLumpModel {
     weekNumber: number;
 
     get amount(): number {
-        return this.amountBN.toNumber();
+        return this.amountBN.toNumber() / 1000000000;
     }
 
     constructor(obj: ILastWeekLumpModel) {

@@ -1,4 +1,5 @@
-<div class="flex-center control-stage-item">
-    <div *ngIf="!isCompleted" class="flex-center control-stage-item-number">{{ stageNumber }}</div>
-    <img *ngIf="isCompleted" src="../../../../../../assets/icons/justluckit-check.svg" alt="JustLuckIt Check Icon">
+<div class="flex-center control-stage-item"
+     [class.disabled]="stageNumber >  currentStageNumber">
+    <div *ngIf="currentStageNumber <= stageNumber" class="flex-center control-stage-item-number">{{ stageNumber }}</div>
+    <img *ngIf="currentStageNumber > stageNumber" src="../../../../../../assets/icons/justluckit-check.svg" alt="JustLuckIt Check Icon">
 </div>
