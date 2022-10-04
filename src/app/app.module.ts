@@ -16,7 +16,6 @@ import { DrawNowComponent } from './components/main/control-progress/draw-now/dr
 import { LastDrawResultsComponent } from './components/main/last-draw-results/last-draw-results.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './components/main/main.component';
-import { NextDrawComponent } from './components/main/next-draw/next-draw.component';
 import { WelcomeViewComponent } from './components/main/welcome-view/welcome-view.component';
 import { AppComponent } from './app.component';
 
@@ -30,7 +29,6 @@ import { AppComponent } from './app.component';
         ControlStageItemComponent,
         DrawNowComponent,
         LastDrawResultsComponent,
-        NextDrawComponent,
         WelcomeViewComponent,
     ],
     imports: [

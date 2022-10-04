@@ -8,11 +8,7 @@
         </p>
     </div>
 
-    <div *ngIf="isLoading" class="flex-center margin-top-x12">
-        <app-loading-indicator-icon></app-loading-indicator-icon>
-    </div>
-
-    <ng-container *ngIf="!isLoading && drawDate && !canDrawLottery && director">
+    <ng-container *ngIf="drawDate && director">
         <div class="margin-top-x14">
             <h3 class="text-title-small">Current Control Stage</h3>
 
@@ -23,7 +19,7 @@
 
         <div class="margin-top-x12">
             <h3 class="text-title-small">Date of Draw</h3>
-            <div class="margin-top-x6 text-title highlighted">{{ drawDate | date:'longDate' }}</div>
+            <div class="margin-top-x6 text-title highlighted">{{ drawDate | date:'medium' }}</div>
         </div>
 
         <div class="margin-top-x19">
@@ -41,8 +37,8 @@
         </div>
     </ng-container>
 
-    <div class="margin-top-x14">
-    <draw-now *ngIf="canDrawLottery"></draw-now>
-    </div>
+    <!--    <div class="margin-top-x14">-->
+    <!--        <draw-now *ngIf="canDrawLottery"></draw-now>-->
+    <!--    </div>-->
 </div>
 

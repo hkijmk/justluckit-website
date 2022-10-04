@@ -2,86 +2,80 @@
     <div class="container last-draw-results">
         <h2 class="text-title font-size-5 highlighted-gradient">Last Draw Results</h2>
 
-        <div *ngIf="isLoading" class="flex-center margin-top-x8">
-            <app-loading-indicator-icon></app-loading-indicator-icon>
-        </div>
+        <div class="card card--on-light-bg margin-top-x8">
+            <div class="flex-center">
+                <img class="last-draw-results-logo"
+                     src="../../../../assets/logos/butterfly-6-49/butterfly-6-49-temporary-logo.svg"
+                     alt="butterfly-lottery">
+            </div>
 
-        <ng-container *ngIf="!isLoading">
-            <div class="card card--on-light-bg margin-top-x8">
-                <div class="flex-center">
-                    <img class="last-draw-results-logo"
-                         src="../../../../assets/logos/butterfly-6-49/butterfly-6-49-temporary-logo.svg"
-                         alt="butterfly-lottery">
-                </div>
+            <div class="margin-top-x8">
+                <h3 class="text-title-small">Total Reward</h3>
+                <div class="margin-top-x6 text-title highlighted">{{ lastDrawResults.totalReward }} SOL</div>
+            </div>
 
-                <div class="margin-top-x8">
-                    <h3 class="text-title-small">Total Reward</h3>
-                    <div class="margin-top-x6 text-title highlighted">{{ lastWeekReward }} SOL</div>
-                </div>
+            <div class="margin-top-x12">
+                <h3 class="text-title-small">Carry Over</h3>
+                <div class="margin-top-x6 text-title highlighted">{{ lastDrawResults.carryOver }} SOL</div>
+            </div>
 
-                <div *ngIf="lastWeekLump" class="margin-top-x12">
-                    <h3 class="text-title-small">Carry Over</h3>
-                    <div class="margin-top-x6 text-title highlighted">{{ lastWeekLump.amount }} SOL</div>
-                </div>
+            <div class="margin-top-x12">
+                <h3 class="text-title-small">Winning Numbers</h3>
 
-                <div *ngIf="winningNumbers" class="margin-top-x12">
-                    <h3 class="text-title-small">Winning Numbers</h3>
-
-                    <div class="margin-top-x8 last-draw-results-winning-numbers">
-                        <lottery-numbers [numbers]="winningNumbers" [columnCountMd]="6" [columnCountSm]="3"></lottery-numbers>
-                    </div>
-                </div>
-
-                <div *ngIf="numberOfWinners && winningAmounts" class="margin-top-x12 last-draw-results-table">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Guessed Numbers</th>
-                            <th>Winners</th>
-                            <th>Payout per Winner</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr>
-                            <td data-heading="Guessed Numbers">6</td>
-                            <td data-heading="Winners">{{ numberOfWinners.sixMatchersCount }}</td>
-                            <td data-heading="Payout per Winner">
-                                <span *ngIf="numberOfWinners.sixMatchersCount > 0">{{ winningAmounts.sixMatchersAmount.toNumber() }}</span>
-                                <span *ngIf="numberOfWinners.sixMatchersCount === 0">No Winners</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td data-heading="Guessed Numbers">5</td>
-                            <td data-heading="Winners">{{ numberOfWinners.fiveMatchersCount }}</td>
-                            <td data-heading="Payout per Winner">
-                                <span *ngIf=" numberOfWinners.fiveMatchersCount.toNumber()> 0">{{ winningAmounts.fiveMatchersAmount.toNumber() }}</span>
-                                <span *ngIf="numberOfWinners.fiveMatchersCount.toNumber() === 0">No Winners</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td data-heading="Guessed Numbers">4</td>
-                            <td data-heading="Winners">{{ numberOfWinners.fourMatchersCount }}</td>
-                            <td data-heading="Payout per Winner">
-                                <span *ngIf=" numberOfWinners.fourMatchersCount.toNumber()> 0">{{ winningAmounts.fourMatchersAmount.toNumber() }}</span>
-                                <span *ngIf="numberOfWinners.fourMatchersCount.toNumber() === 0">No Winners</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td data-heading="Guessed Numbers">3</td>
-                            <td data-heading="Winners">{{ numberOfWinners.threeMatchersCount }}</td>
-                            <td data-heading="Payout per Winner">
-                                <span *ngIf=" numberOfWinners.threeMatchersCount.toNumber()> 0">{{ winningAmounts.threeMatchersAmount.toNumber() }}</span>
-                                <span *ngIf="numberOfWinners.threeMatchersCount.toNumber() === 0">No Winners</span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="margin-top-x8 last-draw-results-winning-numbers">
+                    <lottery-numbers [numbers]="lastDrawResults.winningNumbers" [columnCountMd]="6" [columnCountSm]="3"></lottery-numbers>
                 </div>
             </div>
-        </ng-container>
+
+            <div class="margin-top-x12 last-draw-results-table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Guessed Numbers</th>
+                        <th>Winners</th>
+                        <th>Payout per Winner</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td data-heading="Guessed Numbers">6</td>
+                        <td data-heading="Winners">{{ lastDrawResults.sixWinnersCount }}</td>
+                        <td data-heading="Payout per Winner">
+                            <span *ngIf="lastDrawResults.sixWinnersCount > 0">{{ lastDrawResults.sixWinnersReward }}</span>
+                            <span *ngIf="lastDrawResults.sixWinnersCount === 0">No Winners</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td data-heading="Guessed Numbers">5</td>
+                        <td data-heading="Winners">{{ lastDrawResults.fiveWinnersCount }}</td>
+                        <td data-heading="Payout per Winner">
+                            <span *ngIf="lastDrawResults.fiveWinnersCount > 0">{{ lastDrawResults.fiveWinnersReward }}</span>
+                            <span *ngIf="lastDrawResults.fiveWinnersCount === 0">No Winners</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td data-heading="Guessed Numbers">4</td>
+                        <td data-heading="Winners">{{ lastDrawResults.fourWinnersCount }}</td>
+                        <td data-heading="Payout per Winner">
+                            <span *ngIf="lastDrawResults.fourWinnersCount > 0">{{ lastDrawResults.fourWinnersReward }}</span>
+                            <span *ngIf="lastDrawResults.fourWinnersCount === 0">No Winners</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td data-heading="Guessed Numbers">3</td>
+                        <td data-heading="Winners">{{ lastDrawResults.threeWinnersCount }}</td>
+                        <td data-heading="Payout per Winner">
+                            <span *ngIf=" lastDrawResults.threeWinnersCount > 0">{{ lastDrawResults.threeWinnersReward }}</span>
+                            <span *ngIf="lastDrawResults.threeWinnersCount === 0">No Winners</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

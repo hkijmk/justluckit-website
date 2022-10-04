@@ -86,7 +86,7 @@ export class ConfirmPlayLotteryStep1Component {
             BLOCK_CHAIN_KEYS.programId
         );
 
-        await this.play(
+        await this._play(
             publicKey,
             connection,
             mainCounterAddress[0],
@@ -101,7 +101,7 @@ export class ConfirmPlayLotteryStep1Component {
         );
     }
 
-    async play(
+    async _play(
         publicKey: PublicKey,
         connection: Connection,
         mainCountKey: PublicKey,
@@ -113,7 +113,7 @@ export class ConfirmPlayLotteryStep1Component {
         controllerNumber: number,
         controllerNumberOfSeries: number,
         weekNumber: number,
-    ) {
+    ): Promise<void> {
         try {
             let numberOfSeries: number;
             let counter: number | undefined;

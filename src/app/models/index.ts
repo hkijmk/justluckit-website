@@ -1,11 +1,8 @@
-export * from './date-of-draw.model';
-export * from './director.model';
-export * from './how-often.model';
-export * from './last-week-lump.model';
 export * from './lottery.model';
 export * from './lotto-game.model';
 export * from './main-counter.model';
-export * from './number-of-winners.model';
 export * from './record.model';
-export * from './winning-amounts.model';
-export * from './winning-numbers.model';
+
+export * from './main-screen-info-models/director.model';
+export * from './main-screen-info-models/last-draw-results.model';
+export * from './main-screen-info-models/main-screen-info.model';

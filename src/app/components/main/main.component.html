@@ -1,4 +1,10 @@
 <welcome-view></welcome-view>
-<control-progress></control-progress>
-<last-draw-results></last-draw-results>
-<next-draw></next-draw>
+
+<div *ngIf="isLoading" class="flex-center margin-top-x12">
+    <app-loading-indicator-icon></app-loading-indicator-icon>
+</div>
+
+<ng-container *ngIf="!isLoading && mainScreenInfo">
+    <control-progress [director]="mainScreenInfo.director" [drawDate]="mainScreenInfo.drawDate"></control-progress>
+    <last-draw-results [lastDrawResults]="mainScreenInfo.lastDrawResults"></last-draw-results>
+</ng-container>

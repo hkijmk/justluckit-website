@@ -9,7 +9,6 @@ export const BLOCK_CHAIN_KEYS = {
     rentTerms: new PublicKey('BcJLA7X6DWkpnDsbALXP88Z7baSrSVg4PdcykTvUX8kT'),
     playTerm: new PublicKey('AqtvXKUgAvKM7gfFoAGichizyjcUvsCLprtCaYyBbmxR'),
     dateOfDraw: new PublicKey('4m34LMb9Kc7aCiXfdvPtx1M15qNTL4ztJGUuNEfXLwNW'),
-    howOften: new PublicKey('AqtvXKUgAvKM7gfFoAGichizyjcUvsCLprtCaYyBbmxR'),
     lottoFund: new PublicKey('CBKbeSGXYwgAboku6UXcVBR1yfd9mvzMrjoExLFrgNsg'),
     lottery: new PublicKey('FEHczfXRR41sYghTkB8Lm6RgPGsQgrST5DkdJSt2Hs4u'),
 }
