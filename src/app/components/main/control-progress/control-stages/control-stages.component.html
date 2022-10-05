@@ -1,9 +1,9 @@
 <div class="flex-center">
     <control-stage-item [currentStageNumber]="currentStageNumber" [stageNumber]="1"></control-stage-item>
-    <div class="control-stage-separator"></div>
+    <div class="control-stage-separator" [class.disabled]="currentStageNumber <= 1"></div>
     <control-stage-item [currentStageNumber]="currentStageNumber" [stageNumber]="2"></control-stage-item>
-    <div class="control-stage-separator"></div>
+    <div class="control-stage-separator" [class.disabled]="currentStageNumber <= 2"></div>
     <control-stage-item [currentStageNumber]="currentStageNumber" [stageNumber]="3"></control-stage-item>
-    <div class="control-stage-separator"></div>
+    <div class="control-stage-separator" [class.disabled]="currentStageNumber <= 3"></div>
     <control-stage-item [currentStageNumber]="currentStageNumber" [stageNumber]="4"></control-stage-item>
 </div>
