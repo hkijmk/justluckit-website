@@ -1,6 +1,6 @@
-<draw-now *ngIf="!drawDateForTimeRemaining" [drawDate]="drawDate"></draw-now>
+<draw-now *ngIf="mainScreenInfo.isDrawActive" [drawDate]="mainScreenInfo.drawDate"></draw-now>
 
-<div *ngIf="drawDate && director" class="container">
+<div *ngIf="drawDate && mainScreenInfo" class="container">
     <h2 class="text-title font-size-5 highlighted-gradient">Control Progress</h2>
 
     <div class="margin-top-x8 text-info">
@@ -14,20 +14,20 @@
         <h3 class="text-title-small">Current Control Stage</h3>
 
         <div class="margin-top-x8">
-            <control-stages [currentStageNumber]="director.currentStage"></control-stages>
+            <control-stages [currentStageNumber]="mainScreenInfo.director.currentStage"></control-stages>
         </div>
     </div>
 
-    <div *ngIf="!isTimeZero" class="margin-top-x12">
+    <div class="margin-top-x12">
         <h3 class="text-title-small">Date of Draw</h3>
         <div class="margin-top-x6 text-title highlighted">{{ drawDate | date:'medium' }}</div>
     </div>
 
-    <div *ngIf="drawDateForTimeRemaining" class="margin-top-x19">
+    <div class="margin-top-x19">
         <h3 class="text-title-small">Estimated Time Remaining</h3>
 
         <div class="margin-top-x6">
-            <time-remaining [date]="drawDateForTimeRemaining"></time-remaining>
+            <time-remaining [date]="drawDate"></time-remaining>
         </div>
     </div>
 

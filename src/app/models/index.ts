@@ -1,3 +1,4 @@
+export * from './date-of-draw.model';
 export * from './lottery.model';
 export * from './lotto-game.model';
 export * from './main-counter.model';
