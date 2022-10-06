@@ -1,12 +1,16 @@
 @use '../../../../../styles/abstracts/variables/colors' as *;
+@use '../../../../../styles/abstracts/placeholders/typography.scss' as *;
 
 .lottery-number {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    color: #747474;
-    cursor: default;
+    @extend %font-size-2;
+    color: #373737;
     font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.34);
+    cursor: default;
 
     &.selected {
         background: $app-yellow-green-radial-gradient;
