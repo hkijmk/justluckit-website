@@ -1,7 +1,8 @@
 @use '../mixins' as mxns;
+@use '../variables' as vars;
 
 %heading {
-    font-family: "Lexend", sans-serif;
+    font-family: vars.$font-family-secondary;
     font-weight: 600;
 }
 
