@@ -1,4 +1,23 @@
+$font-DMSansRegular: 400;
+$font-DMSansMedium: 500;
+$font-DMSansBold: 700;
+
+$font-LexendRegular: 400;
+$font-LexendMedium: 500;
+$font-LexendSemiBold: 600;
+$font-LexendBold: 700;
+
 $font-family-primary: 'DM Sans', sans-serif;
 $font-family-secondary: 'Lexend', sans-serif;
+
+// TODO: Refoctoring is needed - Change all "font-weight" declaretions with Sass variables
+$font-primary-regular: $font-DMSansRegular;
+$font-primary-medium: $font-DMSansMedium;
+$font-primary-bold: $font-DMSansBold;
+
+$font-secondary-regular: $font-LexendRegular;
+$font-secondary-medium: $font-LexendMedium;
+$font-secondary-semi-bold: $font-LexendSemiBold;
+$font-secondary-bold: $font-LexendBold;
 
 $letter-spacing-default: 0.125em;
