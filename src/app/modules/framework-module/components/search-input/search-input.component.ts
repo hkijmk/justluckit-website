@@ -9,6 +9,7 @@ import { ICON_SVGS, KEYBOARD_KEYS } from '../../../../constants';
 })
 export class SearchInputComponent {
     @Input() placeholder?: string;
+    @Input() disabled?: boolean;
 
     @Output() onChange = new EventEmitter<string>();
     @Output() onSearch = new EventEmitter<string>();

@@ -10,7 +10,6 @@ import { PlayService } from '../../../services/play.service';
     styleUrls: ['./play-card.component.scss']
 })
 export class PlayCardComponent {
-    @Output() showConnectWalletModal = new EventEmitter<void>();
     @Output() showConfirmPlayLotteryModal = new EventEmitter<void>();
 
     numbersList: number[];

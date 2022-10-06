@@ -1,6 +1,11 @@
 @use '../../../../../styles/abstracts/variables/layout' as *;
 @use '../../../../../styles/abstracts/mixins' as mxns;
 
+:host {
+    position: relative;
+    z-index: $app-modal-z-index;
+}
+
 .modal-backdrop {
     position: fixed;
     left: 0;
@@ -8,6 +13,7 @@
     top: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.62);
+    z-index: $app-modal-z-index;
 
     .modal {
         background-color: #f2f2f2;

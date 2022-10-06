@@ -1,6 +1,8 @@
 import * as BN from 'bn.js';
 
 export class LastDrawResultsModel implements ILastDrawResultsModel {
+    private static readonly _WINNING_AMOUNT_DIVIDER = 1000000000;
+
     number1: number;
     number2: number;
     number3: number;
@@ -25,11 +27,11 @@ export class LastDrawResultsModel implements ILastDrawResultsModel {
             this.fiveWinnersRewardBN.toNumber() * this.fiveWinnersCountBN.toNumber() +
             this.sixWinnersRewardBN.toNumber() * this.sixWinnersCount
 
-        return totalWinningAmount / 1000000000;
+        return totalWinningAmount / LastDrawResultsModel._WINNING_AMOUNT_DIVIDER;
     }
 
     get carryOver(): number {
-        return this.carryOverBN.toNumber() / 1000000000;
+        return this.carryOverBN.toNumber() / LastDrawResultsModel._WINNING_AMOUNT_DIVIDER;
     }
 
     get winningNumbers(): number[] {
@@ -49,19 +51,19 @@ export class LastDrawResultsModel implements ILastDrawResultsModel {
     }
 
     get threeWinnersReward(): number {
-        return this.threeWinnersRewardBN.toNumber();
+        return this.threeWinnersRewardBN.toNumber() / LastDrawResultsModel._WINNING_AMOUNT_DIVIDER;
     }
 
     get fourWinnersReward(): number {
-        return this.fourWinnersRewardBN.toNumber();
+        return this.fourWinnersRewardBN.toNumber() / LastDrawResultsModel._WINNING_AMOUNT_DIVIDER;
     }
 
     get fiveWinnersReward(): number {
-        return this.fiveWinnersRewardBN.toNumber();
+        return this.fiveWinnersRewardBN.toNumber() / LastDrawResultsModel._WINNING_AMOUNT_DIVIDER;
     }
 
     get sixWinnersReward(): number {
-        return this.sixWinnersRewardBN.toNumber();
+        return this.sixWinnersRewardBN.toNumber() / LastDrawResultsModel._WINNING_AMOUNT_DIVIDER;
     }
 
     constructor(obj: ILastDrawResultsModel) {

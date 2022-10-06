@@ -32,6 +32,11 @@
         background-color: white;
     }
 
+    &.button-danger {
+        color: white;
+        background-color: $app-color-red;
+    }
+
     &:disabled {
         opacity: 0.6;
     }
@@ -50,6 +55,10 @@
 
             &.button-default {
                 background: darken(white, 2%);
+            }
+
+            &.button-danger {
+                background: lighten($app-color-red, 10%);
             }
         }
     }

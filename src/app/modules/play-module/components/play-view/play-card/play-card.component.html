@@ -26,10 +26,11 @@
     </div>
 
     <div class="margin-top-x8 play-card-actions">
-        <app-button [variant]="'secondary'" (click)="showConnectWalletModal.emit()">
-            <span *ngIf="!(isWalletConnected$ | async)">Connect Wallet</span>
-            <span *ngIf="isWalletConnected$ | async">Connected</span>
-        </app-button>
+        <connect-wallet-button></connect-wallet-button>
+        <!--        <app-button [variant]="'secondary'" (click)="showConnectWalletModal.emit()">-->
+        <!--            <span *ngIf="!(isWalletConnected$ | async)">Connect Wallet</span>-->
+        <!--            <span *ngIf="isWalletConnected$ | async">Connected</span>-->
+        <!--        </app-button>-->
 
         <app-button [disabled]="selectedNumbers.length !== 6 || ((isWalletConnected$ | async) !== true)"
                     [variant]="'primary'"

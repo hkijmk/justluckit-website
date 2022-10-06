@@ -1,27 +1,24 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Wallet } from '@heavy-duty/wallet-adapter';
-import { Observable, Subscription } from 'rxjs';
+import { firstValueFrom, Subscription } from 'rxjs';
 
 import { BlockChainService } from '../../../../../services/block-chain.service';
 
 @Component({
-    selector: 'connect-wallet',
-    templateUrl: './connect-wallet.component.html',
-    styleUrls: ['./connect-wallet.component.scss']
+    selector: 'connect-wallet-modal',
+    templateUrl: './connect-wallet-modal.component.html',
+    styleUrls: ['./connect-wallet-modal.component.scss']
 })
-export class ConnectWalletComponent implements OnInit, OnDestroy {
+export class ConnectWalletModalComponent implements OnInit, OnDestroy {
     @Output() close = new EventEmitter<void>();
 
     private _wallets: Wallet[] | undefined;
     private _isWalletConnected$?: Subscription;
     private _isWalletConnected: boolean = false;
+    private _isDisconnecting: boolean = false;
 
     get wallets(): Wallet[] | undefined {
         return this._wallets;
-    }
-
-    get wallets$(): Observable<Wallet[] | undefined> {
-        return this._blockChainService.wallets$;
     }
 
     get selectedWallet(): Wallet | null {
@@ -30,6 +27,10 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
 
     get isWalletConnected(): boolean {
         return this._isWalletConnected;
+    }
+
+    get isDisconnecting(): boolean {
+        return this._isDisconnecting;
     }
 
     constructor(private _blockChainService: BlockChainService) {
@@ -44,12 +45,19 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
         this._clearIsWalletConnected$();
     }
 
-    onSelectWallet(wallet: Wallet) {
+    onSelectWallet(wallet: Wallet): void {
         this._blockChainService.selectWallet(wallet.adapter.name);
     }
 
+    async onDisconnect(): Promise<void> {
+        this._isDisconnecting = true;
+
+        await firstValueFrom(this._blockChainService.disconnectWallet());
+        this._isDisconnecting = false;
+    }
+
     private _getWallets(): void {
-        this._blockChainService.wallets$.subscribe((wallets) => {
+        this._blockChainService.getWallets().subscribe((wallets) => {
             this._wallets = wallets;
         })
     }
@@ -63,8 +71,6 @@ export class ConnectWalletComponent implements OnInit, OnDestroy {
     }
 
     private _clearIsWalletConnected$(): void {
-        if (this._isWalletConnected$ !== undefined) {
-            this._isWalletConnected$.unsubscribe();
-        }
+        this._isWalletConnected$?.unsubscribe();
     }
 }

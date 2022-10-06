@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <h2 class="text-title font-size-5 highlighted-gradient">Draw Now</h2>
 
     <div class="margin-top-x4 text-info">
@@ -6,9 +6,13 @@
         dolor.
     </div>
 
-    <div class="margin-top-x6 flex-center">
-        <div class="draw-now-button">
-            <app-button [variant]="'primary'" [isLoading]="isLoading" (onClick)="draw()">Draw</app-button>
+    <div class="margin-top-x12 draw-now-buttons">
+        <div>
+            <connect-wallet-button></connect-wallet-button>
+        </div>
+
+        <div class="margin-top-x12">
+            <app-button [variant]="'primary'" [disabled]="!canDrawLottery" [isLoading]="isLoading" (onClick)="draw()">Draw</app-button>
         </div>
     </div>
 </div>

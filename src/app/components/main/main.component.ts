@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicKey } from '@solana/web3.js';
 import { deserialize } from 'borsh';
-import { firstValueFrom } from 'rxjs';
 
 import { BlockChainService } from '../../services/block-chain.service';
 
@@ -35,9 +34,7 @@ export class MainComponent implements OnInit {
     async _getInfo(): Promise<void> {
         this._isLoading = true;
 
-        const connection = (await firstValueFrom(this._blockChainService.connection$))!;
-
-        const recordBuffer = await connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
+        const recordBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
         const record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
 
         const mainScreenInfoProgram = await PublicKey.findProgramAddress([
@@ -47,7 +44,7 @@ export class MainComponent implements OnInit {
             BLOCK_CHAIN_KEYS.programId,
         );
 
-        const mainScreenInfoBuffer = await connection.getAccountInfo(mainScreenInfoProgram[0]);
+        const mainScreenInfoBuffer = await this._blockChainService.connection.getAccountInfo(mainScreenInfoProgram[0]);
         this._mainScreenInfo = deserialize(MainScreenInfoModel.getSchema(), MainScreenInfoModel, mainScreenInfoBuffer!.data);
 
         this._isLoading = false;

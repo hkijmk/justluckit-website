@@ -1,11 +1,16 @@
 <div class="my-coupons-container">
     <div class="container my-coupons">
         <div>
-            <div class="text-title">Check Your Coupon</div>
+            <h2 class="text-title font-size-3">Check Your Coupon</h2>
+
+            <div class="margin-top-x8">
+                <connect-wallet-button></connect-wallet-button>
+            </div>
 
             <div class="margin-top-x8">
                 <app-search-input [placeholder]="'Enter your coupon code and then press enter'"
-                                  (onChange)="searchText = $event"
+                                  [disabled]="walletPublicKey === null"
+                                  (onChange)="onSearchTextChange($event)"
                                   (onSearch)="searchCouponByCode($event)">
                 </app-search-input>
             </div>

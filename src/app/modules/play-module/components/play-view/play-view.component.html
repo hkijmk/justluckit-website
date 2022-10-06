@@ -4,12 +4,8 @@
          alt="butterfly-lottery">
 
     <div class="margin-top-x12">
-        <play-card (showConnectWalletModal)="isConnectingWallet = true"
-                   (showConfirmPlayLotteryModal)="isConfirmingPlay = true">
-        </play-card>
+        <play-card (showConfirmPlayLotteryModal)="isConfirmingPlay = true"></play-card>
     </div>
 </div>
-
-<connect-wallet *ngIf="isConnectingWallet" (close)="isConnectingWallet = false"></connect-wallet>
 
 <confirm-play-lottery *ngIf="isConfirmingPlay" (close)="isConfirmingPlay = false"></confirm-play-lottery>

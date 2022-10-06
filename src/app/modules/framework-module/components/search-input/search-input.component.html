@@ -1,5 +1,6 @@
-<div class="search-input-container">
+<div class="search-input-container"
+     [class.disabled]="disabled">
     <app-icon [icon]="ICON_SVGS.search"></app-icon>
-    <input [placeholder]="placeholder" [value]="searchText" (input)="onSearchTextChange($event)" (keydown)="onKeyDown($event)"/>
+    <input type="search" [placeholder]="placeholder" [value]="searchText" (input)="onSearchTextChange($event)" (keydown)="onKeyDown($event)"/>
     <app-icon *ngIf="searchText !== ''" [icon]="ICON_SVGS.timesCircle" [size]="20" [clickable]="true" (click)="clearSearchText()"></app-icon>
 </div>

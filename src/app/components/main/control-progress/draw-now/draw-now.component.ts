@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { encode } from '@faustbrian/node-base58';
-import { Connection, PublicKey, Transaction, TransactionInstruction } from '@solana/web3.js';
+import { PublicKey, Transaction, TransactionInstruction } from '@solana/web3.js';
 import { deserialize } from 'borsh';
 import { firstValueFrom } from 'rxjs';
 
 import { BlockChainService } from '../../../../services/block-chain.service';
 
 import { BLOCK_CHAIN_KEYS } from '../../../../constants';
-import { LotteryModel, MainCounterModel, RecordModel } from '../../../../models';
+import { LotteryModel, LottoGameModel, MainCounterModel, RecordModel } from '../../../../models';
 
 @Component({
     selector: 'draw-now',
@@ -15,39 +15,90 @@ import { LotteryModel, MainCounterModel, RecordModel } from '../../../../models'
     styleUrls: ['./draw-now.component.scss']
 })
 export class DrawNowComponent {
+    @Input() drawDate!: Date;
+
     private _isLoading: boolean = false;
-    private _connection?: Connection;
+    private _canDrawLottery: boolean = false;
 
     get isLoading(): boolean {
         return this._isLoading;
     }
 
+    get canDrawLottery(): boolean {
+        return this._canDrawLottery
+    }
+
     constructor(private _blockChainService: BlockChainService) {
     }
 
-    async draw(): Promise<void> {
-        this._isLoading = true;
-        this._connection = (await firstValueFrom(this._blockChainService.connection$))!;
+    ngOnInit(): void {
+        this._setCanDrawLottery();
+    }
 
-        const lotteryBuffer = await this._connection.getAccountInfo(BLOCK_CHAIN_KEYS.lottery);
+    private async _setCanDrawLottery(): Promise<void> {
+        const lotteryBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.lottery);
         const lottery = deserialize(LotteryModel.getSchema(), LotteryModel, lotteryBuffer!.data);
 
-        const walletPublicKey = (await firstValueFrom(this._blockChainService.publicKey$))!;
+        const currentTime = new Date().getTime();
+
+        if (lottery.call <= lottery.shouldCall || this.drawDate.getTime() <= currentTime) {
+            await this._setCanDrawLotteryPerGameActivity();
+        }
+
+        // let airdrop = await connection.requestAirdrop(this._blockChainService.publicKey$,LAMPORTS_PER_SOL);
+        // await connection.confirmTransaction(airdrop);
+    }
+
+    private async _setCanDrawLotteryPerGameActivity(): Promise<void> {
+        const walletPublicKey = (await firstValueFrom(this._blockChainService.walletPublicKey$));
+        if (walletPublicKey === null) {
+            return;
+        }
+
         const walletPublicKeyBytes = encode(walletPublicKey.toString());
 
-        const accounts = await this._connection.getProgramAccounts(
+        const accounts = await this._blockChainService.connection.getProgramAccounts(
             BLOCK_CHAIN_KEYS.programId,
             {
                 filters: [
                     {
-                        dataSize: 93, // number of bytes
+                        dataSize: 93,
                     },
                     {
                         memcmp: {
-                            offset: 12, // number of bytes
+                            offset: 12,
                             bytes: walletPublicKeyBytes,
                         },
                     },
+                ],
+            }
+        );
+
+        const isPlayerAlreadyPlayed = accounts[0] !== null;
+        if (!isPlayerAlreadyPlayed) {
+            this._canDrawLottery = false;
+            return;
+        }
+
+        const lottoGame = deserialize(LottoGameModel.getSchema(), LottoGameModel, accounts[0].account.data);
+        this._canDrawLottery = lottoGame.alreadyparticipated === 0;
+    }
+
+    async draw(): Promise<void> {
+        this._isLoading = true;
+
+        const lotteryBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.lottery);
+        const lottery = deserialize(LotteryModel.getSchema(), LotteryModel, lotteryBuffer!.data);
+
+        const walletPublicKey = (await firstValueFrom(this._blockChainService.walletPublicKey$))!;
+        const walletPublicKeyBytes = encode(walletPublicKey.toString());
+
+        const accounts = await this._blockChainService.connection.getProgramAccounts(
+            BLOCK_CHAIN_KEYS.programId,
+            {
+                filters: [
+                    { dataSize: 93 },
+                    { memcmp: { offset: 12, bytes: walletPublicKeyBytes } },
                 ],
             }
         );
@@ -108,7 +159,7 @@ export class DrawNowComponent {
     }
 
     private async _randomizeLottery(playerPublicKey: string, walletPublicKey: PublicKey) {
-        const recordBuffer = await this._connection!.getAccountInfo(BLOCK_CHAIN_KEYS.record);
+        const recordBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
         const record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
         const mainCountOfLastWeek = await this._mainCounterOfLastWeek(record);
         const playerAccount = new PublicKey(playerPublicKey);
@@ -167,7 +218,7 @@ export class DrawNowComponent {
 
     private async _sendAndConfirmTransaction(gameTransactionInstruction: TransactionInstruction, walletPublicKey: PublicKey): Promise<void> {
         try {
-            const hash = await this._connection!.getLatestBlockhash();
+            const hash = await this._blockChainService.connection.getLatestBlockhash();
             const transaction = new Transaction();
             transaction.add(gameTransactionInstruction);
             transaction.feePayer = walletPublicKey;
@@ -175,9 +226,11 @@ export class DrawNowComponent {
             transaction.lastValidBlockHeight = hash.lastValidBlockHeight;
 
             let signedTrans = await firstValueFrom(this._blockChainService.signTransaction(transaction));
-            let signature = await this._connection!.sendRawTransaction(signedTrans.serialize());
-            await this._connection!.confirmTransaction({ signature, blockhash: hash.blockhash, lastValidBlockHeight: hash.lastValidBlockHeight });
+            let signature = await this._blockChainService.connection.sendRawTransaction(signedTrans.serialize());
+            await this._blockChainService.connection.confirmTransaction({ signature, blockhash: hash.blockhash, lastValidBlockHeight: hash.lastValidBlockHeight });
             alert('Congratulations, you won!');
+
+            this._setCanDrawLottery();
         } catch (error) {
             alert(error);
         }
@@ -185,7 +238,7 @@ export class DrawNowComponent {
 
     private async _getMainCounterByIndex(index: number): Promise<MainCounterModel> {
         const mainCount = await PublicKey.findProgramAddress([Buffer.from("maincounter"), Buffer.from([index])], BLOCK_CHAIN_KEYS.programId);
-        const mainCountBuffer = await this._connection!.getAccountInfo(mainCount[0]);
+        const mainCountBuffer = await this._blockChainService.connection.getAccountInfo(mainCount[0]);
         return deserialize(MainCounterModel.getSchema(), MainCounterModel, mainCountBuffer!.data);
     }
 

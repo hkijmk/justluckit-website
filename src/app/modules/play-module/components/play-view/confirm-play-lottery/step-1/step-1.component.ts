@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { encode } from '@faustbrian/node-base58';
-import { Connection, Keypair, PublicKey, RpcResponseAndContext, SignatureResult, SystemProgram, Transaction, TransactionInstruction } from '@solana/web3.js';
+import { Keypair, PublicKey, RpcResponseAndContext, SignatureResult, SystemProgram, Transaction, TransactionInstruction } from '@solana/web3.js';
 import { deserialize, serialize } from 'borsh';
 import { firstValueFrom } from 'rxjs';
 
@@ -35,19 +35,14 @@ export class ConfirmPlayLotteryStep1Component {
     }
 
     async onConfirm(): Promise<void> {
-        const connection: Connection | null = await firstValueFrom(this._blockChainService.connection$);
-        if (connection === null) {
-            return;
-        }
-
         this._isPlaying = true;
 
-        const publicKey: PublicKey | null = await firstValueFrom(this._blockChainService.publicKey$);
+        const publicKey: PublicKey | null = await firstValueFrom(this._blockChainService.walletPublicKey$);
         if (publicKey === null) {
             return;
         }
 
-        const recordBuffer = await connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
+        const recordBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
         const record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
 
         const mainCounterAddress = await PublicKey.findProgramAddress([Buffer.from("maincounter"), Buffer.from([record.mainCount])], BLOCK_CHAIN_KEYS.programId);
@@ -72,7 +67,7 @@ export class ConfirmPlayLotteryStep1Component {
             BLOCK_CHAIN_KEYS.programId,
         );
 
-        const controllerBuffer = await connection.getAccountInfo(controllerAddress[0]);
+        const controllerBuffer = await this._blockChainService.connection.getAccountInfo(controllerAddress[0]);
         const controllerData = deserialize(SubControllerModel.getSchema(), SubControllerModel, controllerBuffer!.data);
 
         const controllerNumberOfSeries = controllerData.numberOfSeries;
@@ -88,7 +83,6 @@ export class ConfirmPlayLotteryStep1Component {
 
         await this._play(
             publicKey,
-            connection,
             mainCounterAddress[0],
             midCountAddress[0],
             controllerAddress[0],
@@ -103,7 +97,6 @@ export class ConfirmPlayLotteryStep1Component {
 
     async _play(
         publicKey: PublicKey,
-        connection: Connection,
         mainCountKey: PublicKey,
         midCountKey: PublicKey,
         controllerKey: PublicKey,
@@ -123,7 +116,7 @@ export class ConfirmPlayLotteryStep1Component {
                 numberOfSeries = 1;
                 bumpGameWins = true;
             } else {
-                const subCounterBuffer = await connection.getAccountInfo(subCountKey);
+                const subCounterBuffer = await this._blockChainService.connection.getAccountInfo(subCountKey);
                 const subCounter = deserialize(SubCounterModel.toSchema(), SubCounterModel, subCounterBuffer!.data);
                 numberOfSeries = subCounter.numberOfSeries;
                 counter = subCounter.counter;
@@ -198,7 +191,7 @@ export class ConfirmPlayLotteryStep1Component {
                 keys.splice(6, 0, { isSigner: false, isWritable: true, pubkey: subCountNew[0] });
             }
 
-            const { rent, total } = await ConfirmPlayLotteryStep1Component._getFees(connection, weekNumber);
+            const { rent, total } = await this._getFees(weekNumber);
             const transactionInstruction = new TransactionInstruction({
                 programId: BLOCK_CHAIN_KEYS.programId,
                 keys,
@@ -206,7 +199,6 @@ export class ConfirmPlayLotteryStep1Component {
             });
 
             await this._createAndConfirmTransaction(
-                connection,
                 account2ProgramId,
                 transactionInstruction,
                 publicKey,
@@ -261,10 +253,10 @@ export class ConfirmPlayLotteryStep1Component {
         return sp1 + s1 + sp2 + s2 + sp3 + s3 + sp4 + s4 + sp5 + s5 + sp6 + s6;
     }
 
-    private static async _getFees(connection: Connection, weekNumber: number): Promise<{ rent: number, total: number }> {
-        const termOneBuffer = await connection.getAccountInfo(BLOCK_CHAIN_KEYS.term);
+    private async _getFees(weekNumber: number): Promise<{ rent: number, total: number }> {
+        const termOneBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.term);
         const termOne = deserialize(TermOneModel.toSchema(), TermOneModel, termOneBuffer!.data);
-        const minerBuffer = await connection.getAccountInfo(BLOCK_CHAIN_KEYS.minerTerms);
+        const minerBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.minerTerms);
         const minerTerms = deserialize(MinerTermsModel.toSchema(), MinerTermsModel, minerBuffer!.data);
 
         const rentAsString = String(termOne.rent);
@@ -295,7 +287,6 @@ export class ConfirmPlayLotteryStep1Component {
     }
 
     private async _createAndConfirmTransaction(
-        connection: Connection,
         account2ProgramId: PublicKey,
         transactionInstruction: TransactionInstruction,
         publicKey: PublicKey,
@@ -324,15 +315,15 @@ export class ConfirmPlayLotteryStep1Component {
         transaction.add(account1, account2, transactionInstruction);
         transaction.feePayer = publicKey;
 
-        const hash = await connection.getLatestBlockhash();
+        const hash = await this._blockChainService.connection.getLatestBlockhash();
         transaction.recentBlockhash = hash.blockhash;
         transaction.lastValidBlockHeight = hash.lastValidBlockHeight;
 
         transaction.sign(temp1, temp2);
 
         const signedTrans = await firstValueFrom(this._blockChainService.signTransaction(transaction));
-        const signature = await connection.sendRawTransaction(signedTrans.serialize());
-        return await connection.confirmTransaction(
+        const signature = await this._blockChainService.connection.sendRawTransaction(signedTrans.serialize());
+        return await this._blockChainService.connection.confirmTransaction(
             { signature, blockhash: hash.blockhash, lastValidBlockHeight: hash.lastValidBlockHeight },
             'singleGossip',
         );

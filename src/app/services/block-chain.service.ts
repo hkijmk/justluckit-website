@@ -3,44 +3,44 @@ import { ConnectionStore, Wallet, WalletStore } from '@heavy-duty/wallet-adapter
 import { WalletName } from '@solana/wallet-adapter-base';
 import { LedgerWalletAdapter, PhantomWalletAdapter, SlopeWalletAdapter, SolflareWalletAdapter, } from '@solana/wallet-adapter-wallets';
 import { Connection, PublicKey, Transaction } from '@solana/web3.js';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, map, Observable, of, tap } from 'rxjs';
 
 @Injectable()
 export class BlockChainService {
     private _selectedWallet: Wallet | null = null;
+    private _wallets?: Wallet[];
+    private _walletPublicKey: PublicKey | null = null;
+    private _walletPublicKeySubject = new BehaviorSubject<PublicKey | null>(null);
+    private _connection?: Connection;
+
+    get walletPublicKey(): PublicKey | null {
+        return this._walletPublicKey;
+    }
+
+    get walletPublicKey$(): Observable<PublicKey | null> {
+        return this._walletPublicKeySubject.asObservable();
+    }
 
     get isWalletConnected$(): Observable<boolean> {
         return this._walletStore.connected$;
-    }
-
-    get connection$(): Observable<Connection | null> {
-        return this._connectionStore.connection$;
     }
 
     get isWalletReady$(): Observable<Wallet | null> {
         return this._walletStore.wallet$;
     }
 
-    get publicKey$(): Observable<PublicKey | null> {
-        return this._walletStore.publicKey$;
-    }
-
-    get wallets$(): Observable<Wallet[]> {
-        return this._walletStore.wallets$;
-    }
-
     get selectedWallet(): Wallet | null {
         return this._selectedWallet;
     }
 
+    get connection(): Connection {
+        return this._connection!;
+    }
+
     constructor(private _connectionStore: ConnectionStore,
                 private _walletStore: WalletStore) {
-        this._initStoreAndAdapters();
-
-        this._walletStore.wallet$.subscribe((selectedWallet) => {
-            this._selectedWallet = selectedWallet;
-            this._connectToWalletStore();
-        });
+        this._initAdapters();
+        this._initListeners();
     }
 
     signTransaction(transaction: Transaction): Observable<Transaction> {
@@ -51,8 +51,28 @@ export class BlockChainService {
         this._walletStore.selectWallet(walletName);
     }
 
-    private _initStoreAndAdapters(): void {
+    getWallets(): Observable<Wallet[]> {
+        if (this._wallets !== undefined) {
+            return of(this._wallets);
+        }
+
+        return this._walletStore.wallets$.pipe(
+            tap((wallets) => this._wallets = wallets)
+        );
+    }
+
+    disconnectWallet(): Observable<void> {
+        return this._walletStore.disconnect().pipe(
+            map(() => undefined)
+        );
+    }
+
+    async setConnection(): Promise<void> {
         this._connectionStore.setEndpoint('https://api.testnet.solana.com');
+        this._connection = (await firstValueFrom(this._connectionStore.connection$))!;
+    }
+
+    private _initAdapters(): void {
         this._walletStore.setAdapters([
             new PhantomWalletAdapter(),
             new SolflareWalletAdapter(),
@@ -74,5 +94,22 @@ export class BlockChainService {
 
                 }
             });
+    }
+
+    private _initListeners(): void {
+        this._walletStore.wallet$.subscribe((selectedWallet) => {
+            this._selectedWallet = selectedWallet;
+            this._connectToWalletStore();
+        });
+
+        this._walletStore.publicKey$.subscribe((publicKey) => {
+            console.log('publicKey: ', publicKey);
+            this._setPublicKey(publicKey);
+        });
+    }
+
+    private _setPublicKey(publicKey: PublicKey | null): void {
+        this._walletPublicKey = publicKey;
+        this._walletPublicKeySubject.next(this._walletPublicKey);
     }
 }

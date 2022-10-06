@@ -1,0 +1,6 @@
+<app-button [variant]="'secondary'" (click)="isConnectWalletModalVisible = true">
+    <span *ngIf="!(isWalletConnected$ | async)">Connect Wallet</span>
+    <span *ngIf="isWalletConnected$ | async">Wallet Connected</span>
+</app-button>
+
+<connect-wallet-modal *ngIf="isConnectWalletModalVisible" (close)="isConnectWalletModalVisible = false"></connect-wallet-modal>

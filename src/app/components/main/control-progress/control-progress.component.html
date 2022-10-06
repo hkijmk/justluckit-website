@@ -1,4 +1,6 @@
-<div class="container">
+<draw-now *ngIf="!drawDateForTimeRemaining" [drawDate]="drawDate"></draw-now>
+
+<div *ngIf="drawDate && director" class="container">
     <h2 class="text-title font-size-5 highlighted-gradient">Control Progress</h2>
 
     <div class="margin-top-x8 text-info">
@@ -8,37 +10,31 @@
         </p>
     </div>
 
-    <ng-container *ngIf="drawDate && director">
-        <div class="margin-top-x14">
-            <h3 class="text-title-small">Current Control Stage</h3>
+    <div class="margin-top-x14">
+        <h3 class="text-title-small">Current Control Stage</h3>
 
-            <div class="margin-top-x8">
-                <control-stages [currentStageNumber]="director.currentStage"></control-stages>
-            </div>
+        <div class="margin-top-x8">
+            <control-stages [currentStageNumber]="director.currentStage"></control-stages>
         </div>
+    </div>
 
-        <div class="margin-top-x12">
-            <h3 class="text-title-small">Date of Draw</h3>
-            <div class="margin-top-x6 text-title highlighted">{{ drawDate | date:'medium' }}</div>
+    <div *ngIf="!isTimeZero" class="margin-top-x12">
+        <h3 class="text-title-small">Date of Draw</h3>
+        <div class="margin-top-x6 text-title highlighted">{{ drawDate | date:'medium' }}</div>
+    </div>
+
+    <div *ngIf="drawDateForTimeRemaining" class="margin-top-x19">
+        <h3 class="text-title-small">Estimated Time Remaining</h3>
+
+        <div class="margin-top-x6">
+            <time-remaining [date]="drawDateForTimeRemaining"></time-remaining>
         </div>
+    </div>
 
-        <div class="margin-top-x19">
-            <h3 class="text-title-small">Estimated Time Remaining</h3>
-
-            <div class="margin-top-x6">
-                <time-remaining [date]="drawDate"></time-remaining>
-            </div>
-        </div>
-
-        <div class="margin-top-x8 text-info-small">
-            <p>
-                *Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam.
-            </p>
-        </div>
-    </ng-container>
-
-    <!--    <div class="margin-top-x14">-->
-    <!--        <draw-now *ngIf="canDrawLottery"></draw-now>-->
-    <!--    </div>-->
+    <div class="margin-top-x8 text-info-small">
+        <p>
+            *Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam.
+        </p>
+    </div>
 </div>
 

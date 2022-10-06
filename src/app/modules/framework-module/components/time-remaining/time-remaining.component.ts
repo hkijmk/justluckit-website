@@ -70,8 +70,6 @@ export class TimeRemainingComponent implements OnInit, OnDestroy {
     }
 
     private _clearTimer$(): void {
-        if (this._timer !== undefined) {
-            this._timer.unsubscribe();
-        }
+        this._timer?.unsubscribe();
     }
 }

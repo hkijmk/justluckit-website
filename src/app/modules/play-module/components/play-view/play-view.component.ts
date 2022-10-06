@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
     styleUrls: ['./play-view.component.scss']
 })
 export class PlayViewComponent {
-    isConnectingWallet: boolean = false;
     isConfirmingPlay: boolean = false;
 
     constructor() {
