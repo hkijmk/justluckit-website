@@ -1,5 +1,4 @@
-@use '../../../../styles/abstracts/variables/colors' as *;
-@use '../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../styles/abstracts/variables' as vars;
 @use '../../../../styles/abstracts/mixins' as mxns;
 @use '../../../../styles/abstracts/placeholders/typography' as *;
 
@@ -37,8 +36,8 @@
             display: flex;
             flex-wrap: wrap;
             border-top: 1px solid #d8d8d8;
-            padding: $spacing-x8 0;
-            gap: $spacing-x4 $spacing-x8;
+            padding: vars.$spacing-x8 0;
+            gap: vars.$spacing-x4 vars.$spacing-x8;
 
             @include mxns.md {
                 display: table-row;
@@ -50,7 +49,7 @@
                 font-weight: normal;
                 color: #747474;
                 text-align: center;
-                padding: $spacing-x4;
+                padding: vars.$spacing-x4;
 
                 &:nth-child(3) {
                     max-width: 200px;
@@ -60,7 +59,7 @@
             td {
                 @extend %font-size-2;
 
-                flex: 1 1 calc(50% - #{$spacing-x4});
+                flex: 1 1 calc(50% - #{vars.$spacing-x4});
                 text-align: center;
 
                 @include mxns.md {
@@ -70,7 +69,7 @@
                 &:last-child {
                     flex: 1 1 100%;
                     text-align: center;
-                    color: $app-color-green;
+                    color: vars.$app-color-green;
                 }
 
                 &:before {
