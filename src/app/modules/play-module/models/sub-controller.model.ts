@@ -1,3 +1,5 @@
+import * as BN from 'bn.js';
+
 import { BlockChainSchemaType } from '../../../types';
 
 export class SubControllerModel implements ISubControllerModel {
@@ -5,6 +7,10 @@ export class SubControllerModel implements ISubControllerModel {
     fourWinnersCount: number;
     fiveWinnersCount: number;
     sixWinnersCount: number;
+    highestThreeWinnersCountBN: BN;
+    highestFourWinnersCountBN: BN;
+    highestFiveWinnersCountBN: BN;
+    highestSixWinnersCount: BN;
     numberOfSeries: number;
     counterNumber: number;
     belongsToMainCountNumber: number;
@@ -18,6 +24,10 @@ export class SubControllerModel implements ISubControllerModel {
         this.fourWinnersCount = obj.fourWinnersCount;
         this.fiveWinnersCount = obj.fiveWinnersCount;
         this.sixWinnersCount = obj.sixWinnersCount;
+        this.highestThreeWinnersCountBN = obj.highestThreeWinnersCountBN;
+        this.highestFourWinnersCountBN = obj.highestFourWinnersCountBN;
+        this.highestFiveWinnersCountBN = obj.highestFiveWinnersCountBN;
+        this.highestSixWinnersCount = obj.highestSixWinnersCount;
         this.numberOfSeries = obj.numberOfSeries;
         this.counterNumber = obj.counterNumber;
         this.belongsToMainCountNumber = obj.belongsToMainCountNumber;
@@ -38,6 +48,12 @@ export class SubControllerModel implements ISubControllerModel {
                         ["fourWinnersCount", "u64"],
                         ["fiveWinnersCount", "u64"],
                         ["sixWinnersCount", "u16"],
+                        ["highestThreeWinnersCountBN", "u64"],
+                        ["highestFourWinnersCountBN", "u64"],
+                        ["highestFiveWinnersCountBN", "u64"],
+                        ["highestSixWinnersCount", "u16"],
+                        ["number_of_highestseries", "u8"],
+                        ["initialdata", "u8"],
                         ["numberOfSeries", "u8"],
                         ["counterNumber", "u8"],
                         ["belongsToMainCountNumber", "u8"],
@@ -57,6 +73,10 @@ export interface ISubControllerModel {
     fourWinnersCount: number;
     fiveWinnersCount: number;
     sixWinnersCount: number;
+    highestThreeWinnersCountBN: BN;
+    highestFourWinnersCountBN: BN;
+    highestFiveWinnersCountBN: BN;
+    highestSixWinnersCount: BN;
     numberOfSeries: number;
     counterNumber: number;
     belongsToMainCountNumber: number;

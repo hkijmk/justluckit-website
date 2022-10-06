@@ -4,7 +4,7 @@
     <app-loading-indicator-icon></app-loading-indicator-icon>
 </div>
 
-<ng-container *ngIf="!isLoading && mainScreenInfo">
-    <control-progress [mainScreenInfo]="mainScreenInfo"></control-progress>
+<ng-container *ngIf="!isLoading && record && mainScreenInfo">
+    <control-progress [mainScreenInfo]="mainScreenInfo" [drawDate]="record.drawDate"></control-progress>
     <last-draw-results [lastDrawResults]="mainScreenInfo.lastDrawResults"></last-draw-results>
 </ng-container>

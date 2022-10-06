@@ -1,3 +1,5 @@
+import * as BN from 'bn.js';
+
 import { BlockChainSchemaType } from '../types';
 
 export class RecordModel implements IRecordModel {
@@ -6,6 +8,11 @@ export class RecordModel implements IRecordModel {
     mainCount: number;
     midCount: number;
     subCount: number;
+    timeToLottoBN: BN;
+
+    get drawDate(): Date {
+        return new Date(this.timeToLottoBN.toNumber() * 1000);
+    }
 
     constructor(obj: IRecordModel) {
         this.isInit = obj.isInit;
@@ -13,6 +20,7 @@ export class RecordModel implements IRecordModel {
         this.mainCount = obj.mainCount;
         this.midCount = obj.midCount;
         this.subCount = obj.subCount;
+        this.timeToLottoBN = obj.timeToLottoBN;
     }
 
     static getSchema(): BlockChainSchemaType<typeof RecordModel> {
@@ -27,6 +35,7 @@ export class RecordModel implements IRecordModel {
                         ["mainCount", "u8"],
                         ["midCount", "u8"],
                         ["subCount", "u8"],
+                        ["timeToLottoBN", "u64"],
                     ],
                 },
             ],
@@ -40,4 +49,5 @@ export interface IRecordModel {
     mainCount: number;
     midCount: number;
     subCount: number;
+    timeToLottoBN: BN;
 }

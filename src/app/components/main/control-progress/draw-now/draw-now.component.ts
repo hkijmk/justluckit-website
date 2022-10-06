@@ -147,9 +147,8 @@ export class DrawNowComponent {
                 { isSigner: false, isWritable: true, pubkey: walletPublicKey },
                 { isSigner: false, isWritable: true, pubkey: playerAccount },
                 { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.lottoFund },
-                { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.dateOfDraw },
                 { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.lottery },
-                { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.playTerm },
+                { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.playTerms },
                 { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.rentTerms },
             ],
             data: Buffer.from([200])

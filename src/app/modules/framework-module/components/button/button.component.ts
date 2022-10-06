@@ -41,9 +41,14 @@ export class ButtonComponent implements OnChanges {
     private _onIsLoadingChange(prevValue: boolean, currentValue: boolean): void {
         if (prevValue && !currentValue) {
             this._setTimer$();
-        } else {
-            this._clearTimer$();
+            return;
         }
+
+        if (currentValue) {
+            this._isLoading = true;
+        }
+
+        this._clearTimer$();
     }
 
     private _setTimer$(): void {
