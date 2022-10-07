@@ -1,11 +1,13 @@
 $app-color-bg-light: #f2f2e8;
 $app-color-green: #008a23;
 $app-color-green-light: #00cc33;
+$app-color-green-light-2: #7FE519;
 $app-color-yellow: #ffff00;
 $app-color-pink: #E600C7;
 $app-color-red: #e74c1d;
 
 $app-yellow-green-radial-gradient: radial-gradient(circle, $app-color-yellow, $app-color-green-light);
+$app-yellow-green-radial-gradient-2: radial-gradient(circle, $app-color-yellow, $app-color-green-light-2);
 $app-yellow-green-radial-gradient-welcome: radial-gradient(ellipse at 100% 50%, $app-color-yellow, $app-color-green-light 50%);
 $app-yellow-green-radial-gradient-hover: radial-gradient(circle, darken(rgba($app-color-yellow, 0.4), 2%), darken(rgba($app-color-green-light, 0.4), 2%));
 
