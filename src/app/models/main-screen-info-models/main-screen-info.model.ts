@@ -38,11 +38,6 @@ export class MainScreenInfoModel implements IMainScreenInfoModel {
         });
     }
 
-    get isDrawActive(): boolean {
-        const now = new Date().getTime();
-        return now > this.drawDate.getTime();
-    }
-
     get drawDate(): Date {
         return new Date(this.timeToLottoBN.toNumber() * 1000);
     }

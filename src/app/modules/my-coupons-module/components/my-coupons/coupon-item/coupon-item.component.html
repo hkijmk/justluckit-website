@@ -12,5 +12,17 @@
                 <lottery-numbers [numbers]="coupon.getNumbers()" [columnCountMd]="6" [columnCountSm]="3"></lottery-numbers>
             </div>
         </div>
+
+        <div *ngIf="coupon.wins > 0" class="margin-top-x8">
+            <div class="margin-top-x8 text-info">
+                <p>
+                    Congratulations, you won!
+                </p>
+            </div>
+
+            <div>
+                <app-button [variant]="'primary'">Claim Reward</app-button>
+            </div>
+        </div>
     </div>
 </div>

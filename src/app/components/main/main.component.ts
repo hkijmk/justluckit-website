@@ -13,8 +13,13 @@ import { MainScreenInfoModel, RecordModel } from '../../models';
     styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+    private _record?: RecordModel;
     private _mainScreenInfo?: MainScreenInfoModel;
     private _isLoading: boolean = false;
+
+    get record(): RecordModel | undefined {
+        return this._record;
+    }
 
     get mainScreenInfo(): MainScreenInfoModel | undefined {
         return this._mainScreenInfo;
@@ -35,11 +40,11 @@ export class MainComponent implements OnInit {
         this._isLoading = true;
 
         const recordBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
-        const record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
+        this._record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
 
         const mainScreenInfoProgram = await PublicKey.findProgramAddress([
                 Buffer.from("interface"),
-                Buffer.from((record.weekNumber - 1).toString()),
+                Buffer.from((this._record.weekNumber - 1).toString()),
             ],
             BLOCK_CHAIN_KEYS.programId,
         );
