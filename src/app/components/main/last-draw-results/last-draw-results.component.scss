@@ -15,10 +15,11 @@
 }
 
 .last-draw-results-table {
-    @extend %font-size-2;
+    margin-top: vars.$spacing-x8;
 
-    font-family: 'Lexend', sans-serif;
-    font-weight: 600;
+    @include mxns.md {
+        margin-top: vars.$spacing-x4;
+    }
 
     > table {
         margin: 0 auto;
@@ -32,12 +33,25 @@
             }
         }
 
+        thead, td:before {
+            @extend %heading;
+        }
+
+        tbody {
+            font-size: 1.25rem;
+            line-height: 3rem;
+
+            @include mxns.md{
+                line-height: 2.5rem;
+            }
+        }
+
         tr {
             display: flex;
             flex-wrap: wrap;
             border-top: 1px solid #d8d8d8;
-            padding: vars.$spacing-x8 0;
-            gap: vars.$spacing-x4 vars.$spacing-x8;
+            padding: vars.$spacing-x8 0 vars.$spacing-x6;
+            gap: vars.$spacing-x2 vars.$spacing-x8;
 
             @include mxns.md {
                 display: table-row;
@@ -45,11 +59,11 @@
             }
 
             th {
-                @extend %font-size-1;
-                font-weight: normal;
+                line-height: 2.25rem;
+                font-weight: 600;
                 color: #747474;
                 text-align: center;
-                padding: vars.$spacing-x4;
+                padding-bottom: vars.$spacing-x3;
 
                 &:nth-child(3) {
                     max-width: 200px;
@@ -57,14 +71,8 @@
             }
 
             td {
-                @extend %font-size-2;
-
                 flex: 1 1 calc(50% - #{vars.$spacing-x4});
                 text-align: center;
-
-                @include mxns.md {
-                    padding: $spacing-x2;
-                }
 
                 &:last-child {
                     flex: 1 1 100%;
@@ -83,6 +91,14 @@
                         content: unset;
                         display: none;
                     }
+                }
+
+                &[data-heading="Winners"] {
+                    font-weight: vars.$font-primary-medium;
+                }
+
+                &:not([data-heading="Winners"]) {
+                    font-weight: vars.$font-primary-bold;
                 }
             }
         }
