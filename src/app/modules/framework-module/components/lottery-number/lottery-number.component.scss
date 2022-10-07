@@ -9,11 +9,12 @@
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.34);
     cursor: default;
+    transition: box-shadow .15s;
 
     &.selected {
         background: $app-yellow-green-radial-gradient-2;
+        box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.34);
     }
 
     &:not(.selected):hover {
