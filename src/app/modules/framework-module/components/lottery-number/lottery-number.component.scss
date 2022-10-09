@@ -1,8 +1,9 @@
 @use '../../../../../styles/abstracts/variables/colors' as *;
-@use '../../../../../styles/abstracts/placeholders/typography.scss' as *;
+@use '../../../../../styles/abstracts/placeholders/typography' as *;
 
 .lottery-number {
     @extend %font-size-2;
+
     color: #373737;
     font-family: 'Lexend', sans-serif;
     font-weight: 600;
