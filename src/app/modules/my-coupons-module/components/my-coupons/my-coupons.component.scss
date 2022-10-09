@@ -1,8 +1,7 @@
-@use '../../../../../styles/abstracts/variables/colors' as *;
-@use '../../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../../styles/abstracts/variables' as vars;
 
 .my-coupons-container {
-    background-color: $app-color-bg-light;
+    background-color: vars.$app-color-bg-light;
 
     .my-coupons {
         max-width: 768px;
@@ -11,6 +10,6 @@
 
 .my-coupons-list {
     > *:not(:first-child) {
-        margin-top: $spacing-x8;
+        margin-top: vars.$spacing-x8;
     }
 }

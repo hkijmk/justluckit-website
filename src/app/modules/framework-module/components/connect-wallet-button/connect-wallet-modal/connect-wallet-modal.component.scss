@@ -1,10 +1,10 @@
-@use '../../../../../../styles/abstracts/variables/layout.scss' as *;
+@use '../../../../../../styles/abstracts/variables' as vars;
 @use '../../../../../../styles/abstracts/mixins' as mxns;
 
 @use '../../../../../../styles/layout' as *;
 
 .connect-wallet {
-    width: calc(100vw - #{$spacing-x16});
+    width: calc(100vw - #{vars.$spacing-x16});
 
     @include mxns.md {
         width: 22.5rem;

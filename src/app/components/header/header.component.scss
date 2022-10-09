@@ -1,28 +1,27 @@
-@use '../../../styles/abstracts/variables/colors' as *;
-@use '../../../styles/abstracts/variables/layout' as *;
+@use '../../../styles/abstracts/variables' as vars;
 @use '../../../styles/abstracts/mixins' as mxns;
 
 @use '../../../styles/fonts' as *;
 
-$header-height: $vertical-rhythm * 18;
-$header-height-md: $vertical-rhythm * 25;
+$header-height: vars.$vertical-rhythm * 18;
+$header-height-md: vars.$vertical-rhythm * 25;
 
 .header-container {
     position: relative;
-    background-color: $app-color-green-light;
+    background-color: vars.$app-color-green-light;
 }
 
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $spacing-x4;
+    padding: 0 vars.$spacing-x4;
     height: $header-height;
     color: white;
 
     @include mxns.md {
         height: $header-height-md;
-        padding: 0 $spacing-x4;
+        padding: 0 vars.$spacing-x4;
     }
 }
 
@@ -30,14 +29,14 @@ $header-height-md: $vertical-rhythm * 25;
     cursor: pointer;
 
     > img {
-        max-height: $vertical-rhythm * 11;
+        max-height: vars.$vertical-rhythm * 11;
     }
 }
 
 .header__nav {
     display: flex;
     align-items: center;
-    background-color: $app-color-green-light;
+    background-color: vars.$app-color-green-light;
     height: 100%;
 
     @include mxns.md {
@@ -61,11 +60,11 @@ $header-height-md: $vertical-rhythm * 25;
     overflow: hidden;
     flex-direction: column;
     align-items: center;
-    gap: $spacing-x2;
+    gap: vars.$spacing-x2;
     opacity: 0.5;
-    background-color: $app-color-green-light;
+    background-color: vars.$app-color-green-light;
     width: 100%;
-    z-index: $app-header-z-index;
+    z-index: vars.$app-header-z-index;
     transition: max-height 0.15s ease-out, opacity 0.3s ease-out;
 
     &.header__nav-links--visible-on-mobile {
@@ -78,7 +77,7 @@ $header-height-md: $vertical-rhythm * 25;
         flex-direction: row;
         top: auto;
         opacity: 1;
-        gap: $spacing-x16;
+        gap: vars.$spacing-x16;
         background-color: transparent;
         max-height: none;
     }
@@ -92,7 +91,7 @@ $header-height-md: $vertical-rhythm * 25;
         font-family: 'Lexend', sans-serif;
         font-weight: 700;
         display: inline-flex;
-        min-height: $vertical-rhythm * 11;
+        min-height: vars.$vertical-rhythm * 11;
         align-items: center;
         justify-content: center;
         border-top: 1px solid #d8d8d8;
@@ -116,7 +115,7 @@ $header-height-md: $vertical-rhythm * 25;
     border-top: 1px solid #d8d8d8;
     border-bottom: 1px solid #d8d8d8;
     width: 100%;
-    padding: $spacing-x4;
+    padding: vars.$spacing-x4;
 
     @include mxns.md {
         border: none;

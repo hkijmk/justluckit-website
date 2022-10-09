@@ -1,12 +1,11 @@
 @use '../../../../../styles/abstracts/placeholders/typography' as *;
-@use '../../../../../styles/abstracts/variables/colors' as *;
-@use '../../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../../styles/abstracts/variables' as vars;
 
 @use '../../../../../styles/fonts' as *;
 @use '../../../../../styles/typography' as *;
 
 .remaining-time {
-    gap: $spacing-x8;
+    gap: vars.$spacing-x8;
 }
 
 .remaining-time-section {
@@ -20,7 +19,7 @@
     @extend %font-size-md-8;
     @extend %heading;
 
-    color: $app-color-green;
+    color: vars.$app-color-green;
 }
 
 .remaining-time--text {

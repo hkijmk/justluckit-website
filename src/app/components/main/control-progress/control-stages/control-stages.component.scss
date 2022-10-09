@@ -1,11 +1,10 @@
-@use '../../../../../styles/abstracts/variables/colors' as *;
-@use '../../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../../styles/abstracts/variables' as vars;
 
 .control-stage-separator {
     width: 75px;
     height: 1px;
-    margin: 0 $spacing-x2;
-    background-color: $app-color-green-light;
+    margin: 0 vars.$spacing-x2;
+    background-color: vars.$app-color-green-light;
 
     &.disabled {
         filter: saturate(0);

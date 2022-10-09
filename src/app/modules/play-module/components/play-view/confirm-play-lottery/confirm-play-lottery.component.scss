@@ -1,8 +1,8 @@
-@use '../../../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../../../styles/abstracts/variables' as vars;
 @use '../../../../../../styles/abstracts/mixins' as mxns;
 
 .confirm-play-lottery {
-    width: calc(100vw - #{$spacing-x16});
+    width: calc(100vw - #{vars.$spacing-x16});
 
     @include mxns.md {
         width: 22.5rem;

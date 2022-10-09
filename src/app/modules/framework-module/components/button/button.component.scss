@@ -1,31 +1,29 @@
-@use '../../../../../styles/abstracts/variables/colors' as *;
-@use '../../../../../styles/abstracts/variables/layout' as *;
-@use '../../../../../styles/abstracts/variables/typography' as *;
+@use '../../../../../styles/abstracts/variables' as vars;
 
 .button {
     position: relative;
     display: flex;
     align-items: center;
-    color: $app-text-color-body;
+    color: vars.$app-text-color-body;
     font-family: 'Lexend', sans-serif;
     font-size: 0.9375rem;
     font-weight: 700;
     line-height: 1.5em;
-    letter-spacing: $letter-spacing-default;
+    letter-spacing: vars.$letter-spacing-default;
     text-transform: uppercase;
     width: 100%;
     padding: 0.8em 2em;
     border-radius: 9999px;
-    gap: $spacing-x2;
+    gap: vars.$spacing-x2;
     border: none;
     box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.34);
 
     &.button-primary {
-        background: $app-yellow-green-radial-gradient-2;
+        background: vars.$app-yellow-green-radial-gradient-2;
     }
 
     &.button-secondary {
-        background: $app-color-yellow;
+        background: vars.$app-color-yellow;
     }
 
     &.button-default {
@@ -34,7 +32,7 @@
 
     &.button-danger {
         color: white;
-        background-color: $app-color-red;
+        background-color: vars.$app-color-red;
     }
 
     &:disabled {
@@ -46,11 +44,11 @@
 
         &:hover {
             &.button-primary {
-                background: $app-yellow-green-radial-gradient-hover;
+                background: vars.$app-yellow-green-radial-gradient-hover;
             }
 
             &.button-secondary {
-                background: darken($app-color-yellow, 2%);
+                background: darken(vars.$app-color-yellow, 2%);
             }
 
             &.button-default {
@@ -58,7 +56,7 @@
             }
 
             &.button-danger {
-                background: lighten($app-color-red, 10%);
+                background: lighten(vars.$app-color-red, 10%);
             }
         }
     }

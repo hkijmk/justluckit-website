@@ -1,9 +1,8 @@
-@use '../../../../../../styles/abstracts/variables/colors' as *;
-@use '../../../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../../../styles/abstracts/variables' as vars;
 @use '../../../../../../styles/abstracts/placeholders/typography' as *;
 
 .coupon-item-container {
-    padding: $spacing-x6 $spacing-x8;
+    padding: vars.$spacing-x6 vars.$spacing-x8;
     background-color: white;
     box-shadow: 0 30px 30px -15px rgba(0, 0, 0, 0.21);
 

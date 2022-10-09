@@ -1,17 +1,17 @@
-@use './abstracts/variables/layout' as *;
+@use './abstracts/variables' as vars;
 
 @for $i from 1 to 22 {
     .margin-top-x#{$i} {
-        margin-top: $vertical-rhythm * $i;
+        margin-top: vars.$vertical-rhythm * $i;
     }
 
     padding-x#{$i} {
-        padding: $vertical-rhythm * $i;
+        padding: vars.$vertical-rhythm * $i;
     }
 }
 
 .container {
-    padding: $spacing-x16 $spacing-x4;
+    padding: vars.$spacing-x16 vars.$spacing-x4;
     margin: 0 auto;
     max-width: 1170px;
 }
@@ -19,7 +19,7 @@
 .card {
     background-color: white;
     border-radius: 8px;
-    padding: $spacing-x4;
+    padding: vars.$spacing-x4;
 
     &.card--on-light-bg {
         box-shadow: 0 30px 30px -15px rgba(0, 0, 0, 0.21);
@@ -32,8 +32,8 @@
 
 .row {
     flex-wrap: wrap;
-    margin-inline-start: $spacing-x4 * (-1);
-    margin-inline-end: $spacing-x4 * (-1);
+    margin-inline-start: vars.$spacing-x4 * (-1);
+    margin-inline-end: vars.$spacing-x4 * (-1);
     display: flex;
 }
 
@@ -53,8 +53,8 @@
 }
 
 .separator-v {
-    margin-top: $spacing-x8;
-    padding-top: $spacing-x8;
+    margin-top: vars.$spacing-x8;
+    padding-top: vars.$spacing-x8;
     border-top: 1px solid rgba(151, 151, 151, 0.24);
 }
 

@@ -1,5 +1,4 @@
-@use '../../../../../styles/abstracts/variables/colors' as *;
-@use '../../../../../styles/abstracts/variables/layout' as *;
+@use '../../../../../styles/abstracts/variables' as vars;
 
 .search-input-container {
     position: relative;
@@ -8,7 +7,7 @@
     height: 60px;
     box-shadow: 0 30px 30px -15px rgba(0, 0, 0, 0.21);
     background-color: white;
-    padding: 0 $spacing-x4;
+    padding: 0 vars.$spacing-x4;
 
     &.disabled {
         filter: saturate(0);
@@ -17,7 +16,7 @@
     }
 
     > input {
-        margin-inline-start: $spacing-x4;
+        margin-inline-start: vars.$spacing-x4;
         flex-grow: 1;
         min-width: 1px;
         padding: 0;
@@ -25,10 +24,10 @@
         outline: none;
         font-size: 18px;
         text-align: center;
-        color: $app-text-color-standard;
+        color: vars.$app-text-color-standard;
 
         &::placeholder {
-            color: $app-text-color-light;
+            color: vars.$app-text-color-light;
             opacity: 1;
         }
     }
