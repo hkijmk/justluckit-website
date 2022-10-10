@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { encode } from '@faustbrian/node-base58';
-import { PublicKey, Transaction, TransactionInstruction } from '@solana/web3.js';
+import { PublicKey, SystemProgram, Transaction, TransactionInstruction } from '@solana/web3.js';
 import { deserialize } from 'borsh';
 import { firstValueFrom } from 'rxjs';
 
-import { BlockChainService } from '../../../../services/block-chain.service';
+import { BlockChainService } from '../../services/block-chain.service';
 
-import { BLOCK_CHAIN_KEYS } from '../../../../constants';
-import { LotteryModel, LottoGameModel, MainCounterModel, RecordModel } from '../../../../models';
+import { BLOCK_CHAIN_KEYS } from '../../constants';
+import { LotteryModel, LottoGameModel, MainCounterModel, PlayerRecordModel, RecordModel } from '../../models';
 
 @Component({
     selector: 'draw-now',
@@ -19,6 +19,7 @@ export class DrawNowComponent {
 
     private _isLoading: boolean = false;
     private _canDrawLottery: boolean = false;
+    private _playerRecord?: PlayerRecordModel;
 
     get isLoading(): boolean {
         return this._isLoading;
@@ -47,6 +48,38 @@ export class DrawNowComponent {
 
         // let airdrop = await connection.requestAirdrop(this._blockChainService.publicKey$,LAMPORTS_PER_SOL);
         // await connection.confirmTransaction(airdrop);
+    }
+
+    private async _getPlayerRecord(): Promise<void> {
+        const playerRecordKey = await PublicKey.createWithSeed(this._blockChainService.walletPublicKey!, "playerrecord", BLOCK_CHAIN_KEYS.programId);
+        const playerRecordBuffer = await this._blockChainService.connection.getAccountInfo(playerRecordKey);
+
+        if (playerRecordBuffer == null) {
+            alert("account info is null");
+            return;
+        }
+
+        if (playerRecordBuffer?.data == null) {
+            alert("data is null");
+            return;
+        }
+
+        if (playerRecordBuffer?.lamports == null) {
+            alert("lamports is null");
+            return;
+        }
+
+        this._playerRecord = deserialize(PlayerRecordModel.getSchema(), PlayerRecordModel, playerRecordBuffer.data);
+
+        const createdPlayerRecord = SystemProgram.createAccountWithSeed({
+            fromPubkey: this._blockChainService.walletPublicKey!,
+            newAccountPubkey: playerRecordKey,
+            basePubkey: this._blockChainService.walletPublicKey!,
+            seed: "playerrecord",
+            lamports: 20000000,
+            space: 61,
+            programId: BLOCK_CHAIN_KEYS.programId,
+        });
     }
 
     private async _setCanDrawLotteryPerGameActivity(): Promise<void> {

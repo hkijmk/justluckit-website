@@ -1,2 +1,5 @@
 <app-header></app-header>
 <router-outlet *ngIf="!isLoading"></router-outlet>
+<div *ngIf="isLoading" class="flex-center margin-top-x8">
+    <app-loading-indicator-icon></app-loading-indicator-icon>
+</div>

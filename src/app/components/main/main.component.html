@@ -5,6 +5,6 @@
 </div>
 
 <ng-container *ngIf="!isLoading && record && mainScreenInfo">
-    <control-progress [mainScreenInfo]="mainScreenInfo" [drawDate]="record.drawDate"></control-progress>
+    <control-progress [director]="mainScreenInfo.director" [drawDate]="record.drawDate"></control-progress>
     <last-draw-results [lastDrawResults]="mainScreenInfo.lastDrawResults"></last-draw-results>
 </ng-container>

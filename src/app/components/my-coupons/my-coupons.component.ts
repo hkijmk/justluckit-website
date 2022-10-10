@@ -4,10 +4,10 @@ import { PublicKey } from '@solana/web3.js';
 import { deserialize } from 'borsh';
 import { firstValueFrom, Subscription } from 'rxjs';
 
-import { BlockChainService } from '../../../../services/block-chain.service';
+import { BlockChainService } from '../../services/block-chain.service';
 
-import { BLOCK_CHAIN_KEYS } from '../../../../constants';
-import { LottoGameModel } from '../../../../models';
+import { BLOCK_CHAIN_KEYS } from '../../constants';
+import { LottoGameModel } from '../../models';
 
 @Component({
     selector: 'my-coupons',

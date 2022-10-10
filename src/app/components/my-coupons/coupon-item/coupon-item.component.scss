@@ -1,5 +1,5 @@
-@use '../../../../../../styles/abstracts/variables' as vars;
-@use '../../../../../../styles/abstracts/placeholders/typography' as *;
+@use '../../../../styles/abstracts/variables' as vars;
+@use '../../../../styles/abstracts/placeholders/typography' as *;
 
 .coupon-item-container {
     padding: vars.$spacing-x6 vars.$spacing-x8;

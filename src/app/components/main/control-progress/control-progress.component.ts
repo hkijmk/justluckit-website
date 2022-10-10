@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-
-import { MainScreenInfoModel } from '../../../models';
+import { DirectorModel } from '../../../models';
 
 @Component({
     selector: 'control-progress',
@@ -9,13 +8,17 @@ import { MainScreenInfoModel } from '../../../models';
     styleUrls: ['./control-progress.component.scss']
 })
 export class ControlProgressComponent {
-    @Input() mainScreenInfo!: MainScreenInfoModel;
+    @Input() director!: DirectorModel;
     @Input() drawDate!: Date;
 
     private _isLoadingDrawDate: boolean = false;
 
     get isLoadingDrawDate(): boolean {
         return this._isLoadingDrawDate;
+    }
+
+    get isDrawing(): boolean {
+        return new Date().getTime() > this.drawDate.getTime();
     }
 
     constructor() {

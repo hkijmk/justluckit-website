@@ -30,7 +30,7 @@ export class LottoGameModel implements ILottoGameModel {
         this.number4 = obj?.number4 ?? 0;
         this.number5 = obj?.number5 ?? 0;
         this.number6 = obj?.number6 ?? 0;
-        this.player = obj?.player ?? "4YbLBRXwseG1NuyJbteSD5u81Q2QjFqJBp6JmxwYBK";
+        this.player = obj?.player ?? '4YbLBRXwseG1NuyJbteSD5u81Q2QjFqJBp6JmxwYBK';
         this.pl43 = obj?.pl43 ?? 0;
         this.bump = obj?.bump ?? 0;
         this.wins = obj?.wins ?? 0;
@@ -40,7 +40,7 @@ export class LottoGameModel implements ILottoGameModel {
         this.mc = obj?.mc ?? 0;
         this.gameno = obj?.gameno ?? 0;
         this.alreadyparticipated = obj?.alreadyparticipated ?? 0;
-        this.winno = obj?.winno ?? "wwwwmmmmssssrrrraaaaa";
+        this.winno = obj?.winno ?? 'wwwwmmmmssssrrrraaaaa';
     }
 
     static getSchema(): BlockChainSchemaType<typeof LottoGameModel> {

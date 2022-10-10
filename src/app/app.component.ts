@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { deserialize } from 'borsh';
 
+import { AppStateService } from './services/app-state.service';
 import { BlockChainService } from './services/block-chain.service';
+
+import { BLOCK_CHAIN_KEYS } from './constants';
+import { RecordModel } from './models';
 
 @Component({
     selector: 'app-root',
@@ -16,17 +21,22 @@ export class AppComponent implements OnInit {
         return this._isLoading;
     }
 
-    constructor(private _blockChainService: BlockChainService) {
+    constructor(private _appStateService: AppStateService,
+                private _blockChainService: BlockChainService) {
     }
 
-    ngOnInit(): void {
-        this._initBlockChainConnection();
-    }
-
-    private async _initBlockChainConnection(): Promise<void> {
+    async ngOnInit(): Promise<void> {
         this._isLoading = true;
 
         await this._blockChainService.setConnection();
+        await this._initRecord();
+
         this._isLoading = false;
+    }
+
+    private async _initRecord(): Promise<void> {
+        const recordBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
+        const record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
+        this._appStateService.initRecord(record);
     }
 }
