@@ -16,6 +16,7 @@ export class ConnectWalletModalComponent implements OnInit, OnDestroy {
     private _isWalletConnected$?: Subscription;
     private _isWalletConnected: boolean = false;
     private _isDisconnecting: boolean = false;
+    private _isAirDropping: boolean = false;
 
     get wallets(): Wallet[] | undefined {
         return this._wallets;
@@ -33,6 +34,10 @@ export class ConnectWalletModalComponent implements OnInit, OnDestroy {
         return this._isDisconnecting;
     }
 
+    get isAirDropping(): boolean {
+        return this._isAirDropping;
+    }
+
     constructor(private _blockChainService: BlockChainService) {
     }
 
@@ -47,6 +52,15 @@ export class ConnectWalletModalComponent implements OnInit, OnDestroy {
 
     onSelectWallet(wallet: Wallet): void {
         this._blockChainService.selectWallet(wallet.adapter.name);
+    }
+
+    async onAirDrop(): Promise<void> {
+        this._isAirDropping = true;
+
+        const airDrop = await this._blockChainService.connection.requestAirdrop(this._blockChainService.walletPublicKey!, 1000000000);
+        await this._blockChainService.connection.confirmTransaction(airDrop);
+
+        this._isAirDropping = false;
     }
 
     async onDisconnect(): Promise<void> {

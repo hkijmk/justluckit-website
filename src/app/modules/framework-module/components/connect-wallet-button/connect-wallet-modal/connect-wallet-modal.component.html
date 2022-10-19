@@ -31,12 +31,21 @@
 
         <div class="separator-v">
             <app-button
-                    [variant]="'danger'"
                     [disabled]="selectedWallet === null"
-                    [isLoading]="isDisconnecting"
-                    (onClick)="onDisconnect()">
-                Disconnect
+                    [isLoading]="isAirDropping"
+                    (onClick)="onAirDrop()">
+                AirDrop 1 SOL
             </app-button>
+
+            <div class="margin-top-x6">
+                <app-button
+                        [variant]="'danger'"
+                        [disabled]="selectedWallet === null"
+                        [isLoading]="isDisconnecting"
+                        (onClick)="onDisconnect()">
+                    Disconnect
+                </app-button>
+            </div>
 
             <div class="margin-top-x6">
                 <app-button [variant]="'secondary'" (onClick)="close.emit()">Close Dialog</app-button>
