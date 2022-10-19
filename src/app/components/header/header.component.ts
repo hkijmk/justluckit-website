@@ -35,7 +35,6 @@ export class HeaderComponent {
 
     private _showDropdown(): void {
         this._outsideClick$ = fromEvent(document.body, 'click').subscribe((event) => {
-            console.log('clicked')
             if (this._elementRef.nativeElement.contains(event.target)) {
                 return;
             }

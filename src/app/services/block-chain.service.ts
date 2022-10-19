@@ -107,7 +107,6 @@ export class BlockChainService {
         });
 
         this._walletStore.publicKey$.subscribe((publicKey) => {
-            console.log('publicKey: ', publicKey);
             this._setPublicKey(publicKey);
         });
     }

@@ -60,7 +60,6 @@ $header-height-md: vars.$vertical-rhythm * 25;
     overflow: hidden;
     flex-direction: column;
     align-items: center;
-    gap: vars.$spacing-x2;
     opacity: 0.5;
     background-color: vars.$app-color-green-light;
     width: 100%;
@@ -68,7 +67,7 @@ $header-height-md: vars.$vertical-rhythm * 25;
     transition: max-height 0.15s ease-out, opacity 0.3s ease-out;
 
     &.header__nav-links--visible-on-mobile {
-        max-height: 12rem;
+        max-height: 15rem;
         opacity: 1;
     }
 
@@ -91,7 +90,7 @@ $header-height-md: vars.$vertical-rhythm * 25;
         font-family: 'Lexend', sans-serif;
         font-weight: 700;
         display: inline-flex;
-        min-height: vars.$vertical-rhythm * 11;
+        min-height: vars.$vertical-rhythm * 13;
         align-items: center;
         justify-content: center;
         border-top: 1px solid #d8d8d8;
@@ -105,8 +104,10 @@ $header-height-md: vars.$vertical-rhythm * 25;
 
         @include mxns.md {
             width: auto;
+            padding: 0;
             text-align: inherit;
             border-top: none;
+            min-height: vars.$vertical-rhythm * 11;
         }
     }
 }

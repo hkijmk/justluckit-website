@@ -38,10 +38,6 @@ export class MainScreenInfoModel implements IMainScreenInfoModel {
         });
     }
 
-    get drawDate(): Date {
-        return new Date(this.timeToLottoBN.toNumber() * 1000);
-    }
-
     get lastDrawResults(): LastDrawResultsModel {
         return new LastDrawResultsModel({
             number1: this.number1,

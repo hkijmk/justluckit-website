@@ -13,7 +13,6 @@ import { BlockChainService } from './services/block-chain.service';
 import { ControlStageItemComponent } from './components/main/control-progress/control-stages/control-stage-item/control-stage-item.component';
 import { ControlStagesComponent } from './components/main/control-progress/control-stages/control-stages.component';
 import { ControlProgressComponent } from './components/main/control-progress/control-progress.component';
-import { DrawNowComponent } from './components/draw-now/draw-now.component';
 import { LastDrawResultsComponent } from './components/main/last-draw-results/last-draw-results.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeViewComponent } from './components/main/welcome-view/welcome-view.component';
@@ -30,7 +29,6 @@ import { AppComponent } from './app.component';
         ControlProgressComponent,
         ControlStagesComponent,
         ControlStageItemComponent,
-        DrawNowComponent,
         LastDrawResultsComponent,
         MyCouponsComponent,
         CouponItemComponent,
@@ -38,7 +36,7 @@ import { AppComponent } from './app.component';
     ],
     imports: [
         AppRoutingModule,
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         BrowserAnimationsModule,
         FrameworkModule,
         HdWalletAdapterModule.forRoot({ autoConnect: true }),

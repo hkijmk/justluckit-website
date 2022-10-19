@@ -11,15 +11,16 @@ export class AppStateService {
         return this._record!;
     }
 
+    set record(value: RecordModel | undefined) {
+        this._mainScreenInfo = undefined;
+        this._record = value;
+    }
+
     get mainScreenInfo(): MainScreenInfoModel | undefined {
         return this._mainScreenInfo;
     }
 
     constructor() {
-    }
-
-    initRecord(value: RecordModel): void {
-        this._record = value;
     }
 
     initMainScreenInfo(value: MainScreenInfoModel): void {

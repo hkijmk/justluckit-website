@@ -4,12 +4,13 @@ import { Keypair, PublicKey, RpcResponseAndContext, SignatureResult, SystemProgr
 import { deserialize, serialize } from 'borsh';
 import { firstValueFrom } from 'rxjs';
 
+import { AppStateService } from '../../../../../../services/app-state.service';
 import { BlockChainService } from '../../../../../../services/block-chain.service';
 import { PlayService } from '../../../../services/play.service';
 
 import { BLOCK_CHAIN_KEYS } from '../../../../../../constants';
 import { LottoGameModel, RecordModel } from '../../../../../../models';
-import { MinerTermsModel, SubControllerModel, SubCounterModel, TermOneModel } from '../../../../models';
+import { SubControllerModel, SubCounterModel, TermsModel } from '../../../../models';
 
 @Component({
     selector: 'confirm-play-lottery-step-1',
@@ -26,11 +27,16 @@ export class ConfirmPlayLotteryStep1Component {
         return this._playService.selectedNumbers;
     }
 
+    get terms(): TermsModel | undefined {
+        return this._playService.terms;
+    }
+
     get isPlaying(): boolean {
         return this._isPlaying;
     }
 
-    constructor(private _playService: PlayService,
+    constructor(private _appStateService: AppStateService,
+                private _playService: PlayService,
                 private _blockChainService: BlockChainService) {
     }
 
@@ -44,10 +50,11 @@ export class ConfirmPlayLotteryStep1Component {
 
         const recordBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
         const record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
+        this._appStateService.record = record;
 
         const mainCounterAddress = await PublicKey.findProgramAddress([Buffer.from("maincounter"), Buffer.from([record.mainCount])], BLOCK_CHAIN_KEYS.programId);
 
-        const midCountNumber = Math.floor(Math.random() * record.subCount) + 1;
+        const midCountNumber = Math.floor(Math.random() * record.midCount) + 1;
         const midCountAddress = await PublicKey.findProgramAddress(
             [
                 Buffer.from("midc"), Buffer.from([record.mainCount]),
@@ -164,6 +171,7 @@ export class ConfirmPlayLotteryStep1Component {
             game.wins = bumpGameWins ? subCountNew[1] : 0;
 
             const lottoGameEncoded = serialize(LottoGameModel.getSchema(), game);
+            const playerRecordKey = await PublicKey.createWithSeed(this._blockChainService.walletPublicKey!, "playerrecord", BLOCK_CHAIN_KEYS.programId);
 
             let account2ProgramId = SystemProgram.programId;
             let lottoGameBuffer: Uint8Array;
@@ -178,7 +186,7 @@ export class ConfirmPlayLotteryStep1Component {
                 { isSigner: false, isWritable: false, pubkey: mainCountKey },
                 { isSigner: false, isWritable: false, pubkey: midCountKey },
                 { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.term },
-                { isSigner: false, isWritable: false, pubkey: BLOCK_CHAIN_KEYS.minerTerms },
+                { isSigner: false, isWritable: true, pubkey: playerRecordKey },
                 { isSigner: false, isWritable: true, pubkey: SystemProgram.programId },
             ];
 
@@ -187,7 +195,7 @@ export class ConfirmPlayLotteryStep1Component {
                 lottoGameBuffer = Uint8Array.of(0, ...lottoGameEncoded);
                 keys.splice(5, 0, { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.host });
             } else {
-                lottoGameBuffer = Uint8Array.of(10, ...lottoGameEncoded);
+                lottoGameBuffer = Uint8Array.of(1, ...lottoGameEncoded);
                 keys.splice(6, 0, { isSigner: false, isWritable: true, pubkey: subCountNew[0] });
             }
 
@@ -198,10 +206,12 @@ export class ConfirmPlayLotteryStep1Component {
                 data: Buffer.from(lottoGameBuffer)
             });
 
+
             await this._createAndConfirmTransaction(
                 account2ProgramId,
                 transactionInstruction,
                 publicKey,
+                playerRecordKey,
                 rent,
                 temp1,
                 temp2,
@@ -254,26 +264,21 @@ export class ConfirmPlayLotteryStep1Component {
     }
 
     private async _getFees(weekNumber: number): Promise<{ rent: number, total: number }> {
-        const termOneBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.term);
-        const termOne = deserialize(TermOneModel.toSchema(), TermOneModel, termOneBuffer!.data);
-        const minerBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.minerTerms);
-        const minerTerms = deserialize(MinerTermsModel.toSchema(), MinerTermsModel, minerBuffer!.data);
+        const rentAsString = String(this._playService.terms!.rentBN);
+        let demandAsString = String(this._playService.terms!.newDemandBN);
+        let hostFeesAsString = String(this._playService.terms!.newHostFeeBN);
+        let minerFeesAsString = String(this._playService.terms!.newMinersFeeBN);
 
-        const rentAsString = String(termOne.rent);
-        let demandAsString = String(termOne.new_demand);
-        let hostFeesAsString = String(termOne.new_hostfee);
-        let minerFeesAsString = String(minerTerms.new_minersfee);
-
-        if (weekNumber <= minerTerms.apply_after) {
-            minerFeesAsString = String(minerTerms.old_minersfee);
+        if (weekNumber <= this._playService.terms!.applyAfter) {
+            minerFeesAsString = String(this._playService.terms!.oldMinersFeeBN);
         }
 
-        if (weekNumber <= termOne.apply_after_t) {
-            demandAsString = String(termOne.old_demand);
+        if (weekNumber <= this._playService.terms!.applyAfterT) {
+            demandAsString = String(this._playService.terms!.oldDemandBN);
         }
 
-        if (weekNumber <= termOne.apply_after_h) {
-            hostFeesAsString = String(termOne.old_hostfee);
+        if (weekNumber <= this._playService.terms!.applyAfterH) {
+            hostFeesAsString = String(this._playService.terms!.oldHostFeeBN);
         }
 
         const rent = parseInt(rentAsString, 10);
@@ -290,6 +295,7 @@ export class ConfirmPlayLotteryStep1Component {
         account2ProgramId: PublicKey,
         transactionInstruction: TransactionInstruction,
         publicKey: PublicKey,
+        playerRecordKey: PublicKey,
         rent: number,
         temp1: Keypair,
         temp2: Keypair,
@@ -312,6 +318,24 @@ export class ConfirmPlayLotteryStep1Component {
         });
 
         const transaction = new Transaction();
+
+        if (this._playService.terms!.drawTicketAmount !== 0) {
+            const playerRecordBuffer = await this._blockChainService.connection.getAccountInfo(playerRecordKey);
+            if ((playerRecordBuffer === null || playerRecordBuffer.lamports === null)) {
+                const createdPlayerRecord = SystemProgram.createAccountWithSeed({
+                    fromPubkey: this._blockChainService.walletPublicKey!,
+                    newAccountPubkey: playerRecordKey,
+                    basePubkey: this._blockChainService.walletPublicKey!,
+                    seed: "playerrecord",
+                    lamports: 20000000,
+                    space: 10,
+                    programId: BLOCK_CHAIN_KEYS.programId,
+                });
+
+                transaction.add(createdPlayerRecord);
+            }
+        }
+
         transaction.add(account1, account2, transactionInstruction);
         transaction.feePayer = publicKey;
 

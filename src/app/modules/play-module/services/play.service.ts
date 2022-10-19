@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 
+import { TermsModel } from '../models';
+
 @Injectable()
 export class PlayService {
     private _selectedNumbersMap: Set<number> = new Set<number>();
-    private _totalPrice: number = 0.0705;
+
+    terms?: TermsModel;
 
     get selectedNumbers(): number[] {
         return Array.from(this._selectedNumbersMap).sort((number1, number2) => number1 - number2);
-    }
-
-    get totalPrice(): number {
-        return this._totalPrice;
     }
 
     constructor() {

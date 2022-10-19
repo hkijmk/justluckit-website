@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
 
     private async _initRecord(): Promise<void> {
         const recordBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.record);
-        const record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
-        this._appStateService.initRecord(record);
+        this._appStateService.record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
     }
 }
