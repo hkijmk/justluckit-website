@@ -72,7 +72,7 @@ export class BlockChainService {
     }
 
     async setConnection(): Promise<void> {
-        this._connectionStore.setEndpoint('https://api.testnet.solana.com');
+        this._connectionStore.setEndpoint('https://api.devnet.solana.com');
         this._connection = (await firstValueFrom(this._connectionStore.connection$))!;
     }
 
