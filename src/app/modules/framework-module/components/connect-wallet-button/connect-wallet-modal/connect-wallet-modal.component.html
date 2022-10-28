@@ -1,7 +1,13 @@
 <app-modal>
     <div content class="connect-wallet">
-        <div *ngIf="selectedWallet" class="text-title-small">Selected Wallet: {{ selectedWallet.adapter.name }}</div>
-        <div *ngIf="!selectedWallet" class="text-title-small">Select Your Wallet</div>
+        <h3 *ngIf="selectedWallet" class="text-title-small">Selected Wallet: {{ selectedWallet.adapter.name }}</h3>
+        <h3 *ngIf="!selectedWallet" class="text-title-small">Select Your Wallet</h3>
+
+        <div class="margin-top-x8 text-info">
+            <p>
+                You need a Solana wallet to play.
+            </p>
+        </div>
 
         <div *ngIf="wallets !== undefined" class="margin-top-x8 connect-wallet-list">
             <div *ngFor="let wallet of wallets; let i = index">

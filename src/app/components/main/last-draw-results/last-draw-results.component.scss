@@ -1,6 +1,6 @@
-@use '../../../../styles/abstracts/variables' as vars;
-@use '../../../../styles/abstracts/mixins' as mxns;
 @use '../../../../styles/abstracts/placeholders/typography' as *;
+@use '../../../../styles/abstracts/mixins' as mxns;
+@use '../../../../styles/abstracts/variables' as vars;
 
 .last-draw-results-container {
     background-color: #e8f2eb;
@@ -8,6 +8,18 @@
 
 .last-draw-results {
     max-width: 640px;
+
+    .last-draw-results__carry-over {
+        @extend %font-size-3;
+        @extend %font-size-md-4;
+
+        color: vars.$app-color-pink;
+        font-weight: 600;
+    }
+
+    .last-draw-results__card {
+        padding-block: vars.$spacing-x8;
+    }
 }
 
 .last-draw-results-logo {
@@ -41,7 +53,7 @@
             font-size: 1.25rem;
             line-height: 3rem;
 
-            @include mxns.md{
+            @include mxns.md {
                 line-height: 2.5rem;
             }
         }

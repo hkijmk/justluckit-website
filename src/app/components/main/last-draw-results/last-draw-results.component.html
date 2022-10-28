@@ -2,21 +2,21 @@
     <div class="container last-draw-results">
         <h2 class="text-title font-size-5 highlighted-gradient">Last Draw Results</h2>
 
-        <div class="card card--on-light-bg margin-top-x8">
+        <div class="card card--on-light-bg last-draw-results__card margin-top-x8">
             <div class="flex-center">
                 <img class="last-draw-results-logo"
                      src="../../../../assets/logos/butterfly-6-49/butterfly-6-49-temporary-logo.svg"
                      alt="butterfly-lottery">
             </div>
 
-            <div class="margin-top-x8">
+            <div class="margin-top-x12">
                 <h3 class="text-title-small">Total Reward</h3>
-                <div class="margin-top-x6 text-title highlighted">{{ lastDrawResults.totalReward }} SOL</div>
+                <div class="margin-top-x4 text-title highlighted">{{ lastDrawResults.totalReward }} SOL</div>
             </div>
 
             <div class="margin-top-x12">
-                <h3 class="text-title-small">Carry Over</h3>
-                <div class="margin-top-x6 text-title highlighted">{{ lastDrawResults.carryOver }} SOL</div>
+                <h3 class="text-title-small">Carryover</h3>
+                <div class="margin-top-x4 text-title last-draw-results__carry-over">{{ lastDrawResults.carryOver }} SOL</div>
             </div>
 
             <div class="margin-top-x12">
@@ -31,9 +31,9 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>Guessed Numbers</th>
+                        <th>Matched Numbers</th>
                         <th>Winners</th>
-                        <th>Payout per Winner</th>
+                        <th>Prize per Winner</th>
                     </tr>
                     </thead>
 

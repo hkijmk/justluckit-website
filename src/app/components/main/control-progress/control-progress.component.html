@@ -3,8 +3,7 @@
 
     <div class="margin-top-x8 text-info">
         <p>
-            Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam. Sed metus diam, mollis vitae rhoncus vitae, tincidunt at
-            dolor. Suspendisse a vulputate massa. Nullam pulvinar et est eu imperdiet.
+            This part shows you where the butterfly is right now. These 4 steps are the controlling checkpoints. This gives you an estimation of how much time left to announce the winners.
         </p>
     </div>
 
@@ -17,12 +16,12 @@
     </div>
 
     <div class="margin-top-x12">
-        <h3 class="text-title-small">Date of Draw</h3>
+        <h3 class="text-title-small">Date of The Draw</h3>
         <div class="margin-top-x6 text-title highlighted">{{ drawDate | date:'medium' }}</div>
     </div>
 
     <div *ngIf="!isDrawing" class="margin-top-x19">
-        <h3 class="text-title-small">Estimated Time Remaining</h3>
+        <h3 class="text-title-small">Time Until The Draw</h3>
 
         <div class="margin-top-x6">
             <time-remaining [date]="drawDate"></time-remaining>
@@ -31,7 +30,7 @@
 
     <div class="margin-top-x8 text-info-small">
         <p>
-            *Proin in finibus libero. Morbi sit amet nulla eu tellus hendrerit auctor et id quam.
+            *The time shown above is an estimation and it will be updated periodically. The exact time might differ depending on the system load.
         </p>
     </div>
 </div>
