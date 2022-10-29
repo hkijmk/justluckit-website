@@ -60,6 +60,7 @@ export class ConnectWalletModalComponent implements OnInit, OnDestroy {
         const airDrop = await this._blockChainService.connection.requestAirdrop(this._blockChainService.walletPublicKey!, 1000000000);
         await this._blockChainService.connection.confirmTransaction(airDrop);
 
+        alert('Airdropped 1 SOL on your wallet.')
         this._isAirDropping = false;
     }
 
