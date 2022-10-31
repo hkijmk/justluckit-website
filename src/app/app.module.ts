@@ -14,6 +14,7 @@ import { ControlStageItemComponent } from './components/main/control-progress/co
 import { ControlStagesComponent } from './components/main/control-progress/control-stages/control-stages.component';
 import { ControlProgressComponent } from './components/main/control-progress/control-progress.component';
 import { LastDrawResultsComponent } from './components/main/last-draw-results/last-draw-results.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { WelcomeViewComponent } from './components/main/welcome-view/welcome-view.component';
 import { MainComponent } from './components/main/main.component';
@@ -25,6 +26,7 @@ import { AppComponent } from './app.component';
     declarations: [
         AppComponent,
         MainComponent,
+        FooterComponent,
         HeaderComponent,
         ControlProgressComponent,
         ControlStagesComponent,

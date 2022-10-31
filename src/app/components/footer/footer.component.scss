@@ -1,0 +1,7 @@
+@use '../../../styles/abstracts/variables' as vars;
+
+.footer-copyright {
+    background-color: vars.$app-color-green-light;
+    color: white;
+    padding: vars.$spacing-x6;
+}
