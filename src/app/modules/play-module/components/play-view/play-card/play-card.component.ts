@@ -2,10 +2,12 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { deserialize } from 'borsh';
 import { Observable } from 'rxjs';
 
+import { AppStateService } from '../../../../../services/app-state.service';
 import { BlockChainService } from '../../../../../services/block-chain.service';
 import { PlayService } from '../../../services/play.service';
 
 import { BLOCK_CHAIN_KEYS } from '../../../../../constants';
+import { MainScreenInfoModel, RecordModel } from '../../../../../models';
 import { TermsModel } from '../../../models';
 
 @Component({
@@ -28,6 +30,14 @@ export class PlayCardComponent implements OnInit {
         return this._playService.terms;
     }
 
+    get record(): RecordModel {
+        return this._appStateService.record;
+    }
+
+    get mainScreenInfo(): MainScreenInfoModel {
+        return this._appStateService.mainScreenInfo;
+    }
+
     get isWalletConnected$(): Observable<boolean> {
         return this._blockChainService.isWalletConnected$;
     }
@@ -36,7 +46,8 @@ export class PlayCardComponent implements OnInit {
         return this._isLoadingTerms;
     }
 
-    constructor(private _playService: PlayService,
+    constructor(private _appStateService: AppStateService,
+                private _playService: PlayService,
                 private _blockChainService: BlockChainService) {
         this.numbersList = Array.from(Array(49)).map((_, i) => i + 1);
     }

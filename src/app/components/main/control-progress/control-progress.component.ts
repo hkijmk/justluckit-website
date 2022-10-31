@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { AppStateService } from '../../../services/app-state.service';
 
 import { DirectorModel } from '../../../models';
 
@@ -8,19 +10,18 @@ import { DirectorModel } from '../../../models';
     styleUrls: ['./control-progress.component.scss']
 })
 export class ControlProgressComponent {
-    @Input() director!: DirectorModel;
-    @Input() drawDate!: Date;
+    get drawDate(): Date {
+        return this._appStateService.record.drawDate;
+    }
 
-    private _isLoadingDrawDate: boolean = false;
-
-    get isLoadingDrawDate(): boolean {
-        return this._isLoadingDrawDate;
+    get director(): DirectorModel {
+        return this._appStateService.mainScreenInfo.director;
     }
 
     get isDrawing(): boolean {
         return new Date().getTime() > this.drawDate.getTime();
     }
 
-    constructor() {
+    constructor(private _appStateService: AppStateService) {
     }
 }

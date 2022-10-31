@@ -16,8 +16,8 @@ export class AppStateService {
         this._record = value;
     }
 
-    get mainScreenInfo(): MainScreenInfoModel | undefined {
-        return this._mainScreenInfo;
+    get mainScreenInfo(): MainScreenInfoModel {
+        return this._mainScreenInfo!;
     }
 
     constructor() {

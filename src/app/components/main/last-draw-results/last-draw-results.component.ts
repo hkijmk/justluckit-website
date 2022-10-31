@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { AppStateService } from '../../../services/app-state.service';
 
 import { LastDrawResultsModel } from '../../../models';
 
@@ -8,8 +10,10 @@ import { LastDrawResultsModel } from '../../../models';
     styleUrls: ['./last-draw-results.component.scss']
 })
 export class LastDrawResultsComponent {
-    @Input() lastDrawResults!: LastDrawResultsModel;
+    get lastDrawResults(): LastDrawResultsModel {
+        return this._appStateService.mainScreenInfo.lastDrawResults;
+    }
 
-    constructor() {
+    constructor(private _appStateService: AppStateService) {
     }
 }
