@@ -83,32 +83,43 @@
 
 .welcome-view-image-background,
 .welcome-view-image-foreground {
-    height: 100%;
-    left: 0;
-    mix-blend-mode: screen;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    width: 100%;
+    display: none;
 
-    animation-name: fog;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
+    @supports (mix-blend-mode: screen) {
+        display: block;
+        height: 100%;
+        left: -10%;
+        mix-blend-mode: screen;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 120%;
 
-    @include mxns.md {
-        object-fit: contain;
+        animation-name: fog;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+
+        @include mxns.md {
+            object-fit: contain;
+            left: 0;
+            width: 100%;
+        }
     }
 }
 
 .welcome-view-image-background {
-    z-index: 1;
-    animation-duration: 53s;
-    animation-direction: alternate-reverse;
+    @supports (mix-blend-mode: screen) {
+        z-index: 1;
+        animation-duration: 53s;
+        animation-direction: alternate-reverse;
+    }
 }
 .welcome-view-image-foreground {
-    z-index: 3;
-    animation-duration: 29s;
-    animation-direction: alternate;
+    @supports (mix-blend-mode: screen) {
+        z-index: 3;
+        animation-duration: 29s;
+        animation-direction: alternate;
+    }
 }
 
 @keyframes fog {
@@ -123,11 +134,11 @@
         filter: blur(1px);
     }
     50% {
-        transform: translateX(1rem) translateY(1rem) scale(1) skew(2deg);
+        transform: translateX(1rem) translateY(0) scale(1) skew(2deg);
         filter: blur(0px);
     }
     75% {
-        transform: translateX(-1rem) translateY(-1rem) scale(1.05)
+        transform: translateX(-1rem) translateY(1rem) scale(1.05)
             skew(2deg, -2deg);
         filter: blur(1px);
     }
