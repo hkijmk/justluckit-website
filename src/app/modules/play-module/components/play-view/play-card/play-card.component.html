@@ -1,5 +1,7 @@
 <div class="card card--on-light-bg play-card">
-    <div class="text-title highlighted">{{ record.drawDate | date: 'longDate' }}</div>
+    <div class="draw-date margin-top-x6">
+        {{ record.drawDate | date: "longDate" }}
+    </div>
 
     <div class="separator-v play-card-number-selection-container">
         <div class="play-card-number-selection-title">Choose 6 numbers</div>
@@ -7,8 +9,10 @@
         <div class="flex-center margin-top-x8">
             <div class="play-card-number-selection">
                 <div *ngFor="let number of numbersList">
-                    <lottery-number [selected]="isNumberSelected(number)"
-                                    (click)="onSelectNumber(number)">
+                    <lottery-number
+                        [selected]="isNumberSelected(number)"
+                        (click)="onSelectNumber(number)"
+                    >
                         {{ number }}
                     </lottery-number>
                 </div>
@@ -17,13 +21,20 @@
     </div>
 
     <div class="separator-v">
-        <lottery-numbers [numbers]="selectedNumbers" [columnCountMd]="6" [columnCountSm]="3"></lottery-numbers>
+        <lottery-numbers
+            [numbers]="selectedNumbers"
+            [columnCountMd]="6"
+            [columnCountSm]="3"
+        ></lottery-numbers>
     </div>
 
     <div class="separator-v play-card-total-price">
         <div class="play-card-total-price-title">Total Price</div>
         <div class="play-card-total-price-value">
-            <app-loading-indicator-icon *ngIf="isLoadingTerms" [size]="28"></app-loading-indicator-icon>
+            <app-loading-indicator-icon
+                *ngIf="isLoadingTerms"
+                [size]="28"
+            ></app-loading-indicator-icon>
             <span *ngIf="!isLoadingTerms">{{ terms?.totalPrice }} SOL</span>
         </div>
     </div>
@@ -31,7 +42,10 @@
     <div class="margin-top-x8 play-card-total-price">
         <div class="play-card-total-price-title">Deposit</div>
         <div class="play-card-total-price-value">
-            <app-loading-indicator-icon *ngIf="isLoadingTerms" [size]="28"></app-loading-indicator-icon>
+            <app-loading-indicator-icon
+                *ngIf="isLoadingTerms"
+                [size]="28"
+            ></app-loading-indicator-icon>
             <span *ngIf="!isLoadingTerms">{{ terms?.deposit }} SOL</span>
         </div>
     </div>
@@ -39,9 +53,15 @@
     <div class="margin-top-x8 play-card-actions">
         <connect-wallet-button></connect-wallet-button>
 
-        <app-button [disabled]="isLoadingTerms || selectedNumbers.length !== 6 || ((isWalletConnected$ | async) !== true)"
-                    [variant]="'primary'"
-                    (onClick)="showConfirmPlayLotteryModal.emit()">
+        <app-button
+            [disabled]="
+                isLoadingTerms ||
+                selectedNumbers.length !== 6 ||
+                (isWalletConnected$ | async) !== true
+            "
+            [variant]="'primary'"
+            (onClick)="showConfirmPlayLotteryModal.emit()"
+        >
             Play
         </app-button>
     </div>
