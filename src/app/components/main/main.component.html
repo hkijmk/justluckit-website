@@ -1,10 +1,6 @@
 <welcome-view></welcome-view>
 
-<div *ngIf="isLoading" class="flex-center margin-top-x12">
-    <app-loading-indicator-icon></app-loading-indicator-icon>
-</div>
-
-<ng-container *ngIf="!isLoading && record && mainScreenInfo">
+<ng-container *ngIf="record && mainScreenInfo">
     <control-progress></control-progress>
     <last-draw-results></last-draw-results>
 </ng-container>
