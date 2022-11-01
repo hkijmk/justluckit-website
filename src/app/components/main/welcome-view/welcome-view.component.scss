@@ -20,6 +20,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    overflow-x: hidden;
 }
 
 .welcome-view-left {
@@ -114,6 +115,7 @@
         animation-direction: alternate-reverse;
     }
 }
+
 .welcome-view-image-foreground {
     @supports (mix-blend-mode: screen) {
         z-index: 3;
@@ -129,8 +131,7 @@
         filter: blur(0px);
     }
     25% {
-        transform: translateX(-1rem) translateY(-1rem) scale(0.95)
-            skew(-2deg, 3deg);
+        transform: translateX(-1rem) translateY(-1rem) scale(0.95) skew(-2deg, 3deg);
         filter: blur(1px);
     }
     50% {
@@ -138,8 +139,7 @@
         filter: blur(0px);
     }
     75% {
-        transform: translateX(-1rem) translateY(1rem) scale(1.05)
-            skew(2deg, -2deg);
+        transform: translateX(-1rem) translateY(1rem) scale(1.05) skew(2deg, -2deg);
         filter: blur(1px);
     }
 }
