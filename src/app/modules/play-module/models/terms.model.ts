@@ -15,6 +15,7 @@ export class TermsModel implements ITermsModel {
     applyAfter: number;
     drawTicketAmountBN: BN;
     rentBN: BN;
+    airdropTokensPerGameBN: BN;
 
     get drawTicketAmount(): number {
         return this.drawTicketAmountBN.toNumber();
@@ -41,6 +42,7 @@ export class TermsModel implements ITermsModel {
         this.applyAfter = obj.applyAfter;
         this.drawTicketAmountBN = obj.drawTicketAmountBN;
         this.rentBN = obj.rentBN;
+        this.airdropTokensPerGameBN = obj.airdropTokensPerGameBN;
     }
 
     static getSchema(): BlockChainSchemaType<typeof TermsModel> {
@@ -62,6 +64,7 @@ export class TermsModel implements ITermsModel {
                         ["applyAfter", "u16"],
                         ["drawTicketAmountBN", "u64"],
                         ["rentBN", "u64"],
+                        ["airDropTokensPerGame", "u64"],
                     ],
                 },
             ],
@@ -82,4 +85,5 @@ export interface ITermsModel {
     applyAfter: number;
     drawTicketAmountBN: BN;
     rentBN: BN;
+    airdropTokensPerGameBN: BN;
 }
