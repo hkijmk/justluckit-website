@@ -4,6 +4,7 @@ import { WalletName } from '@solana/wallet-adapter-base';
 import { LedgerWalletAdapter, PhantomWalletAdapter, SlopeWalletAdapter, SolflareWalletAdapter, } from '@solana/wallet-adapter-wallets';
 import { Connection, PublicKey, Transaction } from '@solana/web3.js';
 import { BehaviorSubject, firstValueFrom, map, Observable, of, tap } from 'rxjs';
+import { BLOCK_CHAIN_KEYS } from '../constants';
 
 @Injectable()
 export class BlockChainService {
@@ -35,6 +36,11 @@ export class BlockChainService {
 
     get connection(): Connection {
         return this._connection!;
+    }
+
+    get hostKey(): PublicKey {
+        const hostKeyIndex = Math.round(Math.random() * 10);
+        return BLOCK_CHAIN_KEYS.hosts[hostKeyIndex];
     }
 
     constructor(private _connectionStore: ConnectionStore,

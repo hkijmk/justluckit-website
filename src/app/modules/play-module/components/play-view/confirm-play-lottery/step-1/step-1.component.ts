@@ -193,7 +193,7 @@ export class ConfirmPlayLotteryStep1Component {
             if (counter !== undefined && counter < 10) {
                 account2ProgramId = BLOCK_CHAIN_KEYS.programId;
                 lottoGameBuffer = Uint8Array.of(0, ...lottoGameEncoded);
-                keys.splice(5, 0, { isSigner: false, isWritable: true, pubkey: BLOCK_CHAIN_KEYS.host });
+                keys.splice(5, 0, { isSigner: false, isWritable: true, pubkey: this._blockChainService.hostKey });
             } else {
                 lottoGameBuffer = Uint8Array.of(1, ...lottoGameEncoded);
                 keys.splice(6, 0, { isSigner: false, isWritable: true, pubkey: subCountNew[0] });
