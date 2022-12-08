@@ -20,16 +20,8 @@
             <app-loading-indicator-icon></app-loading-indicator-icon>
         </div>
 
-        <ng-container *ngIf="!isLoading">
-            <div *ngIf="searchText && searchedCoupon" class="margin-top-x12">
-                <coupon-item [coupon]="searchedCoupon"></coupon-item>
-            </div>
-
-            <div *ngIf="allCoupons && !searchText" class="margin-top-x12 my-coupons-list">
-                <div *ngFor="let coupon of allCoupons">
-                    <coupon-item [coupon]="coupon"></coupon-item>
-                </div>
-            </div>
-        </ng-container>
+        <div *ngIf="!isLoading && searchText && searchedCoupon" class="margin-top-x12">
+            <coupon-item [coupon]="searchedCoupon"></coupon-item>
+        </div>
     </div>
 </div>

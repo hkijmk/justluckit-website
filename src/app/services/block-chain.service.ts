@@ -3,7 +3,8 @@ import { ConnectionStore, Wallet, WalletStore } from '@heavy-duty/wallet-adapter
 import { WalletName } from '@solana/wallet-adapter-base';
 import { LedgerWalletAdapter, PhantomWalletAdapter, SlopeWalletAdapter, SolflareWalletAdapter, } from '@solana/wallet-adapter-wallets';
 import { Connection, PublicKey, Transaction } from '@solana/web3.js';
-import { BehaviorSubject, firstValueFrom, map, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
+
 import { BLOCK_CHAIN_KEYS } from '../constants';
 
 @Injectable()
@@ -74,8 +75,9 @@ export class BlockChainService {
     }
 
     async setConnection(): Promise<void> {
-        this._connectionStore.setEndpoint('https://api.mainnet-beta.solana.com');
-        this._connection = (await firstValueFrom(this._connectionStore.connection$))!;
+        this._connection = new Connection('https://magical-multi-mansion.solana-mainnet.discover.quiknode.pro/172e18dadc3cbf6fa6ce8a567354861a8f1c4c9e/', "confirmed");
+        // this._connectionStore.setEndpoint('https://api.mainnet-beta.solana.com');
+        // this._connection = (await firstValueFrom(this._connectionStore.connection$))!;
     }
 
     private _initAdapters(): void {

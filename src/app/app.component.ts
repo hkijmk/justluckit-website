@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
     }
 
     private async _getInfo(): Promise<void> {
-        const mainScreenInfoProgram = await PublicKey.findProgramAddress([
+        const mainScreenInfoProgram = PublicKey.findProgramAddressSync([
                 Buffer.from("interface"),
                 Buffer.from((this._appStateService.record.weekNumber - 1).toString()),
             ],
@@ -50,6 +50,10 @@ export class AppComponent implements OnInit {
         );
 
         const mainScreenInfoBuffer = await this._blockChainService.connection.getAccountInfo(mainScreenInfoProgram[0]);
+        if (!mainScreenInfoBuffer) {
+            return;
+        }
+
         const mainScreenInfo = deserialize(MainScreenInfoModel.getSchema(), MainScreenInfoModel, mainScreenInfoBuffer!.data);
         this._appStateService.initMainScreenInfo(mainScreenInfo);
     }

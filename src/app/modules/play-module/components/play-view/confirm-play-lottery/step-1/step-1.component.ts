@@ -52,10 +52,10 @@ export class ConfirmPlayLotteryStep1Component {
         const record = deserialize(RecordModel.getSchema(), RecordModel, recordBuffer!.data);
         this._appStateService.record = record;
 
-        const mainCounterAddress = await PublicKey.findProgramAddress([Buffer.from("maincounter"), Buffer.from([record.mainCount])], BLOCK_CHAIN_KEYS.programId);
+        const mainCounterAddress = PublicKey.findProgramAddressSync([Buffer.from("maincounter"), Buffer.from([record.mainCount])], BLOCK_CHAIN_KEYS.programId);
 
         const midCountNumber = Math.floor(Math.random() * record.midCount) + 1;
-        const midCountAddress = await PublicKey.findProgramAddress(
+        const midCountAddress = PublicKey.findProgramAddressSync(
             [
                 Buffer.from("midc"), Buffer.from([record.mainCount]),
                 Buffer.from("m"), Buffer.from([midCountNumber]),
@@ -65,7 +65,7 @@ export class ConfirmPlayLotteryStep1Component {
         );
 
         const controllerNumber = Math.floor(Math.random() * record.subCount) + 1;
-        const controllerAddress = await PublicKey.findProgramAddress(
+        const controllerAddress = PublicKey.findProgramAddressSync(
             [
                 Buffer.from("sctrl"), Buffer.from([record.mainCount]),
                 Buffer.from("m"), Buffer.from([midCountNumber]),
@@ -78,7 +78,7 @@ export class ConfirmPlayLotteryStep1Component {
         const controllerData = deserialize(SubControllerModel.getSchema(), SubControllerModel, controllerBuffer!.data);
 
         const controllerNumberOfSeries = controllerData.numberOfSeries;
-        const programAddress = await PublicKey.findProgramAddress([
+        const programAddress = PublicKey.findProgramAddressSync([
                 Buffer.from("sc"), Buffer.from([record.mainCount]),
                 Buffer.from("m"), Buffer.from([midCountNumber]),
                 Buffer.from("md"), Buffer.from([controllerNumber]),
@@ -144,12 +144,12 @@ export class ConfirmPlayLotteryStep1Component {
                 counter,
             );
 
-            const programAddress = await PublicKey.findProgramAddress([Buffer.from("L"), Buffer.from(seed)], BLOCK_CHAIN_KEYS.programId);
+            const programAddress = PublicKey.findProgramAddressSync([Buffer.from("L"), Buffer.from(seed)], BLOCK_CHAIN_KEYS.programId);
 
             const temp1 = Keypair.generate();
             const temp2 = Keypair.generate();
 
-            const subCountNew = await PublicKey.findProgramAddress([
+            const subCountNew = PublicKey.findProgramAddressSync([
                     Buffer.from("sc"), Buffer.from([mainCount]),
                     Buffer.from("m"), Buffer.from([midCount]),
                     Buffer.from("md"), Buffer.from([controllerNumber]),

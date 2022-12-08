@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { decode, encode } from '@faustbrian/node-base58';
+import { decode } from '@faustbrian/node-base58';
 import { PublicKey } from '@solana/web3.js';
 import { deserialize } from 'borsh';
-import { firstValueFrom, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { BlockChainService } from '../../services/block-chain.service';
 
@@ -15,7 +15,6 @@ import { LottoGameModel } from '../../models';
     styleUrls: ['./my-coupons.component.scss']
 })
 export class MyCouponsComponent implements OnInit, OnDestroy {
-    private _allCoupons?: LottoGameModel[];
     private _searchedCoupon?: LottoGameModel;
     private _walletPublicKeyChanged$?: Subscription;
     private _searchText: string = ''
@@ -27,10 +26,6 @@ export class MyCouponsComponent implements OnInit, OnDestroy {
 
     get isLoading(): boolean {
         return this._isLoading;
-    }
-
-    get allCoupons(): LottoGameModel[] | undefined {
-        return this._allCoupons;
     }
 
     get searchedCoupon(): LottoGameModel | undefined {
@@ -45,10 +40,6 @@ export class MyCouponsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        if (this.walletPublicKey !== null) {
-            this._getAllMyCoupons();
-        }
-
         this._setWalletPublicKeyChanged$();
     }
 
@@ -81,35 +72,10 @@ export class MyCouponsComponent implements OnInit, OnDestroy {
         this._isLoading = false;
     }
 
-    private async _getAllMyCoupons(): Promise<void> {
-        this._isLoading = true;
-
-        const walletPublicKey = await firstValueFrom(this._blockChainService.walletPublicKey$);
-        const base = encode(walletPublicKey!.toString());
-
-        const accounts = await this._blockChainService.connection.getProgramAccounts(
-            BLOCK_CHAIN_KEYS.programId,
-            {
-                filters: [
-                    { dataSize: 93 },
-                    { memcmp: { offset: 12, bytes: base } },
-                ],
-            }
-        );
-
-        this._allCoupons = accounts.map(accountItem => deserialize(LottoGameModel.getSchema(), LottoGameModel, accountItem.account!.data));
-        this._isLoading = false;
-    }
-
     private _setWalletPublicKeyChanged$(): void {
         this._walletPublicKeyChanged$ = this._blockChainService.walletPublicKey$
             .subscribe(() => {
-                if (this.walletPublicKey === null) {
-                    this._allCoupons = undefined;
-                    return;
-                }
-
-                this._getAllMyCoupons();
+                this._searchedCoupon = undefined;
             });
     }
 

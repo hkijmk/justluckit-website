@@ -16,6 +16,6 @@ const HOST_KEYS = [
 export const BLOCK_CHAIN_KEYS = {
     hosts: HOST_KEYS,
     programId: new PublicKey('6UA8U5SHkuUWGeqc9mnFeby6TTCACvTSACwQo4fuhDH'),
-    term: new PublicKey('GHcQegjpqxWyQA9eBP9MT89bgg2dqgMZNahnSvvJfoG4'),
-    record: new PublicKey('DCJ1SwBScVP74xejEdqWfGmS4HiTs2pJ2wxnE3xKpzX'),
+    term: new PublicKey('4LmheLVizuRFpw64F1TXnjML8wevLzvvTyKYTbSZsA5b'),
+    record: new PublicKey('3HY8Tu7UYMqSnnhXEHe9mmrUds5wEZWs4q6YAubyPPFE'),
 }
