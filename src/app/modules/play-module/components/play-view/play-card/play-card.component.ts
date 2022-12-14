@@ -7,7 +7,7 @@ import { BlockChainService } from '../../../../../services/block-chain.service';
 import { PlayService } from '../../../services/play.service';
 
 import { BLOCK_CHAIN_KEYS } from '../../../../../constants';
-import { MainScreenInfoModel, RecordModel } from '../../../../../models';
+import { RecordModel } from '../../../../../models';
 import { TermsModel } from '../../../models';
 
 @Component({
@@ -32,10 +32,6 @@ export class PlayCardComponent implements OnInit {
 
     get record(): RecordModel {
         return this._appStateService.record;
-    }
-
-    get mainScreenInfo(): MainScreenInfoModel {
-        return this._appStateService.mainScreenInfo;
     }
 
     get isWalletConnected$(): Observable<boolean> {

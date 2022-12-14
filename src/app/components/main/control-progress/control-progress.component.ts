@@ -14,8 +14,8 @@ export class ControlProgressComponent {
         return this._appStateService.record.drawDate;
     }
 
-    get director(): DirectorModel {
-        return this._appStateService.mainScreenInfo.director;
+    get director(): DirectorModel | undefined {
+        return this._appStateService.mainScreenInfo?.director;
     }
 
     get isDrawing(): boolean {

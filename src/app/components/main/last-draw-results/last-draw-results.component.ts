@@ -10,8 +10,8 @@ import { LastDrawResultsModel } from '../../../models';
     styleUrls: ['./last-draw-results.component.scss']
 })
 export class LastDrawResultsComponent {
-    get lastDrawResults(): LastDrawResultsModel {
-        return this._appStateService.mainScreenInfo.lastDrawResults;
+    get lastDrawResults(): LastDrawResultsModel | undefined {
+        return this._appStateService.mainScreenInfo?.lastDrawResults;
     }
 
     constructor(private _appStateService: AppStateService) {
