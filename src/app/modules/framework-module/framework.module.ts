@@ -6,6 +6,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { ConnectWalletModalComponent } from './components/connect-wallet-button/connect-wallet-modal/connect-wallet-modal.component';
 import { ConnectWalletButtonComponent } from './components/connect-wallet-button/connect-wallet-button.component';
 import { LoadingIndicatorIconComponent } from './components/loading-indicator-icon/loading-indicator-icon.component';
+import { ActionStepComponent } from './components/action-step/action-step.component';
 import { LotteryNumberComponent } from './components/lottery-number/lottery-number.component';
 import { LotteryNumbersComponent } from './components/lottery-numbers/lottery-numbers.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -16,6 +17,7 @@ import { TimeRemainingComponent } from './components/time-remaining/time-remaini
 
 @NgModule({
     declarations: [
+        ActionStepComponent,
         ButtonComponent,
         ConnectWalletButtonComponent,
         ConnectWalletModalComponent,
@@ -43,6 +45,7 @@ import { TimeRemainingComponent } from './components/time-remaining/time-remaini
         TimeRemainingComponent,
         SearchInputComponent,
         SafeHtmlPipe,
+        ActionStepComponent,
     ]
 })
 export class FrameworkModule {

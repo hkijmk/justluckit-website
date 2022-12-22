@@ -1,0 +1,6 @@
+<div class="flex-center action-step"
+     [class.action-step--disabled]="disabled"
+     [class.action-step--fixed-size]="fixedSize">
+    <div *ngIf="!completed" class="flex-center action-step__number">{{ stepNumber }}</div>
+    <img *ngIf="completed" src="/assets/icons/justluckit-check.svg" alt="JustLuckIt Check Icon">
+</div>

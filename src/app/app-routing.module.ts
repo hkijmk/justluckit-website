@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MainComponent } from './components/main/main.component';
+import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { MyCouponsComponent } from './components/my-coupons/my-coupons.component';
 
 const routes: Routes = [
@@ -11,6 +12,10 @@ const routes: Routes = [
         loadChildren: () => import('./modules/play-module/play.module').then(m => m.PlayModule),
     },
     {
+        path: 'how-it-works',
+        component: HowItWorksComponent,
+    },
+    {
         path: 'my-coupons',
         component: MyCouponsComponent,
     },
@@ -18,8 +23,8 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
+        initialNavigation: 'enabledBlocking'
+    })],
     exports: [RouterModule]
 })
 export class AppRoutingModule {

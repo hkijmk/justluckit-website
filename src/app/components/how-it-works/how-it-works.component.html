@@ -1,0 +1,74 @@
+<div class="container">
+    <h2 class="text-title font-size-5 highlighted-gradient">How It Works</h2>
+
+    <div class="how-it-works__section">
+        <div class="how-it-works__section-icon">
+            <action-step [stepNumber]="1" [fixedSize]="true"></action-step>
+        </div>
+
+        <div class="how-it-works__section-content">
+            <h2 class="text-title highlighted">Derivation of Lucky Numbers</h2>
+
+            <div class="text-info">
+                <p>Every time you make a coupon in Butterfly 649, a hash function modifies the randomness of the game.</p>
+
+                <p>
+                    The numbers you play, your wallet address and time of your play all together has an effect on this hash function. Your decision of choosing number 2 or number 3 on your coupon
+                    totally changes the result of next draw and all future draws.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="how-it-works__section">
+        <div class="how-it-works__section-icon">
+            <action-step [stepNumber]="2" [fixedSize]="true"></action-step>
+        </div>
+
+        <div class="how-it-works__section-content">
+            <h2 class="text-title highlighted">Hash Function in Details</h2>
+
+            <div class="text-info">
+                <p>Randomness is saved on program counters. We need a few counters to scale butterfly lottery, so that many people can play at the same time.</p>
+
+                <p>
+                    When the draw time shown on home screen is zero, new draw begins and randomization of the counters stops. Randomness in all counters which are ordered by the counter number go to
+                    another hash function consecutively to reach the final randomness. We derive the lucky numbers from this final randomness. You can look at the randomness of the counters and how
+                    final randomness is derived at this link.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="how-it-works__section">
+        <div class="how-it-works__section-icon">
+            <action-step [stepNumber]="3" [fixedSize]="true"></action-step>
+        </div>
+
+        <div class="how-it-works__section-content">
+            <h2 class="text-title highlighted">Subcounters, Randomness and Derivation</h2>
+
+            <div class="text-info">
+                <p>
+                    Randomness is modified only by playing and you can observe it anytime on blockchain, hence you can know the result of the draw at any given moment and decide to win jackpot. You
+                    can prepare your coupon of exact matching numbers and play. However, you modify the randomness when you play and new draw result is different than the numbers you chose. Can you
+                    calculate how your numbers would have an effect on the modification and choose such six numbers that would match the modification? Maybe in the future. Currently there are no
+                    supercomputers capable of executing such calculation in such a short amount of time.
+                </p>
+
+                <p>All coupons you make are saved and all distributions, calculations and control of coupons are done on blockchain.</p>
+
+                <p>
+                    After the draw, controllers check each coupon by calling the smart contract. Controllers also get some reward for this process. Anybody can be a controller and earn rewards. You
+                    can also host this game on your website and earn Sol as people play. You can join our discord channel for details.
+                </p>
+
+                <p>
+                    Currently, we are controlling the lottery settings like how often we have draw, coupon price, share of hosts and controllers. But we are actively working on creating a community
+                    program where community members can vote and offer changes with Butterfly Lottery Token. Butterfly Lottery Token is not listen on any market yet. Ultimately, we will make our
+                    program immutable aon blockchain and open our source code.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

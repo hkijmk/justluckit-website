@@ -17,6 +17,7 @@
                  [class.header__nav-links--visible-on-mobile]="isDropdownVisibleOnMobile">
                 <a [routerLink]="''" (click)="hideDropdown()">Home</a>
                 <a [routerLink]="'my-coupons'" (click)="hideDropdown()">My Coupons</a>
+                <a [routerLink]="'faq'" (click)="hideDropdown()">FAQ</a>
 
                 <div class="header__nav-links__play-now-button">
                     <app-button [variant]="'secondary'" [routerLink]="'play'" (onClick)="hideDropdown()">Play Now</app-button>

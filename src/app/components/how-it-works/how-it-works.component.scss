@@ -1,0 +1,44 @@
+@use '../../../styles/abstracts/placeholders/typography' as *;
+@use '../../../styles/abstracts/variables' as vars;
+@use '../../../styles/abstracts/mixins' as mxns;
+
+@use '../../../styles/fonts' as *;
+@use '../../../styles/layout' as *;
+
+.how-it-works__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &:not(:first-child) {
+        @extend .separator-v;
+    }
+
+    @include mxns.md {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+.how-it-works__section-content {
+    margin-top: vars.$spacing-x6;
+
+    @include mxns.md {
+        margin-top: 0;
+        margin-left: vars.$spacing-x12;
+    }
+
+    > h2 {
+        @extend %font-size-3;
+        @extend %font-size-md-4;
+
+        @include mxns.md {
+            text-align: left;
+        }
+    }
+
+    > div {
+        margin-top: vars.$spacing-x4;
+        text-align: left;
+    }
+}

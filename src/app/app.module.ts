@@ -16,6 +16,7 @@ import { ControlProgressComponent } from './components/main/control-progress/con
 import { LastDrawResultsComponent } from './components/main/last-draw-results/last-draw-results.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { WelcomeViewComponent } from './components/main/welcome-view/welcome-view.component';
 import { MainComponent } from './components/main/main.component';
 import { MyCouponsComponent } from './components/my-coupons/my-coupons.component';
@@ -35,6 +36,7 @@ import { AppComponent } from './app.component';
         MyCouponsComponent,
         CouponItemComponent,
         WelcomeViewComponent,
+        HowItWorksComponent,
     ],
     imports: [
         AppRoutingModule,
