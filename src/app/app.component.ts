@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PublicKey } from '@solana/web3.js';
 import { deserialize } from 'borsh';
 
@@ -14,8 +14,6 @@ import { MainScreenInfoModel, RecordModel } from './models';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    @ViewChild('modal', { read: ViewContainerRef }) private _modalViewRef!: ViewContainerRef;
-
     private _isLoading: boolean = false;
 
     get isLoading(): boolean {

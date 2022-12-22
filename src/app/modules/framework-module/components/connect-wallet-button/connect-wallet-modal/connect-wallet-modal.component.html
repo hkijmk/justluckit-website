@@ -36,15 +36,13 @@
         </div>
 
         <div class="separator-v">
-            <div class="margin-top-x6">
-                <app-button
-                        [variant]="'danger'"
-                        [disabled]="selectedWallet === null"
-                        [isLoading]="isDisconnecting"
-                        (onClick)="onDisconnect()">
-                    Disconnect
-                </app-button>
-            </div>
+            <app-button
+                    [variant]="'danger'"
+                    [disabled]="selectedWallet === null"
+                    [isLoading]="isDisconnecting"
+                    (onClick)="onDisconnect()">
+                Disconnect
+            </app-button>
 
             <div class="margin-top-x6">
                 <app-button [variant]="'secondary'" (onClick)="close.emit()">Close Dialog</app-button>

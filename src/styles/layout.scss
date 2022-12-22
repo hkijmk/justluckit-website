@@ -53,9 +53,9 @@
 }
 
 .separator-v {
+    border-top: vars.$app-separator;
     margin-top: vars.$spacing-x8;
     padding-top: vars.$spacing-x8;
-    border-top: 1px solid rgba(151, 151, 151, 0.24);
 }
 
 .flex-center {

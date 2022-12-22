@@ -1,0 +1,36 @@
+@use '../../../../../styles/abstracts/variables' as vars;
+@use '../../../../../styles/abstracts/placeholders/typography' as *;
+
+.accordion {
+    padding: vars.$spacing-x6 0;
+    border-bottom: vars.$app-separator;
+}
+
+.accordion__header {
+    display: flex;
+    justify-content: space-between;
+    gap: vars.$spacing-x4;
+    cursor: pointer;
+
+    .accordion__title {
+        @extend %font-size-2;
+    }
+
+    .accordion__expand-icon {
+        transform-origin: 50% 42%;
+        transition: transform 0.3s ease-in-out;
+
+        &.accordion__expand-icon--expanded {
+            transform: rotateZ(-180deg);
+        }
+    }
+}
+
+.accordion__content {
+    overflow-y: hidden;
+    transition: max-height 0.3s ease-in-out;
+
+    .accordion__content__size-capture {
+        padding-top: vars.$spacing-x6;
+    }
+}

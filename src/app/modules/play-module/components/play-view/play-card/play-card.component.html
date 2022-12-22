@@ -31,10 +31,7 @@
     <div class="separator-v play-card-total-price">
         <div class="play-card-total-price-title">Total Price</div>
         <div class="play-card-total-price-value">
-            <app-loading-indicator-icon
-                *ngIf="isLoadingTerms"
-                [size]="28"
-            ></app-loading-indicator-icon>
+            <app-loading-indicator-icon *ngIf="isLoadingTerms" [size]="28"></app-loading-indicator-icon>
             <span *ngIf="!isLoadingTerms">{{ terms?.totalPrice }} SOL</span>
         </div>
     </div>
@@ -42,10 +39,7 @@
     <div class="margin-top-x8 play-card-total-price">
         <div class="play-card-total-price-title">Deposit</div>
         <div class="play-card-total-price-value">
-            <app-loading-indicator-icon
-                *ngIf="isLoadingTerms"
-                [size]="28"
-            ></app-loading-indicator-icon>
+            <app-loading-indicator-icon *ngIf="isLoadingTerms" [size]="28"></app-loading-indicator-icon>
             <span *ngIf="!isLoadingTerms">{{ terms?.deposit }} SOL</span>
         </div>
     </div>
@@ -54,11 +48,9 @@
         <connect-wallet-button></connect-wallet-button>
 
         <app-button
-            [disabled]="
-                isLoadingTerms ||
-                selectedNumbers.length !== 6 ||
-                (isWalletConnected$ | async) !== true
-            "
+            [disabled]="isLoadingTerms ||
+                        selectedNumbers.length !== 6 ||
+                        (isWalletConnected$ | async) !== true"
             [variant]="'primary'"
             (onClick)="showConfirmPlayLotteryModal.emit()"
         >

@@ -14,6 +14,7 @@ import { ControlStageItemComponent } from './components/main/control-progress/co
 import { ControlStagesComponent } from './components/main/control-progress/control-stages/control-stages.component';
 import { ControlProgressComponent } from './components/main/control-progress/control-progress.component';
 import { LastDrawResultsComponent } from './components/main/last-draw-results/last-draw-results.component';
+import { FaqComponent } from './components/faq/faq.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
@@ -37,6 +38,7 @@ import { AppComponent } from './app.component';
         CouponItemComponent,
         WelcomeViewComponent,
         HowItWorksComponent,
+        FaqComponent,
     ],
     imports: [
         AppRoutingModule,
