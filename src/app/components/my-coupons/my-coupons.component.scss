@@ -7,3 +7,9 @@
         max-width: 768px;
     }
 }
+
+.my-coupons-list {
+    > *:not(:first-child) {
+        margin-top: vars.$spacing-x8;
+    }
+}

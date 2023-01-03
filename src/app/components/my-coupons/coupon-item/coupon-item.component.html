@@ -2,7 +2,7 @@
     <div class="coupon-item">
         <div>
             <h3 class="text-title-small">Coupon Code</h3>
-            <div class="margin-top-x3 coupon-code">{{ coupon.getSeed() }}</div>
+            <div class="margin-top-x3 coupon-code">{{ coupon.getEncodedSeed() }}</div>
         </div>
 
         <div class="margin-top-x8">
@@ -13,15 +13,17 @@
             </div>
         </div>
 
-        <div *ngIf="coupon.wins > 0" class="margin-top-x8">
-            <div class="margin-top-x8 text-info">
-                <p>
-                    Congratulations, you won!
-                </p>
+        <div class="separator-v">
+            <div *ngIf="coupon.wins > 2">
+                <app-button [isLoading]="isClaimingReward" [variant]="'primary'" (onClick)="claimReward()">Claim Reward</app-button>
             </div>
 
-            <div>
-                <app-button [variant]="'primary'">Claim Reward</app-button>
+            <div *ngIf="coupon.wins === 1">
+                <app-button [isLoading]="isReturningDeposit" [variant]="'secondary'" (onClick)="returnDeposit()">Return Deposit</app-button>
+            </div>
+
+            <div *ngIf="coupon.wins === 0">
+                <app-button [disabled]="true" [variant]="'primary'">Not Drawn Yet</app-button>
             </div>
         </div>
     </div>

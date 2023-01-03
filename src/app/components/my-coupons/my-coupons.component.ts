@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { decode } from '@faustbrian/node-base58';
+import { decode, encode } from '@faustbrian/node-base58';
 import { PublicKey } from '@solana/web3.js';
 import { deserialize } from 'borsh';
 import { Subscription } from 'rxjs';
@@ -15,6 +15,7 @@ import { LottoGameModel } from '../../models';
     styleUrls: ['./my-coupons.component.scss']
 })
 export class MyCouponsComponent implements OnInit, OnDestroy {
+    private _allCoupons?: LottoGameModel[];
     private _searchedCoupon?: LottoGameModel;
     private _walletPublicKeyChanged$?: Subscription;
     private _searchText: string = ''
@@ -26,6 +27,10 @@ export class MyCouponsComponent implements OnInit, OnDestroy {
 
     get isLoading(): boolean {
         return this._isLoading;
+    }
+
+    get allCoupons(): LottoGameModel[] | undefined {
+        return this._allCoupons;
     }
 
     get searchedCoupon(): LottoGameModel | undefined {
@@ -40,6 +45,7 @@ export class MyCouponsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this._getAllMyCoupons();
         this._setWalletPublicKeyChanged$();
     }
 
@@ -72,10 +78,38 @@ export class MyCouponsComponent implements OnInit, OnDestroy {
         this._isLoading = false;
     }
 
+
+    private async _getAllMyCoupons(): Promise<void> {
+        if (this.walletPublicKey === null) {
+            return;
+        }
+
+        this._isLoading = true;
+
+        const base = encode(this.walletPublicKey.toString());
+
+        const accounts = await this._blockChainService.connection.getProgramAccounts(
+            BLOCK_CHAIN_KEYS.programId,
+            {
+                filters: [
+                    { dataSize: 93 },
+                    { memcmp: { offset: 12, bytes: base } },
+                ],
+            }
+        );
+
+        this._allCoupons = accounts.map(accountItem => deserialize(LottoGameModel.getSchema(), LottoGameModel, accountItem.account!.data));
+        console.log(this._allCoupons);
+        this._isLoading = false;
+    }
+
     private _setWalletPublicKeyChanged$(): void {
         this._walletPublicKeyChanged$ = this._blockChainService.walletPublicKey$
             .subscribe(() => {
+                this._allCoupons = undefined;
                 this._searchedCoupon = undefined;
+
+                this._getAllMyCoupons();
             });
     }
 

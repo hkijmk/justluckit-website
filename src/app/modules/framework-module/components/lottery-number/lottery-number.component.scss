@@ -18,7 +18,9 @@
         box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.34);
     }
 
-    &:not(.selected):hover {
-        background: $app-yellow-green-radial-gradient-hover;
+    @media(hover: hover) {
+        &:not(.selected):hover {
+            background: $app-yellow-green-radial-gradient-hover;
+        }
     }
 }

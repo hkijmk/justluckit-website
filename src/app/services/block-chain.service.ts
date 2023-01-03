@@ -27,10 +27,6 @@ export class BlockChainService {
         return this._walletStore.connected$;
     }
 
-    get isWalletReady$(): Observable<Wallet | null> {
-        return this._walletStore.wallet$;
-    }
-
     get selectedWallet(): Wallet | null {
         return this._selectedWallet;
     }
