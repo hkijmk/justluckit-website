@@ -2,32 +2,10 @@
     <h2 class="text-title font-size-5 highlighted-gradient">FAQ</h2>
 
     <div class="margin-top-x8 faq__content">
-        <accordion>
-            <div header>World Lottery nasil tamamen merkeziyetsiz?</div>
-
+        <accordion *ngFor="let faqItem of FAQ">
+            <div header>{{ faqItem.question }}</div>
             <div content>
-                World Lottery'de butun bilgiler blockchain'e gonderiler ve blockain uzerinde saklanir. Bilgilerin saklanmasi icin herhangi bir veri tabani kullanilmaz. Bu sebeple bilgiler
-                silinemez ve degistirilemez.
-            </div>
-        </accordion>
-
-        <accordion>
-            <div header>World Lottery nasil tamamen merkeziyetsiz?</div>
-
-            <div content>
-                World Lottery'de butun bilgiler blockchain'e gonderiler ve blockain uzerinde saklanir. Bilgilerin saklanmasi icin herhangi bir veri tabani kullanilmaz. Bu sebeple bilgiler
-                silinemez ve degistirilemez. World Lottery'de butun bilgiler blockchain'e gonderiler ve blockain uzerinde saklanir. Bilgilerin saklanmasi icin herhangi bir veri tabani kullanilmaz. Bu
-                sebeple bilgiler silinemez ve degistirilemez. World Lottery'de butun bilgiler blockchain'e gonderiler ve blockain uzerinde saklanir. Bilgilerin saklanmasi icin herhangi bir veri tabani
-                kullanilmaz. Bu sebeple bilgiler silinemez ve degistirilemez.
-            </div>
-        </accordion>
-
-        <accordion>
-            <div header>World Lottery nasil tamamen merkeziyetsiz?</div>
-
-            <div content>
-                World Lottery'de butun bilgiler blockchain'e gonderiler ve blockain uzerinde saklanir. Bilgilerin saklanmasi icin herhangi bir veri tabani kullanilmaz. Bu sebeple bilgiler
-                silinemez ve degistirilemez.
+                <div *ngFor="let answer of faqItem.answers">{{ answer }}</div>
             </div>
         </accordion>
     </div>

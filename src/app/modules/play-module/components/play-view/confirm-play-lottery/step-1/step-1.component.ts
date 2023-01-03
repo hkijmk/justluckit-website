@@ -128,7 +128,7 @@ export class ConfirmPlayLotteryStep1Component {
                 numberOfSeries = subCounter.numberOfSeries;
                 counter = subCounter.counter;
 
-                if (counter >= 10) {
+                if (counter >= 1000) {
                     bumpGameWins = true;
                     numberOfSeries++;
                 }
@@ -190,7 +190,7 @@ export class ConfirmPlayLotteryStep1Component {
                 { isSigner: false, isWritable: true, pubkey: SystemProgram.programId },
             ];
 
-            if (counter !== undefined && counter < 10) {
+            if (counter !== undefined && counter < 1000) {
                 account2ProgramId = BLOCK_CHAIN_KEYS.programId;
                 lottoGameBuffer = Uint8Array.of(0, ...lottoGameEncoded);
                 keys.splice(5, 0, { isSigner: false, isWritable: true, pubkey: this._blockChainService.hostKey });
@@ -241,7 +241,7 @@ export class ConfirmPlayLotteryStep1Component {
         if (controllerNumberOfSeries === 0) {
             s6 = (1).toString();
         } else {
-            if (counter! < 10) {
+            if (counter! < 1000) {
                 s6 = (counter! + 1).toString();
             } else {
                 s6 = (1).toString();
