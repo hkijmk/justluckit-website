@@ -1,12 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { PublicKey, SystemProgram, Transaction, TransactionInstruction } from '@solana/web3.js';
+import { encode } from '@faustbrian/node-base58';
+import { AccountInfo, PublicKey, SystemProgram, Transaction, TransactionInstruction } from '@solana/web3.js';
 import { deserialize } from 'borsh';
+import { Buffer } from 'buffer';
 import { firstValueFrom } from 'rxjs';
 
 import { BlockChainService } from '../../../services/block-chain.service';
 
 import { BLOCK_CHAIN_KEYS } from '../../../constants';
-import { CalculatedDistributionModel, LottoGameModel } from '../../../models';
+import { LottoGameModel, NumberOfDistributorsModel } from '../../../models';
 
 @Component({
     selector: 'coupon-item',
@@ -16,7 +18,6 @@ import { CalculatedDistributionModel, LottoGameModel } from '../../../models';
 export class CouponItemComponent {
     @Input() coupon!: LottoGameModel;
 
-    private readonly _MIN_DISTRIBUTOR_LAMPORTS_FOR_CLAIM: number = 2000000;
     private _isClaimingReward: boolean = false;
     private _isReturningDeposit: boolean = false;
 
@@ -35,48 +36,29 @@ export class CouponItemComponent {
         this._isClaimingReward = true;
 
         const gameAddress = PublicKey.findProgramAddressSync([Buffer.from("L"), Buffer.from(this.coupon.getEncodedSeed())], BLOCK_CHAIN_KEYS.programId);
-        const calculatedDistributionAddress = PublicKey.findProgramAddressSync([Buffer.from("caldist"), Buffer.from(this.coupon.week.toString())], BLOCK_CHAIN_KEYS.programId);
-        const calculatedDistributionInfo = await this._blockChainService.connection.getAccountInfo(calculatedDistributionAddress[0]);
-        const calculatedDistributionData = deserialize(CalculatedDistributionModel.getSchema(), CalculatedDistributionModel, calculatedDistributionInfo!.data);
+        const distributionAddress = PublicKey.findProgramAddressSync([Buffer.from("dist"), Buffer.from(this.coupon.week.toString())], BLOCK_CHAIN_KEYS.programId);
+        let distributorPublicKey: PublicKey;
 
-        const distribution = await PublicKey.findProgramAddressSync([Buffer.from("dist"), Buffer.from(this.coupon.week.toString())], BLOCK_CHAIN_KEYS.programId);
-
-        let subDistributorNumber: number = 0;
-        let distributorCount: number = 0;
-        let lamports: number = 0;
-        let win: number = this.coupon.wins;
-        let subDistributorAddress: [PublicKey, number];
-
-        if (win == 3) {
-            distributorCount = calculatedDistributionData.createdThreeWinnerSubDistributorCount;
-        } else if (win == 4) {
-            distributorCount = calculatedDistributionData.createdFourWinnerSubDistributorCount;
-        } else if (win == 5) {
-            distributorCount = calculatedDistributionData.createdFiveWinnerSubDistributorCount;
-        } else if (win == 6) {
-            distributorCount = calculatedDistributionData.createdSixWinnerSubDistributorCount;
-        }
-
-        while (lamports <= this._MIN_DISTRIBUTOR_LAMPORTS_FOR_CLAIM) {
-            subDistributorNumber = Math.floor(Math.random() * distributorCount) + 1;
-
-            subDistributorAddress = PublicKey.findProgramAddressSync([
+        if (this.coupon.wins === 3 || this.coupon.wins === 4 || this.coupon.wins === 5) {
+            distributorPublicKey = await this._getDistributorPublicKey(this.coupon.week, this.coupon.wins)
+        } else if (this.coupon.wins === 6) {
+            distributorPublicKey = PublicKey.findProgramAddressSync([
                 Buffer.from(this.coupon.week.toString()),
                 Buffer.from("sd"),
-                Buffer.from(subDistributorNumber.toString()),
+                Buffer.from('1'),
                 Buffer.from("f"),
-                Buffer.from(win.toString()),
-            ], BLOCK_CHAIN_KEYS.programId);
-
-            const subDistributorAccount = await this._blockChainService.connection.getAccountInfo(subDistributorAddress[0])
-            lamports = subDistributorAccount?.lamports ?? lamports;
+                Buffer.from(this.coupon.wins.toString()),
+            ], BLOCK_CHAIN_KEYS.programId)[0];
+        } else {
+            this._isClaimingReward = false;
+            return;
         }
 
         const gameplay = new TransactionInstruction({
             programId: BLOCK_CHAIN_KEYS.programId,
             keys: [
-                { isSigner: false, isWritable: false, pubkey: distribution[0] },
-                { isSigner: false, isWritable: true, pubkey: subDistributorAddress![0] },
+                { isSigner: false, isWritable: false, pubkey: distributionAddress[0] },
+                { isSigner: false, isWritable: true, pubkey: distributorPublicKey },
                 { isSigner: false, isWritable: true, pubkey: this._blockChainService.walletPublicKey! },
                 { isSigner: false, isWritable: true, pubkey: gameAddress[0] },
             ],
@@ -85,7 +67,7 @@ export class CouponItemComponent {
 
         const transaction = new Transaction();
         transaction.add(gameplay);
-        this._sendTransaction(transaction);
+        await this._sendTransaction(transaction);
 
         this._isClaimingReward = false;
     }
@@ -107,7 +89,7 @@ export class CouponItemComponent {
 
         const transaction = new Transaction();
         transaction.add(transactionInstruction);
-        this._sendTransaction(transaction);
+        await this._sendTransaction(transaction);
 
         this._isReturningDeposit = false;
     }
@@ -123,5 +105,85 @@ export class CouponItemComponent {
             { signature, blockhash: hash.blockhash, lastValidBlockHeight: hash.lastValidBlockHeight },
             'singleGossip',
         );
+    }
+
+    private async _getDistributorPublicKey(weekToClaim: number, numberOfMatches: number): Promise<PublicKey> {
+        const usedNumberThreeDistributors: { [distributorNumber: number]: true } = {};
+
+        const distributorCount = PublicKey.findProgramAddressSync([
+            Buffer.from("nodist"),
+            Buffer.from(weekToClaim.toString()),
+            Buffer.from("f"),
+            Buffer.from(numberOfMatches.toString()),
+        ], BLOCK_CHAIN_KEYS.programId);
+
+        const info = await this._blockChainService.connection.getAccountInfo(distributorCount[0]);
+        const data = deserialize(NumberOfDistributorsModel.getSchema(), NumberOfDistributorsModel, info!.data);
+
+        let levelThreeDistributorNumber: number | null = this._getLevelThreeDistributorNumber(usedNumberThreeDistributors, data.currentLevelThreeNumber)!;
+        let levelTwoDistributorNumber = Math.floor(Math.random() * (levelThreeDistributorNumber !== 1 ? data.remainingLevelTwo : 255)) + 1; //number of level 2 accounts in the first level 3
+        let levelOneDistributorNumber = Math.floor(Math.random() * (levelTwoDistributorNumber !== 1 ? data.remainingLevelOne : 255)) + 1; //number of level 1 accounts in the first level 2
+
+        const s1 = "u".toString();
+        const s2 = numberOfMatches.toString();
+
+        const weekSeed = weekToClaim.toString().padEnd(6, 'w');
+        let levelThreeSeed = levelThreeDistributorNumber.toString().padEnd(4, 'l');
+        let levelTwoSeed = levelTwoDistributorNumber.toString().padEnd(4, 'v');
+        let levelOneSeed = levelOneDistributorNumber.toString().padEnd(4, 'c');
+
+        let seed = s1 + s2 + weekSeed + levelThreeSeed + levelTwoSeed + levelOneSeed;
+        let accounts = await this._getDistributorAccounts(seed)
+
+        while (accounts.length === 0) {
+            if (levelOneSeed.length > 0) {
+                const numberOfLettersToRemove = levelOneSeed.length === 4 ? 2 : 1;
+                levelOneSeed = levelOneSeed.slice(0, levelOneSeed.length - numberOfLettersToRemove)
+            } else if (levelTwoSeed.length > 0) {
+                const numberOfLettersToRemove = levelTwoSeed.length === 4 ? 2 : 1;
+                levelTwoSeed = levelTwoSeed.slice(0, levelTwoSeed.length - numberOfLettersToRemove)
+            } else {
+                levelThreeDistributorNumber = this._getLevelThreeDistributorNumber(usedNumberThreeDistributors, data.currentLevelThreeNumber)
+                if (levelThreeDistributorNumber == null) {
+                    throw new Error('All distributors are used.')
+                }
+
+                levelThreeSeed = levelThreeDistributorNumber.toString().padEnd(4, 'l');
+            }
+
+            seed = s1 + s2 + weekSeed + levelThreeSeed + levelTwoSeed + levelOneSeed;
+            accounts = await this._getDistributorAccounts(seed)
+        }
+
+        return accounts[0].pubkey;
+    }
+
+    private async _getDistributorAccounts(seed: string): Promise<Array<{ pubkey: PublicKey; account: AccountInfo<Buffer> }>> {
+        const base = encode(seed);
+
+        return await this._blockChainService.connection.getProgramAccounts(
+            BLOCK_CHAIN_KEYS.programId,
+            {
+                filters: [
+                    { dataSize: 39 },
+                    { memcmp: { offset: 4, bytes: base } },
+                ],
+            }
+        );
+    }
+
+    private _getLevelThreeDistributorNumber(usedNumberThreeDistributors: { [distributorNumber: number]: true }, currentLevelThreeNumber: number): number | null {
+        const numberOfUsedThreeDistributors = Object.keys(usedNumberThreeDistributors).length;
+        if (numberOfUsedThreeDistributors >= currentLevelThreeNumber) {
+            return null;
+        }
+
+        const numberThreeDistributor = Math.floor(Math.random() * currentLevelThreeNumber) + 1;
+        if (usedNumberThreeDistributors[numberThreeDistributor]) {
+            return this._getLevelThreeDistributorNumber(usedNumberThreeDistributors, currentLevelThreeNumber);
+        }
+
+        usedNumberThreeDistributors[numberThreeDistributor] = true;
+        return numberThreeDistributor;
     }
 }

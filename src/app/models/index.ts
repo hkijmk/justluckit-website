@@ -1,6 +1,6 @@
-export * from './calculated-distribution.model';
 export * from './lotto-game.model';
 export * from './main-counter.model';
+export * from './number-of-distributors.model';
 export * from './record.model';
 
 export * from './main-screen-info-models/director.model';

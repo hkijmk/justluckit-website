@@ -29,7 +29,7 @@
     "@nguniversal/express-engine": "^14.2.0",
     "@solana/wallet-adapter-base": "^0.9.16",
     "@solana/wallet-adapter-wallets": "^0.18.9",
-    "@solana/web3.js": "^1.70.0",
+    "@solana/web3.js": "^1.73.0",
     "better-sqlite3": "^7.6.2",
     "bn": "^1.0.5",
     "borsh": "^0.7.0",
