@@ -81,6 +81,7 @@ export class CouponItemComponent {
 
         const transaction = new Transaction();
         transaction.add(gameplay);
+        transaction.feePayer = this._blockChainService.walletPublicKey!;
 
         try {
             await this._sendTransaction(transaction);
@@ -98,7 +99,6 @@ export class CouponItemComponent {
 
         const gameAddress = PublicKey.findProgramAddressSync([Buffer.from("L"), Buffer.from(this.coupon.getSeed())], BLOCK_CHAIN_KEYS.programId);
 
-        console.log(gameAddress.toString())
         const transactionInstruction = new TransactionInstruction({
             programId: BLOCK_CHAIN_KEYS.programId,
             keys: [
@@ -112,6 +112,7 @@ export class CouponItemComponent {
         const transaction = new Transaction();
         transaction.add(transactionInstruction);
         transaction.feePayer = this._blockChainService.walletPublicKey!;
+
         try {
             await this._sendTransaction(transaction);
 
