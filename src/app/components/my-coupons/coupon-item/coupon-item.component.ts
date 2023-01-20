@@ -33,13 +33,13 @@ export class CouponItemComponent {
     }
 
     get hasWinner(): boolean {
-        const mainScreenInfo = this._appStateService.mainScreenInfo;
-        if (!mainScreenInfo) {
+        if (!this._appStateService.mainScreenInfo) {
             return false;
         }
 
-        return mainScreenInfo.weekNumber >= this.coupon.weekNumber + 2
-            || (mainScreenInfo.weekNumber === this.coupon.weekNumber + 1 && mainScreenInfo.director.stage === 4);
+        return this._appStateService.record.weekNumber >= this.coupon.weekNumber + 2
+            || (this._appStateService.record.weekNumber === this.coupon.weekNumber + 1
+                && this._appStateService.mainScreenInfo.director.stage === 4);
     }
 
     constructor(private _appStateService: AppStateService,
