@@ -13,18 +13,34 @@
             </div>
         </div>
 
+        <div *ngIf="hasWinner" class="margin-top-x8">
+            <h3 class="text-title-small">Matches</h3>
+            <div class="margin-top-x3 coupon-code">{{ coupon.wins }}</div>
+        </div>
+
+        <div class="margin-top-x8">
+            <h3 class="text-title-small">Drawing Number</h3>
+            <div class="margin-top-x3 coupon-code">{{ coupon.weekNumber }}</div>
+        </div>
+
         <div class="separator-v">
-            <div *ngIf="coupon.wins > 2">
-                <app-button [isLoading]="isClaimingReward" [variant]="'primary'" (onClick)="claimReward()">Claim Reward</app-button>
-            </div>
+            <ng-container *ngIf="coupon.wins > 2">
+                <div *ngIf="hasWinner else notDrawnDisplay">
+                    <app-button [isLoading]="isClaimingReward" [variant]="'primary'" (onClick)="claimReward()">Claim Reward</app-button>
+                </div>
+            </ng-container>
 
             <div *ngIf="coupon.wins === 1">
                 <app-button [isLoading]="isReturningDeposit" [variant]="'secondary'" (onClick)="returnDeposit()">Return Deposit</app-button>
             </div>
 
             <div *ngIf="coupon.wins === 0">
-                <app-button [disabled]="true" [variant]="'primary'">Not Drawn Yet</app-button>
+                <ng-container *ngTemplateOutlet="notDrawnDisplay"></ng-container>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #notDrawnDisplay>
+    <app-button [disabled]="true" [variant]="'primary'">Not Drawn Yet</app-button>
+</ng-template>

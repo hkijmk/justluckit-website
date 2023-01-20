@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class ControlStagesComponent {
     @Input() currentStageNumber!: number;
 
-    stageNumbersList = [1, 2, 3, 4];
+    stageNumbersList = [1, 2, 3];
 
     constructor() {
     }

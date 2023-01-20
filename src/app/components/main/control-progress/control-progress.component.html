@@ -1,10 +1,19 @@
 <div class="container">
-    <h2 class="text-title font-size-5 highlighted-gradient">Control Progress</h2>
+    <div *ngIf="!isDrawing">
+        <h2 class="text-title font-size-5 highlighted-gradient">Time Until The Draw</h2>
+
+        <div class="margin-top-x6">
+            <time-remaining [date]="drawDate"></time-remaining>
+        </div>
+    </div>
+
+    <h2 class="text-title font-size-5 highlighted-gradient"
+        [class.separator-v]="!isDrawing">
+        Control Progress
+    </h2>
 
     <div class="margin-top-x8 text-info">
-        <p>
-            This part shows you where the butterfly is right now. These 4 steps are the controlling checkpoints. This gives you an estimation of how much time left to announce the winners.
-        </p>
+        <p>This part shows you where the butterfly is right now. These 4 steps are the controlling checkpoints. This gives you an estimation of how much time left to announce the winners.</p>
     </div>
 
     <div *ngIf="director" class="margin-top-x14">
@@ -13,25 +22,22 @@
         <div class="margin-top-x8">
             <control-stages [currentStageNumber]="director.currentStage"></control-stages>
         </div>
+
+        <div *ngIf="director.currentStage === 4" class="margin-top-x12 text-title highlighted">READY TO CLAIM!</div>
     </div>
+
+    <!--    <div class="margin-top-x12">-->
+    <!--        <h3 class="text-title-small">Date of The Draw</h3>-->
+    <!--        <div class="margin-top-x6 text-title highlighted">{{ drawDate | date:'medium' }}</div>-->
+    <!--    </div>-->
 
     <div class="margin-top-x12">
-        <h3 class="text-title-small">Date of The Draw</h3>
-        <div class="margin-top-x6 text-title highlighted">{{ drawDate | date:'medium' }}</div>
-    </div>
-
-    <div *ngIf="!isDrawing" class="margin-top-x19">
-        <h3 class="text-title-small">Time Until The Draw</h3>
-
-        <div class="margin-top-x6">
-            <time-remaining [date]="drawDate"></time-remaining>
-        </div>
+        <h3 class="text-title-small">Drawing Week</h3>
+        <div class="margin-top-x6 text-title highlighted">{{ drawWeekNumber }}</div>
     </div>
 
     <div class="margin-top-x8 text-info-small">
-        <p>
-            *The time shown above is an estimation and it will be updated periodically. The exact time might differ depending on the system load.
-        </p>
+        <p>*Coupon controls and winner calculations take up to a few hours depending on the system load.</p>
     </div>
 </div>
 

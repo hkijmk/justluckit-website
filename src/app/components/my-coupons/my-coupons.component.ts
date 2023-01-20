@@ -78,6 +78,21 @@ export class MyCouponsComponent implements OnInit, OnDestroy {
         this._isLoading = false;
     }
 
+    removeCouponFromList(couponSeed: string): void {
+        this._searchedCoupon = undefined;
+
+        if (!this._allCoupons) {
+            return;
+        }
+
+        const couponIndex = this._allCoupons?.findIndex((coupon) => coupon.getSeed() === couponSeed);
+        if (couponIndex === -1) {
+            return;
+        }
+
+        this._allCoupons.splice(couponIndex, 1);
+        this._allCoupons = [...this._allCoupons]
+    }
 
     private async _getAllMyCoupons(): Promise<void> {
         if (this.walletPublicKey === null) {
@@ -99,7 +114,6 @@ export class MyCouponsComponent implements OnInit, OnDestroy {
         );
 
         this._allCoupons = accounts.map(accountItem => deserialize(LottoGameModel.getSchema(), LottoGameModel, accountItem.account!.data));
-        console.log(this._allCoupons);
         this._isLoading = false;
     }
 

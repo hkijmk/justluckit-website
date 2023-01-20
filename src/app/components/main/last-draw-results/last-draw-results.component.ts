@@ -14,6 +14,10 @@ export class LastDrawResultsComponent {
         return this._appStateService.mainScreenInfo?.lastDrawResults;
     }
 
+    get drawWeekNumber(): number | undefined {
+        return this._appStateService.mainScreenInfo?.weekNumber;
+    }
+
     constructor(private _appStateService: AppStateService) {
     }
 }

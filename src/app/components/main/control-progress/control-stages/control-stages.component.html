@@ -1,6 +1,6 @@
 <div class="flex-center">
     <ng-container *ngFor="let stageNumber of stageNumbersList">
         <control-stage-item [currentStageNumber]="currentStageNumber" [stageNumber]="stageNumber"></control-stage-item>
-        <div *ngIf="stageNumber !== 4" class="control-stage-separator" [class.disabled]="currentStageNumber <= stageNumber"></div>
+        <div *ngIf="stageNumber !== 3" class="control-stage-separator" [class.disabled]="currentStageNumber <= stageNumber"></div>
     </ng-container>
 </div>

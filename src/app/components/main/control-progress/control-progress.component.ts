@@ -22,6 +22,10 @@ export class ControlProgressComponent {
         return new Date().getTime() > this.drawDate.getTime();
     }
 
+    get drawWeekNumber(): number | undefined {
+        return this._appStateService.mainScreenInfo?.weekNumber;
+    }
+
     constructor(private _appStateService: AppStateService) {
     }
 }

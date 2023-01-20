@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { encode } from '@faustbrian/node-base58';
 import { AccountInfo, PublicKey, SystemProgram, Transaction, TransactionInstruction } from '@solana/web3.js';
 import { deserialize } from 'borsh';
 import { Buffer } from 'buffer';
 import { firstValueFrom } from 'rxjs';
 
+import { AppStateService } from '../../../services/app-state.service';
 import { BlockChainService } from '../../../services/block-chain.service';
 
 import { BLOCK_CHAIN_KEYS } from '../../../constants';
@@ -18,6 +19,8 @@ import { LottoGameModel, NumberOfDistributorsModel } from '../../../models';
 export class CouponItemComponent {
     @Input() coupon!: LottoGameModel;
 
+    @Output() removeFromList = new EventEmitter<string>();
+
     private _isClaimingReward: boolean = false;
     private _isReturningDeposit: boolean = false;
 
@@ -29,21 +32,32 @@ export class CouponItemComponent {
         return this._isReturningDeposit;
     }
 
-    constructor(private _blockChainService: BlockChainService) {
+    get hasWinner(): boolean {
+        const mainScreenInfo = this._appStateService.mainScreenInfo;
+        if (!mainScreenInfo) {
+            return false;
+        }
+
+        return mainScreenInfo.weekNumber >= this.coupon.weekNumber + 2
+            || (mainScreenInfo.weekNumber === this.coupon.weekNumber + 1 && mainScreenInfo.director.stage === 4);
+    }
+
+    constructor(private _appStateService: AppStateService,
+                private _blockChainService: BlockChainService) {
     }
 
     async claimReward(): Promise<void> {
         this._isClaimingReward = true;
 
         const gameAddress = PublicKey.findProgramAddressSync([Buffer.from("L"), Buffer.from(this.coupon.getEncodedSeed())], BLOCK_CHAIN_KEYS.programId);
-        const distributionAddress = PublicKey.findProgramAddressSync([Buffer.from("dist"), Buffer.from(this.coupon.week.toString())], BLOCK_CHAIN_KEYS.programId);
+        const distributionAddress = PublicKey.findProgramAddressSync([Buffer.from("dist"), Buffer.from(this.coupon.weekNumber.toString())], BLOCK_CHAIN_KEYS.programId);
         let distributorPublicKey: PublicKey;
 
         if (this.coupon.wins === 3 || this.coupon.wins === 4 || this.coupon.wins === 5) {
-            distributorPublicKey = await this._getDistributorPublicKey(this.coupon.week, this.coupon.wins)
+            distributorPublicKey = await this._getDistributorPublicKey(this.coupon.weekNumber, this.coupon.wins)
         } else if (this.coupon.wins === 6) {
             distributorPublicKey = PublicKey.findProgramAddressSync([
-                Buffer.from(this.coupon.week.toString()),
+                Buffer.from(this.coupon.weekNumber.toString()),
                 Buffer.from("sd"),
                 Buffer.from('1'),
                 Buffer.from("f"),
@@ -67,7 +81,14 @@ export class CouponItemComponent {
 
         const transaction = new Transaction();
         transaction.add(gameplay);
-        await this._sendTransaction(transaction);
+
+        try {
+            await this._sendTransaction(transaction);
+            alert('Your reward has been successfully transferred to your wallet.')
+            this.removeFromList.emit(this.coupon.getSeed());
+        } catch (e) {
+            alert(e);
+        }
 
         this._isClaimingReward = false;
     }
@@ -75,8 +96,9 @@ export class CouponItemComponent {
     async returnDeposit(): Promise<void> {
         this._isReturningDeposit = true;
 
-        const gameAddress = PublicKey.findProgramAddressSync([Buffer.from("L"), Buffer.from(this.coupon.getEncodedSeed())], BLOCK_CHAIN_KEYS.programId);
+        const gameAddress = PublicKey.findProgramAddressSync([Buffer.from("L"), Buffer.from(this.coupon.getSeed())], BLOCK_CHAIN_KEYS.programId);
 
+        console.log(gameAddress.toString())
         const transactionInstruction = new TransactionInstruction({
             programId: BLOCK_CHAIN_KEYS.programId,
             keys: [
@@ -89,7 +111,15 @@ export class CouponItemComponent {
 
         const transaction = new Transaction();
         transaction.add(transactionInstruction);
-        await this._sendTransaction(transaction);
+        transaction.feePayer = this._blockChainService.walletPublicKey!;
+        try {
+            await this._sendTransaction(transaction);
+
+            alert('Your deposit has been returned to your wallet.')
+            this.removeFromList.emit(this.coupon.getSeed());
+        } catch (e) {
+            alert(e)
+        }
 
         this._isReturningDeposit = false;
     }

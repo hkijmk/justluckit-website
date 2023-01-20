@@ -3,7 +3,7 @@ import { encode } from '@faustbrian/node-base58';
 import { BlockChainSchemaType } from '../types';
 
 export class LottoGameModel implements ILottoGameModel {
-    week: number;
+    weekNumber: number;
     number1: number;
     number2: number;
     number3: number;
@@ -23,7 +23,7 @@ export class LottoGameModel implements ILottoGameModel {
     winno: string;
 
     constructor(obj?: ILottoGameModel) {
-        this.week = obj?.week ?? 0;
+        this.weekNumber = obj?.weekNumber ?? 0;
         this.number1 = obj?.number1 ?? 0;
         this.number2 = obj?.number2 ?? 0;
         this.number3 = obj?.number3 ?? 0;
@@ -50,7 +50,7 @@ export class LottoGameModel implements ILottoGameModel {
                 {
                     kind: "struct",
                     fields: [
-                        ["week", "u16"],
+                        ["weekNumber", "u16"],
                         ["number1", "u8"],
                         ["number2", "u8"],
                         ["number3", "u8"],
@@ -80,7 +80,7 @@ export class LottoGameModel implements ILottoGameModel {
 
     getSeed(): string {
         const sp1 = 'w';
-        const s1 = this.week.toString();
+        const s1 = this.weekNumber.toString();
         const sp2 = "m";
         const s2 = this.mc.toString();
         const sp3 = "md";
@@ -101,7 +101,7 @@ export class LottoGameModel implements ILottoGameModel {
 }
 
 export interface ILottoGameModel {
-    week: number;
+    weekNumber: number;
     number1: number;
     number2: number;
     number3: number;

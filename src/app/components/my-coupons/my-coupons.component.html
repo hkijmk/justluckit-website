@@ -27,7 +27,7 @@
 
             <div *ngIf="allCoupons && !searchText" class="margin-top-x12 my-coupons-list">
                 <div *ngFor="let coupon of allCoupons">
-                    <coupon-item [coupon]="coupon"></coupon-item>
+                    <coupon-item [coupon]="coupon" (removeFromList)="removeCouponFromList($event)"></coupon-item>
                 </div>
             </div>
         </ng-container>
