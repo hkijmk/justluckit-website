@@ -49,7 +49,7 @@ export class CouponItemComponent {
     async claimReward(): Promise<void> {
         this._isClaimingReward = true;
 
-        const gameAddress = PublicKey.findProgramAddressSync([Buffer.from("L"), Buffer.from(this.coupon.getEncodedSeed())], BLOCK_CHAIN_KEYS.programId);
+        const gameAddress = PublicKey.findProgramAddressSync([Buffer.from("L"), Buffer.from(this.coupon.getSeed())], BLOCK_CHAIN_KEYS.programId);
         const distributionAddress = PublicKey.findProgramAddressSync([Buffer.from("dist"), Buffer.from(this.coupon.weekNumber.toString())], BLOCK_CHAIN_KEYS.programId);
         let distributorPublicKey: PublicKey;
 
