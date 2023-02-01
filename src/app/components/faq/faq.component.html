@@ -2,10 +2,120 @@
     <h2 class="text-title font-size-5 highlighted-gradient">FAQ</h2>
 
     <div class="margin-top-x8 faq__content">
-        <accordion *ngFor="let faqItem of FAQ">
-            <div header>{{ faqItem.question }}</div>
+        <accordion>
+            <div header>What is Butterfly Lottery?</div>
+
             <div content>
-                <div *ngFor="let answer of faqItem.answers">{{ answer }}</div>
+                Butterfly Lottery is a decentralized lottery on Solana Blockchain. Playing the lottery, drawings and distribution of the rewards are carried out on the blockchain. That means no
+                centralized authority can interfere or manipulate the process. You can learn more about butterfly lottery <a href="https://butterflylottery.github.io" target="_blank">here</a>.
+            </div>
+        </accordion>
+
+        <accordion>
+            <div header>Why Butterfly?</div>
+
+            <div content>
+                It refers to the butterfly effect in chaos theory. Because each player has significant effect on lucky numbers. For detailed information,
+                <a href="https://butterflylottery.github.io" target="_blank">click here</a>.
+            </div>
+        </accordion>
+
+        <accordion>
+            <div header>How can I play on mobile devices?</div>
+
+            <div content>
+                You need to download a wallet application from your store. Our website supports and recommends the "Phantom" and "Solflare" wallets. Navigate to your wallet application's browser
+                (usually by tapping on the globe icon at right bottom corner of the app). Then type our website address "www.justluckit.com" and confirm the connection request. Navigate to the "Play"
+                screen by tapping the "Play" button. On the "Play" screen, choose six numbers and tap the "Play" button. Your wallet may require you to confirm the transaction again. If transaction is
+                successfully sent to the blockchain you will see a window with coupon code. We recommend to save the coupon code.
+            </div>
+        </accordion>
+
+        <accordion>
+            <div header>How can I play on PC?</div>
+
+            <div content>
+                Download a wallet application to your browser. Our website supports and recommends the "Phantom" and "Solflare" wallets. Navigate to the "Play" screen by tapping the "Play" button. Use
+                the "Connect Your Wallet" button to select your preferred wallet. Choose six numbers and tap the "Play" button. Your wallet may require you to confirm the transaction again. If
+                transaction is successfully sent to the blockchain you will see a window with coupon code. We recommend to save the coupon code.
+            </div>
+        </accordion>
+
+        <accordion>
+            <div header>How can I see my coupons?</div>
+
+            <div content>
+                Go to <a [routerLink]="'/my-coupons'">"My Coupons"</a> section. If your wallet is not connected yet, you can connect using the "Connect Your Wallet" button. Once the wallet is
+                connected, the page automatically loads a list of all your coupons. You can also search a specific coupon by using the coupon code provided when you play the lottery. Once you claim
+                your reward or return the deposit, the coupon will no longer be listed.
+            </div>
+        </accordion>
+
+        <accordion>
+            <div header>How can I claim my reward or return my deposit?</div>
+
+            <div content>
+                You can claim your rewards on the <a [routerLink]="'/my-coupons'">"My Coupons"</a> section. After the draw for a coupon is finalized, a button to claim your reward or to return your
+                deposit will be visible. You can view the control stages on the <a [routerLink]="'/'">"Home Page"</a>. When you claim a reward, your deposit will also be included in the returned
+                amount to your wallet.
+            </div>
+        </accordion>
+
+        <accordion>
+            <div header>When is the Drawing?</div>
+
+            <div content>
+                There is a countdown on the <a [routerLink]="'/'">"Home Page"</a>. Drawing is finalized when the countdown reaches zero. At this moment, the Drawing is made for every seven days.
+            </div>
+        </accordion>
+
+        <accordion>
+            <div header>How long does it take for the Control Stage to be finalized?</div>
+
+            <div content>Control stage takes about a few hours. Depending on the number of coupons, it can take up to a day.</div>
+        </accordion>
+
+        <accordion>
+            <div header>Why is there a Control Process?</div>
+
+            <div content>
+                Since all the data is stored and processed on the blockchain, the data process can take time. Each coupon is sent to Smart Contract one by one by the controllers.
+                For detailed information, <a href="https://butterflylottery.github.io" target="_blank">click here</a>.
+            </div>
+        </accordion>
+
+        <accordion>
+            <div header>Who are the Controllers?</div>
+
+            <div content>
+                Controllers are individuals who take part in running the Butterfly Lottery smart contract. Anybody can be a controller without permission or registry. For detailed information,
+                <a href="https://butterflylottery.github.io" target="_blank">click here</a>.
+            </div>
+        </accordion>
+
+        <accordion>
+            <div header>In which cryptocurrency can I play the lottery?</div>
+
+            <div content>
+                At this moment, you can play Butterfly Lottery with Solana Blockchain's native cryptocurrency "SOL". Your rewards are also deposited to your wallet in "SOL".
+            </div>
+        </accordion>
+
+        <accordion>
+            <div header>Why do I pay deposit?</div>
+
+            <div content>
+                To store data on Solana Blockchain, we need to create accounts. Accounts can store data and they need to have "Lamports" depending on the data size. Once you transfer "Lamports" to
+                your wallet (return deposit), the account which store the data is deleted.
+            </div>
+        </accordion>
+
+        <accordion>
+            <div header>Is Butterfly Lottery reliable?</div>
+
+            <div content>
+                Butterfly Lottery results are completely transparent. You can confirm this anytime on the Blockchain. For detailed information,
+                <a href="https://butterflylottery.github.io" target="_blank">click here</a>.
             </div>
         </accordion>
     </div>
