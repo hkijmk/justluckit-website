@@ -67,7 +67,7 @@ export class ConfirmPlayLotteryStep1Component {
         const controllerNumber = Math.floor(Math.random() * record.subCount) + 1;
         const controllerAddress = PublicKey.findProgramAddressSync(
             [
-                Buffer.from("sctrl"), Buffer.from([record.mainCount]),
+                Buffer.from("sreg"), Buffer.from([record.mainCount]),
                 Buffer.from("m"), Buffer.from([midCountNumber]),
                 Buffer.from("md"), Buffer.from([controllerNumber]),
             ],

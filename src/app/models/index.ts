@@ -1,5 +1,4 @@
 export * from './lotto-game.model';
-export * from './main-counter.model';
 export * from './number-of-distributors.model';
 export * from './record.model';
 
