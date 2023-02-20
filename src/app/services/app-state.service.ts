@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { MainScreenInfoModel, RecordModel } from '../models';
+import { MainScreenInfoModel, RecordModel, PoolInfo } from '../models';
 
 @Injectable()
 export class AppStateService {
     private _record?: RecordModel;
     private _mainScreenInfo?: MainScreenInfoModel;
+    private _poolInfo?: PoolInfo;
 
     get record(): RecordModel {
         return this._record!;
@@ -14,6 +15,10 @@ export class AppStateService {
     set record(value: RecordModel | undefined) {
         this._mainScreenInfo = undefined;
         this._record = value;
+    }
+
+    get poolInfo(): PoolInfo | undefined {
+        return this._poolInfo;
     }
 
     get mainScreenInfo(): MainScreenInfoModel | undefined {
@@ -25,5 +30,9 @@ export class AppStateService {
 
     initMainScreenInfo(value: MainScreenInfoModel): void {
         this._mainScreenInfo = value;
+    }
+
+    initPoolInfo(value: PoolInfo): void {
+        this._poolInfo = value;
     }
 }

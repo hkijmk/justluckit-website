@@ -6,7 +6,7 @@ import { AppStateService } from './services/app-state.service';
 import { BlockChainService } from './services/block-chain.service';
 
 import { BLOCK_CHAIN_KEYS } from './constants';
-import { MainScreenInfoModel, RecordModel } from './models';
+import { MainScreenInfoModel, RecordModel, PoolInfo } from './models';
 
 @Component({
     selector: 'app-root',
@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
         await this._blockChainService.setConnection();
         await this._initRecord();
         await this._getInfo();
+        await this._getPoolInfo();
 
         this._isLoading = false;
     }
@@ -54,5 +55,15 @@ export class AppComponent implements OnInit {
 
         const mainScreenInfo = deserialize(MainScreenInfoModel.getSchema(), MainScreenInfoModel, mainScreenInfoBuffer!.data);
         this._appStateService.initMainScreenInfo(mainScreenInfo);
+    }
+
+    private async _getPoolInfo(): Promise<void> {
+        const poolBuffer = await this._blockChainService.connection.getAccountInfo(BLOCK_CHAIN_KEYS.pool);
+        if (!poolBuffer) {
+            return;
+        }
+
+        const poolInfo = deserialize(PoolInfo.getSchema(), PoolInfo, poolBuffer.data);
+        this._appStateService.initPoolInfo(poolInfo);
     }
 }

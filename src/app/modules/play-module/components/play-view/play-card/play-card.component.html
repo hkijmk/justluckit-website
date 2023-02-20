@@ -32,7 +32,7 @@
         <div class="play-card-total-price-title">Total Price</div>
         <div class="play-card-total-price-value">
             <app-loading-indicator-icon *ngIf="isLoadingTerms" [size]="28"></app-loading-indicator-icon>
-            <span *ngIf="!isLoadingTerms">{{ terms?.totalPrice }} SOL</span>
+            <span *ngIf="!isLoadingTerms">{{ totalPrice }} SOL / ~${{ totalPriceInUsd }}</span>
         </div>
     </div>
 
@@ -40,7 +40,7 @@
         <div class="play-card-total-price-title">Deposit</div>
         <div class="play-card-total-price-value">
             <app-loading-indicator-icon *ngIf="isLoadingTerms" [size]="28"></app-loading-indicator-icon>
-            <span *ngIf="!isLoadingTerms">{{ terms?.deposit }} SOL</span>
+            <span *ngIf="!isLoadingTerms">{{ totalDeposit }} SOL / ~${{ totalDepositInUsd }}</span>
         </div>
     </div>
 

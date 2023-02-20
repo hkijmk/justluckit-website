@@ -26,10 +26,6 @@ export class PlayCardComponent implements OnInit {
         return this._playService.selectedNumbers;
     }
 
-    get terms(): TermsModel | undefined {
-        return this._playService.terms;
-    }
-
     get record(): RecordModel {
         return this._appStateService.record;
     }
@@ -40,6 +36,38 @@ export class PlayCardComponent implements OnInit {
 
     get isLoadingTerms(): boolean {
         return this._isLoadingTerms;
+    }
+
+    get totalDeposit(): number {
+        if (!this._playService.terms) {
+            return 0;
+        }
+
+        return this._playService.terms.deposit;
+    }
+
+    get totalDepositInUsd(): string {
+        if (!this._playService.terms || !this._appStateService.poolInfo) {
+            return '0';
+        }
+
+        return (this._playService.terms.deposit * this._appStateService.poolInfo.solToUsd).toFixed(2);
+    }
+
+    get totalPrice(): number {
+        if (!this._playService.terms) {
+            return 0;
+        }
+
+        return this._playService.terms.totalPrice;
+    }
+
+    get totalPriceInUsd(): string {
+        if (!this._playService.terms || !this._appStateService.poolInfo) {
+            return '0';
+        }
+
+        return (this._playService.terms.totalPrice * this._appStateService.poolInfo.solToUsd).toFixed(2);
     }
 
     constructor(private _appStateService: AppStateService,

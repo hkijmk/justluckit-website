@@ -21,7 +21,6 @@
     text-align: center;
     text-transform: uppercase;
     letter-spacing: vars.$letter-spacing-default;
-    text-transform: uppercase;
 }
 
 .play-card-number-selection-container {
@@ -53,9 +52,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 25px;
+    font-size: 21px;
     line-height: 36px;
     color: vars.$app-text-color-standard;
+
+    @include mxns.md {
+        font-size: 25px;
+    }
 }
 
 .play-card-actions {

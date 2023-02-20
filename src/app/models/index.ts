@@ -1,5 +1,6 @@
 export * from './lotto-game.model';
 export * from './number-of-distributors.model';
+export * from './pool-info.model';
 export * from './record.model';
 
 export * from './main-screen-info-models/director.model';

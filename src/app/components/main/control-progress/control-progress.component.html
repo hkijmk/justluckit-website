@@ -7,8 +7,15 @@
         </div>
     </div>
 
-    <h2 class="text-title font-size-5 highlighted-gradient"
-        [class.separator-v]="!isDrawing">
+    <div *ngIf="poolInfo" [class.separator-v]="!isDrawing">
+        <h2 class="text-title font-size-5 highlighted-gradient">Total SOL in Pool</h2>
+
+        <div class="margin-top-x6">
+            <div class="margin-top-x6 text-title highlighted">{{ poolInfo.totalSolInPool }} SOL / ${{ poolInfo.totalSolInPool * poolInfo.solToUsd }}</div>
+        </div>
+    </div>
+
+    <h2 class="separator-v text-title font-size-5 highlighted-gradient">
         Control Progress
     </h2>
 

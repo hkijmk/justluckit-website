@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { AppStateService } from '../../../services/app-state.service';
 
-import { DirectorModel } from '../../../models';
+import { DirectorModel, PoolInfo } from '../../../models';
 
 @Component({
     selector: 'control-progress',
@@ -24,6 +24,10 @@ export class ControlProgressComponent {
 
     get drawWeekNumber(): number | undefined {
         return this._appStateService.mainScreenInfo?.weekNumber;
+    }
+
+    get poolInfo(): PoolInfo | undefined {
+        return this._appStateService.poolInfo;
     }
 
     constructor(private _appStateService: AppStateService) {
