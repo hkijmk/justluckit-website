@@ -42,7 +42,7 @@ export class LastDrawResultsComponent implements OnInit, OnDestroy {
 
     private _setOnDrawingNumberChangeListener() {
         this._drawingNumberChangedListener = this._drawingNumberChanged$
-            .pipe(debounceTime(1000))
+            .pipe(debounceTime(300))
             .subscribe(async (drawingNumber: number) => {
                 let drawResults = this._appStateService.getDrawResultPerWeek(drawingNumber);
                 if (!drawResults) {
