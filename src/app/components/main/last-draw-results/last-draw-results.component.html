@@ -15,7 +15,7 @@
                     <div class="last-draw-results__drawing-number-input">
                         <app-input [placeholder]="'Please enter a week number'"
                                    [type]="'number'"
-                                   [min]="0"
+                                   [min]="1"
                                    [value]="drawWeekNumber.toString()"
                                    [max]="maxDrawWeekNumber"
                                    (onChange)="onDrawingNumberChange($event)">
