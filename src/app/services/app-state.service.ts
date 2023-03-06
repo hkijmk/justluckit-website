@@ -55,7 +55,7 @@ export class AppStateService {
 
 
         const mainScreenInfo = deserialize(MainScreenInfoModel.getSchema(), MainScreenInfoModel, mainScreenInfoBuffer!.data);
-        this._drawResultsPerWeekNumber[weekNumber] = mainScreenInfo.lastDrawResults;
+        this._drawResultsPerWeekNumber[weekNumber - 1] = mainScreenInfo.lastDrawResults;
 
         return mainScreenInfo;
     }
