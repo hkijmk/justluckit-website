@@ -1,0 +1,11 @@
+<div class="search-input-container"
+     [class.disabled]="disabled">
+    <input [placeholder]="placeholder"
+           [value]="text"
+           [type]="type"
+           [min]="min"
+           [max]="max"
+           (input)="onTextChange($event)"/>
+
+    <app-icon *ngIf="isClearable && text !== ''" [icon]="ICON_SVGS.timesCircle" [size]="20" [clickable]="true" (click)="clearText()"></app-icon>
+</div>

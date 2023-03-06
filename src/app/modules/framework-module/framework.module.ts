@@ -12,6 +12,7 @@ import { LotteryNumberComponent } from './components/lottery-number/lottery-numb
 import { LotteryNumbersComponent } from './components/lottery-numbers/lottery-numbers.component';
 import { ButtonComponent } from './components/button/button.component';
 import { IconComponent } from './components/icon/icon.component';
+import { InputComponent } from './components/input/input.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { TimeRemainingComponent } from './components/time-remaining/time-remaining.component';
@@ -24,6 +25,7 @@ import { TimeRemainingComponent } from './components/time-remaining/time-remaini
         ConnectWalletButtonComponent,
         ConnectWalletModalComponent,
         IconComponent,
+        InputComponent,
         LoadingIndicatorIconComponent,
         LotteryNumberComponent,
         LotteryNumbersComponent,
@@ -40,6 +42,7 @@ import { TimeRemainingComponent } from './components/time-remaining/time-remaini
         ConnectWalletButtonComponent,
         ConnectWalletModalComponent,
         IconComponent,
+        InputComponent,
         LoadingIndicatorIconComponent,
         LotteryNumberComponent,
         LotteryNumbersComponent,
