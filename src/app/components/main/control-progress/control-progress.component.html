@@ -10,17 +10,23 @@
     <div *ngIf="poolInfo" [class.separator-v]="!isDrawing">
         <h2 class="text-title font-size-5 highlighted-gradient">Total SOL in Pool</h2>
 
+        <div class="margin-top-x8 text-info">
+            <p>Updated every 4 hours.</p>
+        </div>
+
         <div class="margin-top-x6">
             <div class="margin-top-x6 text-title highlighted">{{ poolInfo.totalSolInPool }} SOL / ${{ poolInfo.totalSolInPool * poolInfo.solToUsd }}</div>
         </div>
     </div>
 
-    <h2 class="separator-v text-title font-size-5 highlighted-gradient">
-        Control Progress
-    </h2>
+    <div class="separator-v">
+        <h2 class=" text-title font-size-5 highlighted-gradient">
+            Control Progress
+        </h2>
 
-    <div class="margin-top-x8 text-info">
-        <p>This part shows you where the butterfly is right now. These 4 steps are the controlling checkpoints. This gives you an estimation of how much time left to announce the winners.</p>
+        <div class="margin-top-x8 text-info">
+            <p>This part shows you where the butterfly is right now. These 3 steps are the controlling checkpoints. This gives you an estimation of how much time left to announce the winners.</p>
+        </div>
     </div>
 
     <div *ngIf="director" class="margin-top-x14">

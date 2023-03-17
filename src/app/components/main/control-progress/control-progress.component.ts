@@ -22,8 +22,12 @@ export class ControlProgressComponent {
         return new Date().getTime() > this.drawDate.getTime();
     }
 
-    get drawWeekNumber(): number | undefined {
-        return this._appStateService.mainScreenInfo?.weekNumber;
+    get drawWeekNumber(): number {
+        if (!this._appStateService.mainScreenInfo) {
+            return 0;
+        }
+
+        return this._appStateService.mainScreenInfo.weekNumber - 1;
     }
 
     get poolInfo(): PoolInfo | undefined {
