@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ConnectionStore, Wallet, WalletStore } from '@heavy-duty/wallet-adapter';
 import { WalletName } from '@solana/wallet-adapter-base';
-import { LedgerWalletAdapter, PhantomWalletAdapter, SlopeWalletAdapter, SolflareWalletAdapter, } from '@solana/wallet-adapter-wallets';
+import { BackpackWalletAdapter, LedgerWalletAdapter, PhantomWalletAdapter, SolflareWalletAdapter, } from '@solana/wallet-adapter-wallets';
 import { Connection, PublicKey, Transaction } from '@solana/web3.js';
 import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 
@@ -81,7 +81,7 @@ export class BlockChainService {
             new PhantomWalletAdapter(),
             new SolflareWalletAdapter(),
             new LedgerWalletAdapter(),
-            new SlopeWalletAdapter(),
+            new BackpackWalletAdapter(),
         ]);
     }
 
