@@ -37,7 +37,9 @@
 
     .welcome-view-title,
     .welcome-view-info {
-        color: white;
+        &, a {
+            color: white;
+        }
     }
 
     .welcome-view-info {
@@ -123,6 +125,10 @@
         animation-duration: 29s;
         animation-direction: alternate;
     }
+}
+
+.welcome-view-bg-svg {
+    fill: vars.$app-solana-bg-dark;
 }
 
 @keyframes fog {

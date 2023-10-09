@@ -19,11 +19,12 @@
     box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.34);
 
     &.button-primary {
+        color: #1f1f1f;
         background: vars.$app-yellow-green-radial-gradient-2;
     }
 
     &.button-secondary {
-        background: vars.$app-color-yellow;
+        background: vars.$app-solana-bg-light;
     }
 
     &.button-default {
@@ -48,7 +49,7 @@
             }
 
             &.button-secondary {
-                background: darken(vars.$app-color-yellow, 2%);
+                background: darken(vars.$app-solana-bg-light, 2%);
             }
 
             &.button-default {

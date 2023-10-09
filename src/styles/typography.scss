@@ -47,12 +47,12 @@ h6 {
         @extend %font-size-md-6;
         @extend %heading;
 
-        color: $app-color-green;
+        color: $app-solana-bg-dark;
         font-weight: 600;
     }
 
     &.highlighted-gradient {
-        background: linear-gradient(0.25turn, $app-color-green, $app-color-green-light);
+        background: linear-gradient(0.25turn, $app-solana-bg-dark, $app-solana-bg-light);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -99,7 +99,7 @@ h6 {
     @extend %font-size-2;
     @extend %font-size-md-3;
 
-    color: $app-color-green;
+    color: $app-solana-bg-dark;
     text-align: center;
     font-weight: 600;
 }
