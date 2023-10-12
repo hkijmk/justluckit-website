@@ -8,7 +8,7 @@ $header-height-md: vars.$vertical-rhythm * 25;
 
 .header-container {
     position: relative;
-    background-color: vars.$app-solana-bg-dark-2;
+    background-color: vars.$app-color-green-light;
 }
 
 .header {
@@ -36,7 +36,7 @@ $header-height-md: vars.$vertical-rhythm * 25;
 .header__nav {
     display: flex;
     align-items: center;
-    background-color: vars.$app-solana-bg-dark-2;
+    background-color: vars.$app-color-green-light;
     height: 100%;
 
     @include mxns.md {
@@ -61,7 +61,7 @@ $header-height-md: vars.$vertical-rhythm * 25;
     flex-direction: column;
     align-items: center;
     opacity: 0.5;
-    background-color: vars.$app-solana-bg-dark-2;
+    background-color: vars.$app-color-green-light;
     width: 100%;
     z-index: vars.$app-header-z-index;
     transition: max-height 0.15s ease-out, opacity 0.3s ease-out;

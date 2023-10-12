@@ -4,7 +4,7 @@
 .lottery-number {
     @extend %font-size-2;
 
-    color: #d9d9d9;
+    color: #373737;
     font-family: 'Lexend', sans-serif;
     font-weight: 600;
     width: 3rem;
@@ -14,14 +14,12 @@
     transition: box-shadow .15s;
 
     &.selected {
-        color: black;
         background: $app-yellow-green-radial-gradient-2;
         box-shadow: 0 10px 15px -10px rgba(0, 0, 0, 0.34);
     }
 
     @media(hover: hover) {
         &:not(.selected):hover {
-            color: black;
             background: $app-yellow-green-radial-gradient-hover;
         }
     }

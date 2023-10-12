@@ -4,7 +4,7 @@
     width: 75px;
     height: 1px;
     margin: 0 vars.$spacing-x2;
-    background-color: vars.$app-solana-bg-light;
+    background-color: vars.$app-color-green-light;
 
     &.disabled {
         filter: saturate(0);

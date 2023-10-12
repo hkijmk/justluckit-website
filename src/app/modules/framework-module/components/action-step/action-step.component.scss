@@ -12,7 +12,7 @@ $md-scale: 2.5;
     width: fns.vertical-rhythm(10);
     height: fns.vertical-rhythm(10);
     border-radius: 50%;
-    background: conic-gradient($app-solana-bg-light, $app-solana-bg-dark);
+    background: conic-gradient($app-color-green-light, $app-color-yellow);
     box-shadow: 0 30px 30px -15px rgba(0, 0, 0, 0.21);
 
     &.action-step--disabled {

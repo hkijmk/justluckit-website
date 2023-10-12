@@ -16,7 +16,7 @@
     @extend %font-size-2;
     @extend %font-size-md-3;
 
-    color: #2cfefa;
+    color: vars.$app-color-green;
     font-weight: 600;
     text-align: center;
     text-transform: uppercase;
@@ -25,9 +25,9 @@
 
 .play-card-number-selection-container {
     .play-card-number-selection-title {
-        color: vars.$app-solana-bg-light;
         font-size: 25px;
         line-height: 36px;
+        color: vars.$app-color-pink;
         text-align: center;
     }
 
@@ -54,7 +54,7 @@
     justify-content: space-between;
     font-size: 21px;
     line-height: 36px;
-    color: #d9d9d9;
+    color: vars.$app-text-color-standard;
 
     @include mxns.md {
         font-size: 25px;
