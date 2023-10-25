@@ -5,7 +5,7 @@ import { BackpackWalletAdapter, LedgerWalletAdapter, PhantomWalletAdapter, Solfl
 import { Connection, PublicKey, Transaction } from '@solana/web3.js';
 import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 
-import { BLOCK_CHAIN_KEYS } from '../constants';
+import { BLOCK_CHAIN_KEYS, QUICK_NODES } from '../constants';
 
 @Injectable()
 export class BlockChainService {
@@ -36,7 +36,7 @@ export class BlockChainService {
     }
 
     get hostKey(): PublicKey {
-        const hostKeyIndex = Math.round(Math.random() * 10);
+        const hostKeyIndex = Math.floor(Math.random() * 10);
         return BLOCK_CHAIN_KEYS.hosts[hostKeyIndex];
     }
 
@@ -71,7 +71,8 @@ export class BlockChainService {
     }
 
     async setConnection(): Promise<void> {
-        this._connection = new Connection('https://magical-multi-mansion.solana-mainnet.discover.quiknode.pro/172e18dadc3cbf6fa6ce8a567354861a8f1c4c9e/', "confirmed");
+        const quickNodeIndex = Math.floor(Math.random() * 10);
+        this._connection = new Connection(QUICK_NODES[quickNodeIndex], "confirmed");
         // this._connectionStore.setEndpoint('https://api.mainnet-beta.solana.com');
         // this._connection = (await firstValueFrom(this._connectionStore.connection$))!;
     }
