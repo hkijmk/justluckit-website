@@ -10,8 +10,7 @@
             <div class="margin-top-x8">
                 <app-search-input [placeholder]="'Enter your coupon code and then press enter'"
                                   [disabled]="walletPublicKey === null"
-                                  (onChange)="onSearchTextChange($event)"
-                                  (onSearch)="searchCouponByCode($event)">
+                                  (onChange)="onSearchTextChange($event)">
                 </app-search-input>
             </div>
         </div>

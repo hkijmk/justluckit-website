@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { decode, encode } from '@faustbrian/node-base58';
 import { PublicKey } from '@solana/web3.js';
 import { deserialize } from 'borsh';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, debounceTime, Subscription } from 'rxjs';
 
 import { BlockChainService } from '../../services/block-chain.service';
 
@@ -18,11 +18,12 @@ export class MyCouponsComponent implements OnInit, OnDestroy {
     private _allCoupons?: LottoGameModel[];
     private _searchedCoupon?: LottoGameModel;
     private _walletPublicKeyChanged$?: Subscription;
-    private _searchText: string = ''
+    private _searchTextDebounce = new BehaviorSubject<string>('');
+    private _searchTextListener?: Subscription;
     private _isLoading: boolean = false;
 
     get searchText(): string {
-        return this._searchText;
+        return this._searchTextDebounce.value;
     }
 
     get isLoading(): boolean {
@@ -47,34 +48,43 @@ export class MyCouponsComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this._getAllMyCoupons();
         this._setWalletPublicKeyChanged$();
+        this._setSearchTextListener();
     }
 
     ngOnDestroy(): void {
         this._clearPublicKeyChanged();
+        this._clearSearchTextListener();
     }
 
     onSearchTextChange(value: string): void {
-        this._searchText = value;
+        const searchText = value.trim();
         this._searchedCoupon = undefined;
+        this._searchTextDebounce.next(searchText);
+        if (searchText !== '') {
+            this._isLoading = true
+        }
     }
 
-    async searchCouponByCode(couponCode: string): Promise<void> {
-        if (!couponCode) {
-            return;
-        }
-
-        this._isLoading = true;
-
-        const seed = decode(couponCode);
-        const playerAddress = await PublicKey.findProgramAddress([Buffer.from("L"), Buffer.from(seed)], BLOCK_CHAIN_KEYS.programId);
-        const playerBuffer = await this._blockChainService.connection.getAccountInfo(playerAddress[0]);
-        if (playerBuffer === null) {
+    async searchByCouponByCode(searchText: string): Promise<void> {
+        if (!searchText) {
             this._isLoading = false;
-            this._searchedCoupon = undefined;
             return;
         }
 
-        this._searchedCoupon = deserialize(LottoGameModel.getSchema(), LottoGameModel, playerBuffer!.data);
+        try {
+            const seed = decode(searchText);
+            const playerAddress = await PublicKey.findProgramAddress([Buffer.from("L"), Buffer.from(seed)], BLOCK_CHAIN_KEYS.programId);
+            const playerBuffer = await this._blockChainService.connection.getAccountInfo(playerAddress[0]);
+            if (playerBuffer === null) {
+                this._isLoading = false;
+                this._searchedCoupon = undefined;
+                return;
+            }
+
+            this._searchedCoupon = deserialize(LottoGameModel.getSchema(), LottoGameModel, playerBuffer!.data);
+        } catch (_) {
+        }
+
         this._isLoading = false;
     }
 
@@ -127,9 +137,23 @@ export class MyCouponsComponent implements OnInit, OnDestroy {
             });
     }
 
+    private _setSearchTextListener(): void {
+        this._searchTextListener = this._searchTextDebounce
+            .pipe(debounceTime(1000))
+            .subscribe((searchText: string) => this.searchByCouponByCode(searchText));
+    }
+
     private _clearPublicKeyChanged(): void {
         if (this._walletPublicKeyChanged$ !== undefined) {
             this._walletPublicKeyChanged$.unsubscribe();
         }
     }
+
+    private _clearSearchTextListener(): void {
+        if (this._searchTextListener !== undefined) {
+            this._searchTextListener.unsubscribe();
+        }
+    }
+
+
 }
