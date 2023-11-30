@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppStateService } from './services/app-state.service';
 import { BroadcastService } from './services/broadcast.service';
 import { BlockChainService } from './services/block-chain.service';
+import { SnickerDoodleService } from './services/snicker-doodle.service';
 
 import { ControlStageItemComponent } from './components/main/control-progress/control-stages/control-stage-item/control-stage-item.component';
 import { ControlStagesComponent } from './components/main/control-progress/control-stages/control-stages.component';
@@ -22,6 +23,7 @@ import { WelcomeViewComponent } from './components/main/welcome-view/welcome-vie
 import { MainComponent } from './components/main/main.component';
 import { MyCouponsComponent } from './components/my-coupons/my-coupons.component';
 import { CouponItemComponent } from './components/my-coupons/coupon-item/coupon-item.component';
+import { ReferralLinkRedirectComponent } from './components/referral-link-redirect/referral-link-redirect.component';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -39,6 +41,7 @@ import { AppComponent } from './app.component';
         WelcomeViewComponent,
         HowItWorksComponent,
         FaqComponent,
+        ReferralLinkRedirectComponent,
     ],
     imports: [
         AppRoutingModule,
@@ -51,6 +54,7 @@ import { AppComponent } from './app.component';
         AppStateService,
         BroadcastService,
         BlockChainService,
+        SnickerDoodleService,
     ],
     bootstrap: [AppComponent]
 })

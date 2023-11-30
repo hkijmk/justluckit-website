@@ -5,6 +5,7 @@ import { MainComponent } from './components/main/main.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { MyCouponsComponent } from './components/my-coupons/my-coupons.component';
+import { ReferralLinkRedirectComponent } from './components/referral-link-redirect/referral-link-redirect.component';
 
 const routes: Routes = [
     { path: '', component: MainComponent },
@@ -23,6 +24,10 @@ const routes: Routes = [
     {
         path: 'my-coupons',
         component: MyCouponsComponent,
+    },
+    {
+        path: 'referral-link-redirect',
+        component: ReferralLinkRedirectComponent,
     },
 ];
 

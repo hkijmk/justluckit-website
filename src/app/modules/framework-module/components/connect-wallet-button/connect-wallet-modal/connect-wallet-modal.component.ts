@@ -17,6 +17,8 @@ export class ConnectWalletModalComponent implements OnInit, OnDestroy {
     private _isWalletConnected: boolean = false;
     private _isDisconnecting: boolean = false;
 
+    showReferralLinkModal: boolean = false;
+
     get wallets(): Wallet[] | undefined {
         return this._wallets;
     }

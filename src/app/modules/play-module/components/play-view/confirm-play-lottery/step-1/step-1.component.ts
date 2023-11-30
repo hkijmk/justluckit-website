@@ -206,7 +206,6 @@ export class ConfirmPlayLotteryStep1Component {
                 data: Buffer.from(lottoGameBuffer)
             });
 
-
             await this._createAndConfirmTransaction(
                 account2ProgramId,
                 transactionInstruction,
@@ -347,6 +346,7 @@ export class ConfirmPlayLotteryStep1Component {
 
         const signedTrans = await firstValueFrom(this._blockChainService.signTransaction(transaction));
         const signature = await this._blockChainService.connection.sendRawTransaction(signedTrans.serialize());
+
         return await this._blockChainService.connection.confirmTransaction(
             { signature, blockhash: hash.blockhash, lastValidBlockHeight: hash.lastValidBlockHeight },
             'singleGossip',

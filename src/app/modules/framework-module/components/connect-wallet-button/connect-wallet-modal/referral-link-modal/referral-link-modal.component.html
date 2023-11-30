@@ -1,0 +1,22 @@
+<app-modal>
+    <div content class="referral-link-modal">
+        <h2 class="text-title font-size-3">Referral Link</h2>
+
+        <div class="margin-top-x6">
+            <app-input [disabled]="true" [value]="referralLink"></app-input>
+        </div>
+
+        <div class="margin-top-x4">
+            <app-button
+                [variant]="'primary'"
+                [disabled]="isCopied"
+                (onClick)="copyReferralLinkToClipboard()">
+                {{ isCopied ? 'Copied' : 'Copy To Clipboard' }}
+            </app-button>
+        </div>
+
+        <div class="separator-v buttons-vertical">
+            <app-button [variant]="'secondary'" (onClick)="close.emit()">Close</app-button>
+        </div>
+    </div>
+</app-modal>

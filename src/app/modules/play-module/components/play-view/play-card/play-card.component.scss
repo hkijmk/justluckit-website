@@ -60,14 +60,3 @@
         font-size: 25px;
     }
 }
-
-.play-card-actions {
-    > app-button {
-        display: block;
-        width: 100%;
-
-        &:not(:first-child) {
-            @extend .margin-top-x8;
-        }
-    }
-}

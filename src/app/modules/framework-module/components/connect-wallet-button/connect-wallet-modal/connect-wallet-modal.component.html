@@ -1,4 +1,4 @@
-<app-modal>
+<app-modal *ngIf="!showReferralLinkModal">
     <div content class="connect-wallet">
         <h3 *ngIf="selectedWallet" class="text-title-small">Selected Wallet: {{ selectedWallet.adapter.name }}</h3>
         <h3 *ngIf="!selectedWallet" class="text-title-small">Select Your Wallet</h3>
@@ -35,18 +35,27 @@
             </div>
         </div>
 
-        <div class="separator-v">
+        <div class="separator-v buttons-vertical">
             <app-button
-                    [variant]="'danger'"
-                    [disabled]="selectedWallet === null"
-                    [isLoading]="isDisconnecting"
-                    (onClick)="onDisconnect()">
+                [variant]="'danger'"
+                [disabled]="selectedWallet === null"
+                [isLoading]="isDisconnecting"
+                (onClick)="onDisconnect()">
                 Disconnect
             </app-button>
 
-            <div class="margin-top-x6">
-                <app-button [variant]="'secondary'" (onClick)="close.emit()">Close Dialog</app-button>
-            </div>
+            <app-button
+                [disabled]="selectedWallet === null"
+                (onClick)="showReferralLinkModal = true">
+                Generate Referral Link
+            </app-button>
+
+            <app-button [variant]="'secondary'" (onClick)="close.emit()">Close Dialog</app-button>
         </div>
     </div>
 </app-modal>
+
+<referral-link-modal
+    *ngIf="showReferralLinkModal"
+    (close)="showReferralLinkModal = false">
+</referral-link-modal>

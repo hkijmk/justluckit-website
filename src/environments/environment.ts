@@ -1,16 +1,23 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
-  production: false
+    production: false,
+    SNICKER_DOODLE_INFURA_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_ANKR_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_COVALENT_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_POAP_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_ALCHEMY_ARBITRUM_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_ALCHEMY_ASTAR_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_ALCHEMY_OPTIMISM_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_ALCHEMY_POLYGON_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_ALCHEMY_MUMBAI_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_ALCHEMY_SOLANA_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_ALCHEMY_SOLANA_TESTNET_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_ETHERSCAN_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_POLYGONSCAN_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_SNOWTRACE_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_BSCSCAN_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_MOONSCAN_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_OPTIMISTIC_ETHERSCAN_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_ARBISCAN_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_GNOSISSCAN_API_KEY: '<please-fill>',
+    SNICKER_DOODLE_FUJI_SNOWTRACE_API_KEY: '<please-fill>',
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

@@ -18,12 +18,7 @@
     </div>
 </div>
 
-<div class="margin-top-x8">
-    <div>
-        <app-button [variant]="'primary'" [isLoading]="isPlaying" (onClick)="onConfirm()">Confirm</app-button>
-    </div>
-
-    <div class="margin-top-x6">
-        <app-button [variant]="'secondary'" (onClick)="onCancel.emit()">Cancel</app-button>
-    </div>
+<div class="margin-top-x8 buttons-vertical">
+    <app-button [variant]="'primary'" [isLoading]="isPlaying" (onClick)="onConfirm()">Confirm</app-button>
+    <app-button [variant]="'secondary'" (onClick)="onCancel.emit()">Cancel</app-button>
 </div>

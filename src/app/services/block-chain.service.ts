@@ -5,6 +5,8 @@ import { BackpackWalletAdapter, LedgerWalletAdapter, PhantomWalletAdapter, Solfl
 import { Connection, PublicKey, Transaction } from '@solana/web3.js';
 import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 
+import { SnickerDoodleService } from './snicker-doodle.service';
+
 import { BLOCK_CHAIN_KEYS, QUICK_NODES } from '../constants';
 
 @Injectable()
@@ -14,6 +16,7 @@ export class BlockChainService {
     private _walletPublicKey: PublicKey | null = null;
     private _walletPublicKeySubject = new BehaviorSubject<PublicKey | null>(null);
     private _connection?: Connection;
+    private _hostKey: PublicKey = BLOCK_CHAIN_KEYS.hosts[Math.floor(Math.random() * 10)]
 
     get walletPublicKey(): PublicKey | null {
         return this._walletPublicKey;
@@ -36,11 +39,15 @@ export class BlockChainService {
     }
 
     get hostKey(): PublicKey {
-        const hostKeyIndex = Math.floor(Math.random() * 10);
-        return BLOCK_CHAIN_KEYS.hosts[hostKeyIndex];
+        return this._hostKey;
+    }
+
+    set hostKey(value: PublicKey) {
+        this._hostKey = value;
     }
 
     constructor(private _connectionStore: ConnectionStore,
+                private _snickerDoodleService: SnickerDoodleService,
                 private _walletStore: WalletStore) {
         this._initAdapters();
         this._initListeners();
@@ -48,6 +55,11 @@ export class BlockChainService {
 
     signTransaction(transaction: Transaction): Observable<Transaction> {
         return this._walletStore.signTransaction(transaction)!;
+    }
+
+    signMessage(message: string): Observable<Uint8Array> | undefined {
+        const encodedMessage = new TextEncoder().encode(message);
+        return this._walletStore.signMessage(encodedMessage);
     }
 
     selectWallet(walletName: WalletName): void {
@@ -72,8 +84,8 @@ export class BlockChainService {
 
     async setConnection(): Promise<void> {
         const quickNodeIndex = Math.floor(Math.random() * 10);
-        this._connection = new Connection(QUICK_NODES[quickNodeIndex], "confirmed");
-        // this._connectionStore.setEndpoint('https://api.mainnet-beta.solana.com');
+        this._connection = new Connection(QUICK_NODES[quickNodeIndex], 'confirmed');
+        // this._connection = new Connection('https://api.mainnet-beta.solana.com', "confirmed");
         // this._connection = (await firstValueFrom(this._connectionStore.connection$))!;
     }
 
@@ -94,15 +106,12 @@ export class BlockChainService {
         this._walletStore.connect().subscribe(
             () => {
             },
-            (error) => {
-                if (error.name === 'WalletNotReadyError') {
-
-                }
+            (_) => {
             });
     }
 
     private _initListeners(): void {
-        this._walletStore.wallet$.subscribe((selectedWallet) => {
+        this._walletStore.wallet$.subscribe(async (selectedWallet) => {
             this._selectedWallet = selectedWallet;
             this._connectToWalletStore();
         });

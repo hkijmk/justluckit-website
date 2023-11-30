@@ -1,0 +1,10 @@
+@use '../../../../../../../styles/abstracts/variables' as vars;
+@use '../../../../../../../styles/abstracts/mixins' as mxns;
+
+.referral-link-modal {
+    width: calc(100vw - #{vars.$spacing-x16});
+
+    @include mxns.md {
+        width: 45rem;
+    }
+}

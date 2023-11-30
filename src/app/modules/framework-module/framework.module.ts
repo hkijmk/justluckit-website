@@ -14,6 +14,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { IconComponent } from './components/icon/icon.component';
 import { InputComponent } from './components/input/input.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { ReferralLinkModalComponent } from './components/connect-wallet-button/connect-wallet-modal/referral-link-modal/referral-link-modal.component';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { TimeRemainingComponent } from './components/time-remaining/time-remaining.component';
 
@@ -30,9 +31,10 @@ import { TimeRemainingComponent } from './components/time-remaining/time-remaini
         LotteryNumberComponent,
         LotteryNumbersComponent,
         ModalComponent,
-        TimeRemainingComponent,
+        ReferralLinkModalComponent,
         SearchInputComponent,
         SafeHtmlPipe,
+        TimeRemainingComponent,
     ],
     imports: [
         CommonModule,

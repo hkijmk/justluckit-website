@@ -4,8 +4,9 @@ import { deserialize } from 'borsh';
 import { AppStateService } from './services/app-state.service';
 import { BlockChainService } from './services/block-chain.service';
 
-import { BLOCK_CHAIN_KEYS } from './constants';
+import { BLOCK_CHAIN_KEYS, LOCAL_STORAGE_KEYS } from './constants';
 import { RecordModel, PoolInfo } from './models';
+import { PublicKey } from '@solana/web3.js';
 
 @Component({
     selector: 'app-root',
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
     async ngOnInit(): Promise<void> {
         this._isLoading = true;
 
+        this._initHostKey();
         await this._blockChainService.setConnection();
         await this._initRecord();
         await this._initMainScreenInfo();
@@ -56,5 +58,17 @@ export class AppComponent implements OnInit {
 
         const poolInfo = deserialize(PoolInfo.getSchema(), PoolInfo, poolBuffer.data);
         this._appStateService.initPoolInfo(poolInfo);
+    }
+
+    private _initHostKey(): void {
+        const savedHostKeyString = localStorage.getItem(LOCAL_STORAGE_KEYS.hostKeyString);
+        if (!savedHostKeyString) {
+            return;
+        }
+
+        try {
+            this._blockChainService.hostKey = new PublicKey(savedHostKeyString);
+        } catch (_) {
+        }
     }
 }
