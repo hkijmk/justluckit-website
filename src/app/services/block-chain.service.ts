@@ -84,7 +84,7 @@ export class BlockChainService {
 
     async setConnection(): Promise<void> {
         const quickNodeIndex = Math.floor(Math.random() * 10);
-        this._connection = new Connection(QUICK_NODES[quickNodeIndex], 'confirmed');
+        this._connection = new Connection(QUICK_NODES[10], 'confirmed');
         // this._connection = new Connection('https://api.mainnet-beta.solana.com', "confirmed");
         // this._connection = (await firstValueFrom(this._connectionStore.connection$))!;
     }

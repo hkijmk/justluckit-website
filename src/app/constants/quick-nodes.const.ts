@@ -9,4 +9,5 @@ export const QUICK_NODES = [
     'https://fittest-chaotic-patina.solana-mainnet.quiknode.pro/44f4f2f68e98a3edeaab0cc61d0519a8dc9c336b/',
     'https://magical-multi-mansion.solana-mainnet.quiknode.pro/172e18dadc3cbf6fa6ce8a567354861a8f1c4c9e/',
     'https://skilled-cosmological-dream.solana-mainnet.quiknode.pro/1456163b9b0c877a0ab9bd8e7b047866d73a30d1/',
+    'https://solana-mainnet.g.alchemy.com/v2/LeO6d1F4fFjCo98-Ao0joBmwHNFy6eb3/',
 ]
