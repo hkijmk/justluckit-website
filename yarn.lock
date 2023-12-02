@@ -2975,11 +2975,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@snickerdoodlelabs/common-utils@npm:^1.0.0":
-  version: 1.0.3
-  resolution: "@snickerdoodlelabs/common-utils@npm:1.0.3"
+"@snickerdoodlelabs/common-utils@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@snickerdoodlelabs/common-utils@npm:1.0.0"
   dependencies:
-    "@snickerdoodlelabs/objects": ^1.1.3
+    "@snickerdoodlelabs/objects": ^1.0.0
     axios: ^0.27.2
     ethers: ^5.6.6
     inversify: ^6.0.1
@@ -2989,42 +2989,11 @@ __metadata:
     pino: ^8.1.0
     tweetnacl: ^1.0.3
     uuid: ^8.3.0
-  checksum: c7e579d7826860a4f8e0a72ce2b75bd81433e5d7125baa384ace6ec8d40c7ff166af08d26a7fee61c4df6bff211ac8c4fa0db16bcac71731f6b64c54b488068e
+  checksum: 8b6e55d72787796f70d7021ce40116ac7321ec029c3c8c7fa6d270442a0e0b8199863ab4fe8541dce2d926e9b33f1d81cf4a07bdb7f46dc5bcc81556e8249064
   languageName: node
   linkType: hard
 
-"@snickerdoodlelabs/common-utils@npm:^1.0.4":
-  version: 1.0.7
-  resolution: "@snickerdoodlelabs/common-utils@npm:1.0.7"
-  dependencies:
-    "@snickerdoodlelabs/objects": ^1.1.8
-    axios: ^0.27.2
-    ethers: ^5.6.6
-    inversify: ^6.0.2
-    neverthrow: ^5.1.0
-    neverthrow-result-utils: ^2.0.2
-    oauth-1.0a: ^2.2.6
-    pino: ^8.1.0
-    tweetnacl: ^1.0.3
-    uuid: ^8.3.0
-  checksum: e7f4bb005a2fe7af5df1c022c18ae0175ecf2e38cbb744f529c435100538aefd6c03034d7b53805fcd10e85aefbf904387f759a4f3948a1def10d4cfd8a1a87e
-  languageName: node
-  linkType: hard
-
-"@snickerdoodlelabs/objects@npm:^1.0.0, @snickerdoodlelabs/objects@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "@snickerdoodlelabs/objects@npm:1.1.3"
-  dependencies:
-    ethers: ^5.6.6
-    neverthrow: ^5.1.0
-    rxjs: ^7.5.5
-    ts-brand: ^0.0.2
-    utility-types: ^3.10.0
-  checksum: 58f0196ba5c5b83516052f94e54e7f57fcf69e18a12b66312ac04fe74f4f3041e0c32b113f84755ac18f216f1ce6d48ddc98a4ff9b837d9c919c6c7de49bebaa
-  languageName: node
-  linkType: hard
-
-"@snickerdoodlelabs/objects@npm:^1.1.7, @snickerdoodlelabs/objects@npm:^1.1.8":
+"@snickerdoodlelabs/objects@npm:1.1.8":
   version: 1.1.8
   resolution: "@snickerdoodlelabs/objects@npm:1.1.8"
   dependencies:
@@ -10004,7 +9973,7 @@ __metadata:
     rxjs: ~7.5.0
     tslib: ^2.3.0
     types-bn: ^0.0.1
-    typescript: ~4.7.2
+    typescript: ~4.9.5
     zone.js: ~0.11.4
   languageName: unknown
   linkType: soft
@@ -14554,13 +14523,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:~4.7.2":
-  version: 4.7.4
-  resolution: "typescript@npm:4.7.4"
+"typescript@npm:~4.9.5":
+  version: 4.9.5
+  resolution: "typescript@npm:4.9.5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 5750181b1cd7e6482c4195825547e70f944114fb47e58e4aa7553e62f11b3f3173766aef9c281783edfd881f7b8299cf35e3ca8caebe73d8464528c907a164df
+  checksum: ee000bc26848147ad423b581bd250075662a354d84f0e06eb76d3b892328d8d4440b7487b5a83e851b12b255f55d71835b008a66cbf8f255a11e4400159237db
   languageName: node
   linkType: hard
 
@@ -14574,13 +14543,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@~4.7.2#~builtin<compat/typescript>":
-  version: 4.7.4
-  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=65a307"
+"typescript@patch:typescript@~4.9.5#~builtin<compat/typescript>":
+  version: 4.9.5
+  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 9096d8f6c16cb80ef3bf96fcbbd055bf1c4a43bd14f3b7be45a9fbe7ada46ec977f604d5feed3263b4f2aa7d4c7477ce5f9cd87de0d6feedec69a983f3a4f93e
+  checksum: ab417a2f398380c90a6cf5a5f74badd17866adf57f1165617d6a551f059c3ba0a3e4da0d147b3ac5681db9ac76a303c5876394b13b3de75fdd5b1eaa06181c9d
   languageName: node
   linkType: hard
 
