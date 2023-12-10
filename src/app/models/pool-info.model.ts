@@ -2,11 +2,15 @@ import { BlockChainSchemaType } from '../types';
 
 export class PoolInfo implements IPoolInfo {
     solToUsd: number;
-    totalSolInPool: number;
+    totalSolInPoolLamports: number;
+
+    get totalSolInPool(): number {
+        return this.totalSolInPoolLamports / 1000000000;
+    }
 
     constructor(obj: IPoolInfo) {
         this.solToUsd = obj.solToUsd;
-        this.totalSolInPool = obj.totalSolInPool;
+        this.totalSolInPoolLamports = obj.totalSolInPoolLamports;
     }
 
     static getSchema(): BlockChainSchemaType<typeof PoolInfo> {
@@ -17,8 +21,7 @@ export class PoolInfo implements IPoolInfo {
                     kind: "struct",
                     fields: [
                         ["solToUsd", "u64"],
-                        ["totalSolInPool", "u64"],
-
+                        ["totalSolInPoolLamports", "u64"],
                     ],
                 },
             ],
@@ -28,5 +31,5 @@ export class PoolInfo implements IPoolInfo {
 
 interface IPoolInfo {
     solToUsd: number;
-    totalSolInPool: number;
+    totalSolInPoolLamports: number;
 }
